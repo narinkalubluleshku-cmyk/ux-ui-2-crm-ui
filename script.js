@@ -159,23 +159,19 @@ let conceptCaptionTimer = null;
 
 function updateConceptAlignment() {
   const activeImage = activeConceptCard?.querySelector("img");
-  if (!activeImage || !conceptIntro) return;
+  if (!activeImage || !conceptIntro || activeImage.clientHeight <= 0) return;
   conceptIntro.style.setProperty("--concept-image-height", `${activeImage.clientHeight}px`);
 }
 
 function updateActiveConcept() {
   if (!conceptCards.length || !conceptCaption) return;
-  const controlLine = window.innerHeight * 0.5;
+  const controlLine = conceptIntro?.getBoundingClientRect().top ?? window.innerHeight * 0.5;
   const cards = Array.from(conceptCards);
-  const cardOnLine = cards.find((card) => {
-    const rect = card.getBoundingClientRect();
-    return rect.top <= controlLine && rect.bottom > controlLine;
+  const activationLine = controlLine + Math.min(180, window.innerHeight * 0.2);
+  const activatedCards = cards.filter((card) => {
+    return card.getBoundingClientRect().top <= activationLine;
   });
-  const nextCard = cardOnLine || cards.reduce((closest, card) => {
-    const rect = card.getBoundingClientRect();
-    const distance = Math.abs(rect.top + rect.height / 2 - controlLine);
-    return !closest || distance < closest.distance ? { card, distance } : closest;
-  }, null)?.card;
+  const nextCard = activatedCards[activatedCards.length - 1] || cards[0];
 
   if (!nextCard || nextCard === activeConceptCard) return;
   activeConceptCard = nextCard;
