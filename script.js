@@ -69,7 +69,6 @@ function splitHeadingIntoWords(element) {
       node.textContent.split(/(\s+)/).forEach((part) => {
         if (!part) return;
         if (/^\s+$/.test(part)) {
-          fragment.appendChild(document.createTextNode(part));
           return;
         }
 
