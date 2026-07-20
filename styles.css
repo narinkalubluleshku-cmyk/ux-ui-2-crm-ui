@@ -69,13 +69,14 @@ body {
 }
 
 .case-hero h1 {
-  max-width: 980px;
+  max-width: none;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(52px, 8vw, 124px);
+  font-size: var(--text-title);
   font-weight: 500;
-  letter-spacing: -0.055em;
-  line-height: 0.92;
+  letter-spacing: -0.035em;
+  line-height: 0.97;
+  white-space: nowrap;
 }
 
 .case-tags {
@@ -1920,6 +1921,7 @@ body.lightbox-open {
     font-size: var(--text-title);
     letter-spacing: -0.035em;
     line-height: 0.97;
+    white-space: normal;
   }
 
   .case-tags {
