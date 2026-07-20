@@ -97,6 +97,10 @@ img {
   font-size: var(--text-meta);
 }
 
+.mobile-header-actions {
+  display: none;
+}
+
 .header-context {
   position: absolute;
   top: 50%;
@@ -1333,19 +1337,46 @@ body.lightbox-open {
   }
 
   .header-links {
-    gap: var(--mobile-space-2);
-  }
-
-  .header-links a:first-child {
     display: none;
   }
 
   .header-context {
-    max-width: 48vw;
+    display: none;
   }
 
-  .header-links a:not(:last-child) {
-    display: none;
+  .mobile-header-actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: var(--mobile-space-1);
+  }
+
+  .mobile-header-action {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.42);
+    box-shadow: none !important;
+  }
+
+  .mobile-header-action svg,
+  .mobile-header-action img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .mobile-header-action svg {
+    fill: currentColor;
+  }
+
+  .mobile-header-action img {
+    object-fit: contain;
+  }
+
+  .mobile-header-action:active {
+    background: rgba(17, 17, 15, 0.16) !important;
   }
 
   .hero {
@@ -1390,7 +1421,7 @@ body.lightbox-open {
   }
 
   .projects .section-heading + .project {
-    padding-top: var(--mobile-space-4);
+    padding-top: var(--mobile-space-5);
   }
 
   .project:last-child {
@@ -1403,7 +1434,7 @@ body.lightbox-open {
 
   .project h3 {
     order: 1;
-    margin-bottom: var(--mobile-space-2);
+    margin-bottom: var(--mobile-space-5);
   }
 
   .project-visual {
@@ -1441,7 +1472,7 @@ body.lightbox-open {
 
   .concept-layout {
     display: block;
-    padding-top: var(--mobile-space-4);
+    padding-top: var(--mobile-space-5);
   }
 
   .concept-intro {
@@ -1470,6 +1501,7 @@ body.lightbox-open {
     font-family: var(--font-display);
     font-size: var(--text-body);
     line-height: 1.25;
+    opacity: 0.4;
     content: attr(data-caption);
   }
 
@@ -1492,7 +1524,7 @@ body.lightbox-open {
   .about-list {
     grid-template-columns: 1fr;
     gap: var(--mobile-space-5);
-    padding-top: var(--mobile-space-4);
+    padding-top: var(--mobile-space-5);
   }
 
   .about-item {
