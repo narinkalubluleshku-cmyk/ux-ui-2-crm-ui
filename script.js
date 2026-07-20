@@ -359,6 +359,12 @@ function openLightbox(image, fullSource = "") {
   lightboxImage.alt = image.alt;
   lightbox.classList.add("is-open");
   document.body.classList.add("lightbox-open");
+  lightbox.scrollLeft = 0;
+  lightbox.scrollTop = 0;
+  requestAnimationFrame(() => {
+    lightbox.scrollLeft = 0;
+    lightbox.scrollTop = 0;
+  });
   lightboxClose.focus();
 }
 
@@ -367,7 +373,7 @@ function closeLightbox() {
   document.body.classList.remove("lightbox-open");
 }
 
-document.querySelectorAll(".project-visual, .concept-card").forEach((container) => {
+document.querySelectorAll(".project-visual, .concept-card, .case-media").forEach((container) => {
   const image = container.querySelector("img");
   if (!image) return;
   const fullSource = container.dataset.fullSrc || "";
