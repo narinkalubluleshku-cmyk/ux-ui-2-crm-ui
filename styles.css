@@ -1386,6 +1386,19 @@ body.lightbox-open {
     margin-bottom: 96px;
   }
 
+  .project--crm .project-meta {
+    position: relative;
+    align-self: stretch;
+    min-height: 100%;
+  }
+
+  .project--crm .project-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
   .project:last-child {
     margin-bottom: 0;
   }
