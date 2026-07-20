@@ -354,8 +354,8 @@ document.body.appendChild(lightbox);
 const lightboxImage = lightbox.querySelector(".image-lightbox-image");
 const lightboxClose = lightbox.querySelector(".image-lightbox-close");
 
-function openLightbox(image) {
-  lightboxImage.src = image.currentSrc || image.src;
+function openLightbox(image, fullSource = "") {
+  lightboxImage.src = fullSource || image.currentSrc || image.src;
   lightboxImage.alt = image.alt;
   lightbox.classList.add("is-open");
   document.body.classList.add("lightbox-open");
@@ -370,6 +370,7 @@ function closeLightbox() {
 document.querySelectorAll(".project-visual, .concept-card").forEach((container) => {
   const image = container.querySelector("img");
   if (!image) return;
+  const fullSource = container.dataset.fullSrc || "";
 
   container.classList.add("zoomable-media");
   const zoomButton = document.createElement("button");
@@ -382,8 +383,8 @@ document.querySelectorAll(".project-visual, .concept-card").forEach((container) 
       <path d="M14.5 14.5 20 20M10.5 8v5M8 10.5h5"></path>
     </svg>
   `;
-  zoomButton.addEventListener("click", () => openLightbox(image));
-  image.addEventListener("click", () => openLightbox(image));
+  zoomButton.addEventListener("click", () => openLightbox(image, fullSource));
+  image.addEventListener("click", () => openLightbox(image, fullSource));
   container.appendChild(zoomButton);
 });
 
