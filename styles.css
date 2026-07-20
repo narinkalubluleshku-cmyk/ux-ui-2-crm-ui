@@ -107,6 +107,11 @@ body {
   line-height: 1.5;
 }
 
+.case-overview-item strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 .case-overview-item p + p {
   margin-top: var(--space-2);
 }
@@ -1951,28 +1956,37 @@ body.lightbox-open {
   }
 
   .case-process-list {
-    grid-template-columns: 1fr;
+    overflow-x: auto;
+    grid-template-columns: none;
+    grid-auto-columns: calc(100% - 48px);
+    grid-auto-flow: column;
+    align-items: stretch;
     gap: var(--mobile-space-2);
+    padding-bottom: var(--mobile-space-1);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .case-process-list::-webkit-scrollbar {
+    display: none;
   }
 
   .case-process-step {
+    height: 100%;
     min-height: 0;
     padding: var(--mobile-space-3);
     border-radius: 20px;
+    scroll-snap-align: start;
   }
 
-  .case-process-step:not(:nth-child(3n))::after {
-    top: auto;
-    right: 24px;
-    bottom: -20px;
-    content: "↓";
-  }
-
-  .case-process-step:nth-child(3)::after {
+  .case-process-step:not(:last-child)::after {
     position: absolute;
     z-index: 1;
-    right: 24px;
-    bottom: -20px;
+    top: 24px;
+    right: -20px;
+    bottom: auto;
     display: grid;
     width: 24px;
     height: 24px;
@@ -1980,9 +1994,13 @@ body.lightbox-open {
     border-radius: 50%;
     color: var(--bg);
     background: var(--ink);
-    content: "↓";
+    content: "→";
     font-family: var(--font-caption);
     font-size: 14px;
+  }
+
+  .case-process-step:last-child::after {
+    display: none;
   }
 
   .case-process-number {
@@ -1995,9 +2013,10 @@ body.lightbox-open {
   }
 
   .case-video-wrap {
+    overflow: visible;
     width: 100%;
     margin-top: var(--mobile-space-5);
-    border-radius: 20px;
+    border-radius: 0;
   }
 
   .case-gallery {
