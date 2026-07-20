@@ -1154,7 +1154,7 @@ body.lightbox-open {
   padding-top: 36px;
   padding-bottom: 24px;
   color: #fff;
-  background: var(--accent);
+  background: #242421;
 }
 
 .footer-row {
@@ -1205,21 +1205,10 @@ body.lightbox-open {
   fill: currentColor;
 }
 
-.footer-mail .footer-max-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.footer-mail--secondary {
-  color: rgba(23, 23, 20, 0.68) !important;
-  background: rgba(255, 255, 255, 0.42);
-}
-
-.footer-mail--secondary:hover,
-.footer-mail--secondary:focus-visible {
-  color: var(--ink) !important;
-  background: rgba(255, 255, 255, 0.68);
+.footer-mail:hover,
+.footer-mail:focus-visible {
+  color: #fff !important;
+  background: var(--accent);
 }
 
 .footer-mail:hover span {
