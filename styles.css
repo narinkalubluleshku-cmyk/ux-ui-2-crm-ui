@@ -197,7 +197,7 @@ img {
   margin: 0;
   font-size: var(--text-title);
   font-weight: 500;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.055em;
   line-height: 0.77;
 }
 
@@ -430,7 +430,7 @@ img {
   margin: 0 0 22px;
   font-size: var(--text-title);
   font-weight: 500;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.035em;
   line-height: 0.97;
 }
 
@@ -1408,7 +1408,8 @@ body.lightbox-open {
 
   .section-heading {
     grid-template-columns: 1fr;
-    padding-bottom: 0;
+    justify-items: start;
+    padding-block: var(--mobile-space-3);
   }
 
   .project {
@@ -1532,14 +1533,22 @@ body.lightbox-open {
     padding: 0;
   }
 
+  .about-item > p {
+    text-align: left;
+  }
+
   .about-visual {
-    height: 280px;
-    min-height: 280px;
+    height: auto;
+    min-height: 0;
+    padding-block: var(--mobile-space-5);
     border-radius: 0;
   }
 
   .about-collage {
-    min-height: 330px;
+    min-height: 0;
+    margin-top: var(--mobile-space-5);
+    padding-block: 0;
+    aspect-ratio: 1 / 0.9;
   }
 
   .collage-image--one {
