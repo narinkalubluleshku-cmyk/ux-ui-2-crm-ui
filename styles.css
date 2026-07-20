@@ -1878,8 +1878,8 @@ body.lightbox-open {
     display: flex;
     width: 100%;
     flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: var(--mobile-space-1);
+    justify-content: flex-start;
+    gap: 22px;
     font-size: var(--text-meta);
     letter-spacing: 0.04em;
     white-space: nowrap;
