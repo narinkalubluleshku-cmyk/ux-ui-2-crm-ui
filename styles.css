@@ -351,9 +351,100 @@ img {
 }
 
 .hero {
+  position: relative;
   min-height: 100svh;
   padding-top: 48px;
   padding-bottom: 32px;
+}
+
+.hero-intro {
+  position: absolute;
+  z-index: 20;
+  inset: 0 28px;
+  display: none;
+  align-items: center;
+  overflow: visible;
+  pointer-events: none;
+}
+
+html.intro-pending {
+  overflow-x: hidden;
+}
+
+html.intro-pending .hero-intro {
+  display: flex;
+}
+
+html.intro-pending .hero-title,
+html.intro-pending .hero-info {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+html.intro-pending .hero-photo-wrap > img {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+html.intro-pending .hero-photo-wrap {
+  pointer-events: none;
+  transform: none !important;
+}
+
+html.intro-pending .hero-photo-wrap::after {
+  display: none;
+}
+
+.hero-intro-text {
+  width: min(100%, 1180px);
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.97;
+}
+
+.hero-intro-text .generated-word {
+  transition: none;
+}
+
+.intro-flight-photo {
+  position: relative;
+  display: inline-block;
+  width: 0.82em;
+  height: 0.82em;
+  margin-left: 0.22em;
+  overflow: hidden;
+  border-radius: 50%;
+  vertical-align: -0.14em;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  will-change: transform, width, height, opacity;
+}
+
+.intro-flight-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.intro-flight-placeholder {
+  display: inline-block;
+  width: 1.04em;
+  height: 0.82em;
+  vertical-align: -0.14em;
+}
+
+.intro-flight-photo.is-flip-target {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 50%;
 }
 
 .section-heading,
@@ -405,7 +496,7 @@ img {
   z-index: 3;
   overflow: visible;
   width: clamp(90px, 12vw, 190px);
-  aspect-ratio: auto;
+  aspect-ratio: 1;
   border-radius: 0;
   background: transparent;
   transform: none;
@@ -443,7 +534,7 @@ img {
 .hero-photo-wrap img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -1631,6 +1722,15 @@ body.lightbox-open {
     padding-bottom: var(--mobile-space-3);
   }
 
+  .hero-intro {
+    inset-inline: var(--mobile-space-2);
+  }
+
+  .hero-intro-text {
+    font-size: var(--text-title);
+    letter-spacing: -0.035em;
+  }
+
   .hero-title {
     line-height: 0.86;
   }
@@ -2086,6 +2186,17 @@ body.lightbox-open {
     filter: none;
     transform: none;
     animation: none !important;
+  }
+
+  html.intro-pending .hero-intro {
+    display: none !important;
+  }
+
+  html.intro-pending .hero-title,
+  html.intro-pending .hero-info,
+  html.intro-pending .hero-photo-wrap > img {
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
 }

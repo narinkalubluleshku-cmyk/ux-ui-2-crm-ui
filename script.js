@@ -245,6 +245,182 @@ const cursor = document.querySelector(".cursor-dot");
 
 const heroLayout = document.querySelector(".hero-layout");
 const heroPhoto = document.querySelector(".hero-photo-wrap");
+const heroIntro = document.querySelector(".hero-intro");
+const heroIntroText = document.querySelector(".hero-intro-text");
+const heroTitle = document.querySelector(".hero-title");
+const heroInfo = document.querySelector(".hero-info");
+const heroPhotoImage = heroPhoto?.querySelector("img");
+
+function showHeroFinalState() {
+  document.documentElement.classList.remove("intro-pending");
+  heroIntro?.remove();
+  heroTitle?.querySelectorAll(".generated-word").forEach((word) => {
+    word.style.opacity = "1";
+    word.style.filter = "none";
+    word.style.transform = "none";
+  });
+  heroTitle?.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
+  heroInfo?.classList.add("is-visible");
+  heroPhoto?.classList.add("is-visible");
+  [heroTitle, heroInfo, heroPhotoImage].forEach((item) => {
+    if (!item) return;
+    item.style.removeProperty("opacity");
+    item.style.removeProperty("visibility");
+    item.style.removeProperty("transform");
+  });
+}
+
+async function runHeroIntro() {
+  if (
+    window.__heroIntroPlayed ||
+    !heroIntro ||
+    !heroIntroText ||
+    !heroTitle ||
+    !heroInfo ||
+    !heroPhoto ||
+    !heroPhotoImage
+  ) {
+    showHeroFinalState();
+    return;
+  }
+
+  window.__heroIntroPlayed = true;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    showHeroFinalState();
+    return;
+  }
+
+  const { gsap, Flip } = window;
+  if (!gsap || !Flip) {
+    showHeroFinalState();
+    return;
+  }
+
+  gsap.registerPlugin(Flip);
+
+  const phraseWords = "Твоя команда грустит, потому что в\u00a0ней нет меня".split(" ");
+  const wordElements = [];
+
+  phraseWords.forEach((text) => {
+    const word = document.createElement("span");
+    word.className = "generated-word";
+    word.textContent = text;
+    heroIntroText.appendChild(word);
+    wordElements.push(word);
+  });
+
+  const flightPhoto = document.createElement("span");
+  flightPhoto.className = "intro-flight-photo";
+  const flightPhotoImage = document.createElement("img");
+  flightPhotoImage.src = heroPhotoImage.currentSrc || heroPhotoImage.src;
+  flightPhotoImage.alt = "";
+  flightPhoto.appendChild(flightPhotoImage);
+  heroIntroText.appendChild(flightPhoto);
+
+  heroTitle.querySelectorAll(".generated-word").forEach((word) => {
+    gsap.set(word, { opacity: 1, filter: "blur(0px)", y: 0 });
+  });
+  heroTitle.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
+  heroInfo.classList.add("is-visible");
+  heroPhoto.classList.add("is-visible");
+
+  const resources = [];
+  if (document.fonts?.ready) resources.push(document.fonts.ready);
+  if (!heroPhotoImage.complete || heroPhotoImage.naturalWidth === 0) {
+    resources.push(heroPhotoImage.decode?.() || Promise.resolve());
+  } else if (heroPhotoImage.decode) {
+    resources.push(heroPhotoImage.decode());
+  }
+  if (!flightPhotoImage.complete || flightPhotoImage.naturalWidth === 0) {
+    resources.push(flightPhotoImage.decode?.() || Promise.resolve());
+  } else if (flightPhotoImage.decode) {
+    resources.push(flightPhotoImage.decode());
+  }
+  await Promise.allSettled(resources);
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+  const placeholder = document.createElement("span");
+  placeholder.className = "intro-flight-placeholder";
+
+  const flipState = Flip.getState(flightPhoto);
+  flightPhoto.replaceWith(placeholder);
+  heroPhoto.appendChild(flightPhoto);
+  flightPhoto.classList.add("is-flip-target");
+
+  const flipTween = Flip.from(flipState, {
+    paused: true,
+    absolute: true,
+    scale: true,
+    duration: 3,
+    ease: "expo.inOut",
+    onStart: () => gsap.set(flightPhoto, {
+      force3D: true,
+      transformOrigin: "50% 50%"
+    })
+  });
+
+  gsap.set(flightPhoto, { autoAlpha: 1 });
+  const introRevealItems = [...wordElements, flightPhotoImage];
+  gsap.set(introRevealItems, { autoAlpha: 0, filter: "blur(14px)", y: 18 });
+  gsap.set(heroPhotoImage, { autoAlpha: 0 });
+
+  const interfaceItems = [heroTitle, heroInfo];
+  const timeline = gsap.timeline({
+    defaults: { overwrite: "auto" },
+    onComplete: () => {
+      flightPhoto.remove();
+      heroIntro.remove();
+      gsap.set([...interfaceItems, heroPhotoImage], { clearProps: "opacity,visibility,transform" });
+    }
+  });
+
+  const wordStagger = 0.24;
+
+  timeline.to(introRevealItems, {
+    autoAlpha: 1,
+    filter: "blur(0px)",
+    y: 0,
+    duration: 2.7,
+    stagger: wordStagger,
+    ease: "power2.out"
+  }, 0);
+
+  const disappearStart = timeline.duration() + 0.1;
+  timeline.to(wordElements, {
+    autoAlpha: 0,
+    filter: "blur(8px)",
+    y: -8,
+    duration: 0.4125,
+    stagger: 0.0825,
+    ease: "power2.inOut"
+  }, disappearStart);
+
+  timeline.addLabel("photo-flight", ">+=0.04");
+  timeline.add(flipTween.play(), "photo-flight");
+
+  timeline.call(() => {
+    gsap.set(interfaceItems, { autoAlpha: 0, y: 18 });
+    document.documentElement.classList.remove("intro-pending");
+  });
+  timeline.addLabel("photo-reveal");
+  timeline.set(heroPhotoImage, { autoAlpha: 1 }, "photo-reveal");
+  timeline.to(flightPhoto, {
+    autoAlpha: 0,
+    duration: 0.16,
+    ease: "power2.inOut"
+  }, "photo-reveal");
+  timeline.to(interfaceItems, {
+    autoAlpha: 1,
+    y: 0,
+    duration: 0.22,
+    stagger: 0.08,
+    ease: "power2.out"
+  }, "photo-reveal+=0.1");
+}
+
+runHeroIntro().catch(showHeroFinalState);
+
 const catPhotos = [
   "./assets/cats/cat-01.webp",
   "./assets/cats/cat-02-full.webp",
