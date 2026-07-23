@@ -245,6 +245,200 @@ const cursor = document.querySelector(".cursor-dot");
 
 const heroLayout = document.querySelector(".hero-layout");
 const heroPhoto = document.querySelector(".hero-photo-wrap");
+const heroIntro = document.querySelector(".hero-intro");
+const heroIntroText = document.querySelector(".hero-intro-text");
+const heroTitle = document.querySelector(".hero-title");
+const heroInfo = document.querySelector(".hero-info");
+const heroPhotoImage = heroPhoto?.querySelector("img");
+
+function showHeroFinalState() {
+  document.documentElement.classList.remove("intro-pending");
+  heroIntro?.remove();
+  heroTitle?.querySelectorAll(".generated-word").forEach((word) => {
+    word.style.opacity = "1";
+    word.style.filter = "none";
+    word.style.transform = "none";
+  });
+  heroTitle?.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
+  heroInfo?.classList.add("is-visible");
+  heroPhoto?.classList.add("is-visible");
+  [heroTitle, heroInfo, heroPhotoImage].forEach((item) => {
+    if (!item) return;
+    item.style.removeProperty("opacity");
+    item.style.removeProperty("visibility");
+    item.style.removeProperty("transform");
+  });
+}
+
+async function runHeroIntro() {
+  if (
+    window.__heroIntroPlayed ||
+    !heroIntro ||
+    !heroIntroText ||
+    !heroTitle ||
+    !heroInfo ||
+    !heroPhoto ||
+    !heroPhotoImage
+  ) {
+    showHeroFinalState();
+    return;
+  }
+
+  window.__heroIntroPlayed = true;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    showHeroFinalState();
+    return;
+  }
+
+  const { gsap } = window;
+  if (!gsap) {
+    showHeroFinalState();
+    return;
+  }
+
+  const phraseWords = "Твоя команда грустит, потому что в ней нет меня".split(" ");
+  const wordElements = [];
+
+  phraseWords.forEach((text) => {
+    const word = document.createElement("span");
+    word.className = "generated-word";
+    word.textContent = text;
+    heroIntroText.appendChild(word);
+    wordElements.push(word);
+  });
+
+  const flightPhoto = document.createElement("span");
+  flightPhoto.className = "intro-flight-photo";
+  const flightPhotoImage = document.createElement("img");
+  flightPhotoImage.src = heroPhotoImage.currentSrc || heroPhotoImage.src;
+  flightPhotoImage.alt = "";
+  flightPhoto.appendChild(flightPhotoImage);
+  heroIntroText.appendChild(flightPhoto);
+
+  heroTitle.querySelectorAll(".generated-word").forEach((word) => {
+    gsap.set(word, { opacity: 1, filter: "blur(0px)", y: 0 });
+  });
+  heroTitle.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
+  heroInfo.classList.add("is-visible");
+  heroPhoto.classList.add("is-visible");
+
+  const resources = [];
+  if (document.fonts?.ready) resources.push(document.fonts.ready);
+  resources.push(heroPhotoImage.decode?.() || Promise.resolve());
+  resources.push(flightPhotoImage.decode?.() || Promise.resolve());
+  await Promise.allSettled(resources);
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+  const flightStartRect = flightPhoto.getBoundingClientRect();
+  const flightEndRect = heroPhoto.getBoundingClientRect();
+  flightPhoto.remove();
+  document.body.appendChild(flightPhoto);
+  gsap.set(flightPhoto, {
+    position: "fixed",
+    zIndex: 100,
+    left: flightStartRect.left,
+    top: flightStartRect.top,
+    width: flightStartRect.width,
+    height: flightStartRect.height,
+    margin: 0,
+    force3D: true
+  });
+
+  gsap.set(flightPhoto, { autoAlpha: 1 });
+  const introRevealItems = [...wordElements, flightPhotoImage];
+  gsap.set(introRevealItems, { autoAlpha: 0, filter: "blur(14px)", y: 18 });
+  gsap.set(heroPhotoImage, { autoAlpha: 0 });
+
+  const interfaceItems = [heroTitle, heroInfo];
+  const isDesktopHero = window.matchMedia("(min-width: 801px)").matches;
+  const flightFastDuration = isDesktopHero ? 0.5 : 0.75;
+  const flightLandingDuration = isDesktopHero ? 0.22 : 0.3;
+  const timeline = gsap.timeline({
+    defaults: { overwrite: "auto" },
+    onComplete: () => {
+      flightPhoto.remove();
+      heroIntro.remove();
+      gsap.set([...interfaceItems, heroPhotoImage], { clearProps: "opacity,visibility,transform" });
+    }
+  });
+
+  const wordStagger = 0.24;
+  timeline.to(introRevealItems, {
+    autoAlpha: 1,
+    filter: "blur(0px)",
+    y: 0,
+    duration: 2.7,
+    stagger: wordStagger,
+    ease: "power2.out"
+  }, 0);
+
+  const disappearStart = 2.7 + (wordElements.length - 1) * wordStagger;
+  timeline.to(wordElements, {
+    autoAlpha: 0,
+    filter: "blur(8px)",
+    y: -8,
+    duration: 0.4125,
+    stagger: 0.0825,
+    ease: "power2.inOut"
+  }, disappearStart);
+
+  timeline.addLabel("photo-flight", disappearStart);
+  const flightCurve = { progress: 0 };
+  const updateFlightCurve = () => {
+    const progress = flightCurve.progress;
+    const left = flightStartRect.left + (flightEndRect.left - flightStartRect.left) * progress;
+    const top = flightStartRect.top + (flightEndRect.top - flightStartRect.top) * progress ** 3;
+    const width = flightStartRect.width + (flightEndRect.width - flightStartRect.width) * progress;
+    const height = flightStartRect.height + (flightEndRect.height - flightStartRect.height) * progress;
+    gsap.set(flightPhoto, { left, top, width, height });
+  };
+  timeline.to(flightCurve, {
+    progress: 0.9,
+    duration: flightFastDuration,
+    ease: "none",
+    onUpdate: updateFlightCurve
+  }, "photo-flight");
+  timeline.to(flightCurve, {
+    progress: 1,
+    duration: flightLandingDuration,
+    ease: "sine.out",
+    onUpdate: updateFlightCurve
+  }, `photo-flight+=${flightFastDuration}`);
+  gsap.set(flightPhoto, { scale: 1, transformOrigin: "50% 50%" });
+  timeline.to(flightPhoto, {
+    scale: 1.02,
+    duration: 0.18,
+    ease: "sine.out"
+  });
+  timeline.to(flightPhoto, {
+    scale: 1,
+    duration: 0.3,
+    ease: "sine.inOut"
+  });
+
+  timeline.call(() => {
+    gsap.set(interfaceItems, { autoAlpha: 0, y: 18 });
+    document.documentElement.classList.remove("intro-pending");
+  });
+  timeline.addLabel("photo-reveal");
+  timeline.set(heroPhotoImage, { autoAlpha: 1 }, "photo-reveal");
+  timeline.to(flightPhoto, {
+    autoAlpha: 0,
+    duration: 0.16,
+    ease: "power2.inOut"
+  }, "photo-reveal");
+  timeline.to(interfaceItems, {
+    autoAlpha: 1,
+    y: 0,
+    duration: 0.22,
+    stagger: 0.08,
+    ease: "power2.out"
+  }, "photo-reveal+=0.1");
+}
+
+runHeroIntro().catch(showHeroFinalState);
+
 const catPhotos = [
   "./assets/cats/cat-01.webp",
   "./assets/cats/cat-02-full.webp",

@@ -1,0 +1,12 @@
+# Codex workspace metadata
+.agents/
+.codex/
+outputs/
+work/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
