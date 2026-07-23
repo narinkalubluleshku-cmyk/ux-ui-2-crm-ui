@@ -405,16 +405,13 @@ async function runHeroIntro() {
     ease: "sine.out",
     onUpdate: updateFlightCurve
   }, `photo-flight+=${flightFastDuration}`);
-  gsap.set(flightPhoto, { scale: 1, transformOrigin: "50% 50%" });
+  timeline.set(flightPhoto, { scale: 1, transformOrigin: "50% 50%" });
   timeline.to(flightPhoto, {
-    scale: 1.02,
-    duration: 0.18,
-    ease: "sine.out"
-  });
-  timeline.to(flightPhoto, {
-    scale: 1,
-    duration: 0.3,
-    ease: "sine.inOut"
+    keyframes: [
+      { scale: 1.02, duration: 0.24, ease: "sine.inOut" },
+      { scale: 1, duration: 0.36, ease: "sine.inOut" }
+    ],
+    ease: "none"
   });
 
   timeline.call(() => {
