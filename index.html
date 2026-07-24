@@ -15,6 +15,10 @@
     <script>
       document.documentElement.classList.add("intro-pending");
     </script>
+    <style>
+      /* Prevent a first-paint flash while the hero intro is being prepared. */
+      html.intro-pending .hero-layout { visibility: hidden; }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

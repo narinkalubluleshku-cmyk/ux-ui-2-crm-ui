@@ -429,6 +429,10 @@ html.intro-pending {
   overflow-x: hidden;
 }
 
+html.intro-pending .hero-layout {
+  visibility: hidden;
+}
+
 html.intro-pending .hero-intro {
   display: flex;
 }
@@ -2247,7 +2251,8 @@ body.lightbox-open {
 
   html.intro-pending .hero-title,
   html.intro-pending .hero-info,
-  html.intro-pending .hero-photo-wrap > img {
+  html.intro-pending .hero-photo-wrap > img,
+  html.intro-pending .hero-layout {
     visibility: visible !important;
     opacity: 1 !important;
   }
