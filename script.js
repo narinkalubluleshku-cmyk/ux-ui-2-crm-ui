@@ -1,5 +1,59 @@
 const revealItems = document.querySelectorAll(".reveal");
 
+const emailCopyLinks = document.querySelectorAll("[data-copy-email]");
+let emailToastTimer;
+
+function getEmailAddress(link) {
+  return decodeURIComponent(link.getAttribute("href") || "")
+    .replace(/^mailto:/i, "")
+    .split("?")[0]
+    .trim();
+}
+
+function copyTextFallback(text) {
+  const field = document.createElement("textarea");
+  field.value = text;
+  field.setAttribute("readonly", "");
+  field.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+  document.body.appendChild(field);
+  field.select();
+  document.execCommand("copy");
+  field.remove();
+}
+
+function showEmailToast() {
+  let toast = document.querySelector(".email-copy-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.className = "email-copy-toast";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    toast.textContent = "Почта скопирована";
+    document.body.appendChild(toast);
+  }
+
+  window.clearTimeout(emailToastTimer);
+  toast.classList.add("is-visible");
+  emailToastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 2200);
+}
+
+emailCopyLinks.forEach((link) => {
+  link.addEventListener("click", async (event) => {
+    event.preventDefault();
+    const email = getEmailAddress(link);
+    if (!email) return;
+
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error("Clipboard API unavailable");
+      await navigator.clipboard.writeText(email);
+    } catch {
+      copyTextFallback(email);
+    }
+
+    showEmailToast();
+  });
+});
+
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -427,6 +481,12 @@ async function runHeroIntro() {
     duration: 0.48,
     ease: "power3.out"
   }, "hero-reveal");
+  timeline.to(heroInfo, {
+    autoAlpha: 1,
+    y: 0,
+    duration: 0.48,
+    ease: "power3.out"
+  }, "hero-reveal");
   timeline.addLabel("photo-materialize");
   timeline.to(heroPhoto, {
     y: 0,
@@ -441,12 +501,6 @@ async function runHeroIntro() {
     ease: "power3.out"
   }, "photo-materialize");
   timeline.add(createHeroRippleTimeline(gsap, heroPhoto), "photo-materialize+=0.04");
-  timeline.to(heroInfo, {
-    autoAlpha: 1,
-    y: 0,
-    duration: 0.48,
-    ease: "power3.out"
-  });
 }
 
 runHeroIntro().catch(showHeroFinalState);

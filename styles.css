@@ -40,6 +40,63 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.email-copy-toast {
+  position: fixed;
+  z-index: 100;
+  bottom: 24px;
+  left: 50%;
+  padding: 11px 14px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--ink);
+  font-family: var(--font-caption);
+  font-size: var(--text-meta);
+  letter-spacing: 0.04em;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity 180ms ease, transform 220ms ease;
+}
+
+.email-copy-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-copy-email] {
+    position: relative;
+  }
+
+  [data-copy-email]::before {
+    content: attr(data-copy-tooltip);
+    position: absolute;
+    z-index: 10;
+    bottom: calc(100% + 9px);
+    left: 0;
+    width: max-content;
+    max-width: 220px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--bg);
+    background: var(--ink);
+    font-family: var(--font-caption);
+    font-size: var(--text-meta);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(0, 4px);
+    transition: opacity 160ms ease, transform 180ms ease;
+  }
+
+  [data-copy-email]:hover::before,
+  [data-copy-email]:focus-visible::before {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
 .case-page {
   min-height: 100svh;
 }
