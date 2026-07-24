@@ -785,6 +785,28 @@ body {
   border-radius: var(--radius);
 }
 
+.case-screens--meditation .case-media {
+  height: min(39vw, 560px);
+}
+
+.case-screens--meditation .case-media img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.case-screen-description {
+  width: min(50%, 680px);
+  margin: var(--space-3) 0 0;
+  color: #4d4b46;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 .case-video-wrap {
   overflow: hidden;
   width: 66.666%;
@@ -2825,6 +2847,15 @@ body.lightbox-open {
   .case-screens .case-gallery {
     gap: var(--mobile-space-3);
     margin-top: 0;
+  }
+
+  .case-screens--meditation .case-media {
+    height: 220px;
+  }
+
+  .case-screen-description {
+    width: 100%;
+    margin-top: var(--mobile-space-2);
   }
 
   .case-gallery--meditation-lead {
