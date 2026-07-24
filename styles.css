@@ -32,6 +32,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   color: var(--ink);
   background: var(--bg);
   font-family: var(--font-body);
@@ -387,6 +388,9 @@ html.intro-pending .hero-photo-wrap > img {
 }
 
 html.intro-pending .hero-photo-wrap {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  box-shadow: none !important;
   pointer-events: none;
   transform: none !important;
 }
@@ -428,6 +432,16 @@ html.intro-pending .hero-photo-wrap::after {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.hero-photo-ripple {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border: 1px solid rgba(17, 17, 16, 0.32);
+  border-radius: inherit;
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .section-heading,

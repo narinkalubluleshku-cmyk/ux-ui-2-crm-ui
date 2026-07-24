@@ -270,6 +270,33 @@ function showHeroFinalState() {
   });
 }
 
+function createHeroRippleTimeline(gsap, target) {
+  target.querySelectorAll(".hero-photo-ripple").forEach((ring) => ring.remove());
+
+  const rings = Array.from({ length: 3 }, () => {
+    const ring = document.createElement("span");
+    ring.className = "hero-photo-ripple";
+    target.appendChild(ring);
+    return ring;
+  });
+
+  const rippleTimeline = gsap.timeline();
+  rings.forEach((ring, index) => {
+    rippleTimeline.fromTo(ring,
+      { autoAlpha: 0.34, scale: 0.9 },
+      {
+        autoAlpha: 0,
+        scale: 1.28 + index * 0.12,
+        duration: 0.52,
+        ease: "power2.out",
+        onComplete: () => ring.remove()
+      },
+      index * 0.1
+    );
+  });
+  return rippleTimeline;
+}
+
 async function runHeroIntro() {
   if (
     window.__heroIntroPlayed ||
@@ -330,36 +357,17 @@ async function runHeroIntro() {
   await Promise.allSettled(resources);
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
-  const flightStartRect = flightPhoto.getBoundingClientRect();
-  const flightEndRect = heroPhoto.getBoundingClientRect();
-  flightPhoto.remove();
-  document.body.appendChild(flightPhoto);
-  gsap.set(flightPhoto, {
-    position: "fixed",
-    zIndex: 100,
-    left: flightStartRect.left,
-    top: flightStartRect.top,
-    width: flightStartRect.width,
-    height: flightStartRect.height,
-    margin: 0,
-    force3D: true
-  });
-
   gsap.set(flightPhoto, { autoAlpha: 1 });
   const introRevealItems = [...wordElements, flightPhotoImage];
   gsap.set(introRevealItems, { autoAlpha: 0, filter: "blur(14px)", y: 18 });
   gsap.set(heroPhotoImage, { autoAlpha: 0 });
 
-  const interfaceItems = [heroTitle, heroInfo];
-  const isDesktopHero = window.matchMedia("(min-width: 801px)").matches;
-  const flightFastDuration = isDesktopHero ? 0.5 : 0.75;
-  const flightLandingDuration = isDesktopHero ? 0.22 : 0.3;
   const timeline = gsap.timeline({
     defaults: { overwrite: "auto" },
     onComplete: () => {
       flightPhoto.remove();
       heroIntro.remove();
-      gsap.set([...interfaceItems, heroPhotoImage], { clearProps: "opacity,visibility,transform" });
+      gsap.set([heroTitle, heroInfo, heroPhoto, heroPhotoImage], { clearProps: "opacity,visibility,transform" });
     }
   });
 
@@ -383,55 +391,62 @@ async function runHeroIntro() {
     ease: "power2.inOut"
   }, disappearStart);
 
-  timeline.addLabel("photo-flight", disappearStart);
-  const flightCurve = { progress: 0 };
-  const updateFlightCurve = () => {
-    const progress = flightCurve.progress;
-    const left = flightStartRect.left + (flightEndRect.left - flightStartRect.left) * progress;
-    const top = flightStartRect.top + (flightEndRect.top - flightStartRect.top) * progress ** 3;
-    const width = flightStartRect.width + (flightEndRect.width - flightStartRect.width) * progress;
-    const height = flightStartRect.height + (flightEndRect.height - flightStartRect.height) * progress;
-    gsap.set(flightPhoto, { left, top, width, height });
-  };
-  timeline.to(flightCurve, {
-    progress: 0.9,
-    duration: flightFastDuration,
-    ease: "none",
-    onUpdate: updateFlightCurve
-  }, "photo-flight");
-  timeline.to(flightCurve, {
-    progress: 1,
-    duration: flightLandingDuration,
-    ease: "sine.out",
-    onUpdate: updateFlightCurve
-  }, `photo-flight+=${flightFastDuration}`);
-  timeline.set(flightPhoto, { scale: 1, transformOrigin: "50% 50%" });
+  timeline.addLabel("photo-collapse", disappearStart);
   timeline.to(flightPhoto, {
-    keyframes: [
-      { scale: 1.02, duration: 0.24, ease: "sine.inOut" },
-      { scale: 1, duration: 0.36, ease: "sine.inOut" }
-    ],
-    ease: "none"
+    scaleX: 0.06,
+    scaleY: 0.1,
+    rotationY: -9,
+    rotationX: 3,
+    filter: "blur(1.5px)",
+    duration: 0.38,
+    ease: "power4.in",
+    transformOrigin: "50% 50%",
+    force3D: true
+  }, "photo-collapse");
+  timeline.to(flightPhoto, {
+    autoAlpha: 0,
+    duration: 0.08,
+    ease: "power2.in"
+  }, "photo-collapse+=0.3");
+  timeline.set(heroPhotoImage, {
+    autoAlpha: 0,
+    scale: 0.055,
+    filter: "blur(2px)",
+    transformOrigin: "50% 50%"
   });
 
   timeline.call(() => {
-    gsap.set(interfaceItems, { autoAlpha: 0, y: 18 });
+    gsap.set([heroTitle, heroInfo], { autoAlpha: 0, y: 24 });
     document.documentElement.classList.remove("intro-pending");
+    gsap.set(heroPhoto, { autoAlpha: 1, y: 24 });
   });
-  timeline.addLabel("photo-reveal");
-  timeline.set(heroPhotoImage, { autoAlpha: 1 }, "photo-reveal");
-  timeline.to(flightPhoto, {
-    autoAlpha: 0,
-    duration: 0.16,
-    ease: "power2.inOut"
-  }, "photo-reveal");
-  timeline.to(interfaceItems, {
+  timeline.addLabel("hero-reveal");
+  timeline.to(heroTitle, {
     autoAlpha: 1,
     y: 0,
-    duration: 0.22,
-    stagger: 0.08,
-    ease: "power2.out"
-  }, "photo-reveal+=0.1");
+    duration: 0.48,
+    ease: "power3.out"
+  }, "hero-reveal");
+  timeline.addLabel("photo-materialize");
+  timeline.to(heroPhoto, {
+    y: 0,
+    duration: 0.72,
+    ease: "power3.out"
+  }, "photo-materialize");
+  timeline.to(heroPhotoImage, {
+    autoAlpha: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    duration: 0.72,
+    ease: "power3.out"
+  }, "photo-materialize");
+  timeline.add(createHeroRippleTimeline(gsap, heroPhoto), "photo-materialize+=0.04");
+  timeline.to(heroInfo, {
+    autoAlpha: 1,
+    y: 0,
+    duration: 0.48,
+    ease: "power3.out"
+  });
 }
 
 runHeroIntro().catch(showHeroFinalState);
