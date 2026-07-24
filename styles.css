@@ -201,12 +201,26 @@ body {
   letter-spacing: 0.06em;
   line-height: 1;
   text-transform: uppercase;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .case-tab--active {
   border-color: var(--ink);
   color: var(--bg);
   background: var(--ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .case-tab:not(:disabled):not(.case-tab--active):hover {
+    border-color: var(--accent);
+    color: #fff;
+    background: var(--accent);
+    transform: translateY(-3px);
+  }
 }
 
 .case-tab:disabled {
