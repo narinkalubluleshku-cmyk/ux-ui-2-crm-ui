@@ -482,6 +482,8 @@ html.intro-pending .hero-photo-wrap::after {
   margin-left: 0.22em;
   overflow: hidden;
   border-radius: 50%;
+  opacity: 0;
+  visibility: hidden;
   vertical-align: -0.14em;
   transform-origin: 50% 50%;
   backface-visibility: hidden;
