@@ -503,7 +503,17 @@ async function runHeroIntro() {
   timeline.add(createHeroRippleTimeline(gsap, heroPhoto), "photo-materialize+=0.04");
 }
 
-runHeroIntro().catch(showHeroFinalState);
+const navigationType = performance.getEntriesByType?.("navigation")[0]?.type;
+
+if (navigationType === "back_forward") {
+  showHeroFinalState();
+} else {
+  runHeroIntro().catch(showHeroFinalState);
+}
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) showHeroFinalState();
+});
 
 const catPhotos = [
   "./assets/cats/cat-01.webp",

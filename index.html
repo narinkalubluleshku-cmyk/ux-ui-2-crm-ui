@@ -13,7 +13,10 @@
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <title>Наринэ Туманова — UX/UI-дизайнер</title>
     <script>
-      document.documentElement.classList.add("intro-pending");
+      const navigationEntry = performance.getEntriesByType?.("navigation")[0];
+      if (navigationEntry?.type !== "back_forward") {
+        document.documentElement.classList.add("intro-pending");
+      }
     </script>
     <style>
       /* Prevent a first-paint flash while the hero intro is being prepared. */
