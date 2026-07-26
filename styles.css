@@ -989,6 +989,20 @@ html.intro-pending .hero-photo-wrap::after {
   display: none;
 }
 
+/* Финальное раскрытие hero ведёт GSAP одним tween. Обычные CSS-переходы
+   в этот момент отключены, чтобы элементы не начинали движение по очереди. */
+html.hero-intro-active .hero-title .reveal,
+html.hero-intro-active .hero-info,
+html.hero-intro-active .hero-photo-wrap,
+html.hero-intro-active .hero-photo-wrap img,
+html.hero-intro-revealing .hero-title,
+html.hero-intro-revealing .hero-title .reveal,
+html.hero-intro-revealing .hero-info,
+html.hero-intro-revealing .hero-photo-wrap,
+html.hero-intro-revealing .hero-photo-wrap img {
+  transition: none !important;
+}
+
 .hero-intro-text {
   width: min(100%, 1180px);
   margin: 0;

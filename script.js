@@ -1,4 +1,8 @@
-const revealItems = document.querySelectorAll(".reveal");
+// Hero раскрывается отдельным GSAP-сценарием. Исключаем его из общего
+// IntersectionObserver, иначе тот добавляет CSS-задержки по элементам.
+const revealItems = Array.from(document.querySelectorAll(".reveal")).filter(
+  (item) => !item.closest(".hero-layout")
+);
 
 const emailCopyLinks = document.querySelectorAll("[data-copy-email]");
 let emailToastTimer;
@@ -307,6 +311,7 @@ const heroPhotoImage = heroPhoto?.querySelector("img");
 
 function showHeroFinalState() {
   document.documentElement.classList.remove("intro-pending");
+  document.documentElement.classList.remove("hero-intro-active", "hero-intro-revealing");
   heroIntro?.remove();
   heroTitle?.querySelectorAll(".generated-word").forEach((word) => {
     word.style.opacity = "1";
@@ -322,33 +327,9 @@ function showHeroFinalState() {
     item.style.removeProperty("visibility");
     item.style.removeProperty("transform");
   });
-}
-
-function createHeroRippleTimeline(gsap, target) {
-  target.querySelectorAll(".hero-photo-ripple").forEach((ring) => ring.remove());
-
-  const rings = Array.from({ length: 3 }, () => {
-    const ring = document.createElement("span");
-    ring.className = "hero-photo-ripple";
-    target.appendChild(ring);
-    return ring;
-  });
-
-  const rippleTimeline = gsap.timeline();
-  rings.forEach((ring, index) => {
-    rippleTimeline.fromTo(ring,
-      { autoAlpha: 0.34, scale: 0.9 },
-      {
-        autoAlpha: 0,
-        scale: 1.28 + index * 0.12,
-        duration: 0.52,
-        ease: "power2.out",
-        onComplete: () => ring.remove()
-      },
-      index * 0.1
-    );
-  });
-  return rippleTimeline;
+  heroLayout?.style.removeProperty("opacity");
+  heroLayout?.style.removeProperty("visibility");
+  heroLayout?.style.removeProperty("transform");
 }
 
 async function runHeroIntro() {
@@ -356,6 +337,7 @@ async function runHeroIntro() {
     window.__heroIntroPlayed ||
     !heroIntro ||
     !heroIntroText ||
+    !heroLayout ||
     !heroTitle ||
     !heroInfo ||
     !heroPhoto ||
@@ -366,6 +348,7 @@ async function runHeroIntro() {
   }
 
   window.__heroIntroPlayed = true;
+  document.documentElement.classList.add("hero-intro-active");
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     showHeroFinalState();
@@ -389,14 +372,6 @@ async function runHeroIntro() {
     wordElements.push(word);
   });
 
-  const flightPhoto = document.createElement("span");
-  flightPhoto.className = "intro-flight-photo";
-  const flightPhotoImage = document.createElement("img");
-  flightPhotoImage.src = heroPhotoImage.currentSrc || heroPhotoImage.src;
-  flightPhotoImage.alt = "";
-  flightPhoto.appendChild(flightPhotoImage);
-  heroIntroText.appendChild(flightPhoto);
-
   heroTitle.querySelectorAll(".generated-word").forEach((word) => {
     gsap.set(word, { opacity: 1, filter: "blur(0px)", y: 0 });
   });
@@ -407,100 +382,64 @@ async function runHeroIntro() {
   const resources = [];
   if (document.fonts?.ready) resources.push(document.fonts.ready);
   resources.push(heroPhotoImage.decode?.() || Promise.resolve());
-  resources.push(flightPhotoImage.decode?.() || Promise.resolve());
   await Promise.allSettled(resources);
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
-  gsap.set(flightPhoto, { autoAlpha: 1 });
-  const introRevealItems = [...wordElements, flightPhotoImage];
-  gsap.set(introRevealItems, { autoAlpha: 0, filter: "blur(14px)", y: 18 });
+  gsap.set(wordElements, { autoAlpha: 0, filter: "blur(14px)", y: 18 });
   gsap.set(heroPhotoImage, { autoAlpha: 0 });
 
   const timeline = gsap.timeline({
     defaults: { overwrite: "auto" },
     onComplete: () => {
-      flightPhoto.remove();
       heroIntro.remove();
-      gsap.set([heroTitle, heroInfo, heroPhoto, heroPhotoImage], { clearProps: "opacity,visibility,transform" });
+      document.documentElement.classList.remove("hero-intro-active", "hero-intro-revealing");
+      gsap.set([heroLayout, heroTitle, heroInfo, heroPhoto, heroPhotoImage], { clearProps: "opacity,visibility,transform" });
     }
   });
 
-  const wordStagger = 0.24;
-  timeline.to(introRevealItems, {
+  const wordStagger = 0.154;
+  const wordRevealDuration = 1.728;
+  timeline.to(wordElements, {
     autoAlpha: 1,
     filter: "blur(0px)",
     y: 0,
-    duration: 2.7,
+    duration: wordRevealDuration,
     stagger: wordStagger,
     ease: "power2.out"
   }, 0);
 
-  const disappearStart = 2.7 + (wordElements.length - 1) * wordStagger;
+  // Даём фразе полностью проявиться, затем быстро и последовательно уводим её.
+  const disappearStart = wordRevealDuration + (wordElements.length - 1) * wordStagger - 0.5;
+  const wordDisappearDuration = 0.5;
+  const wordDisappearStagger = 0;
   timeline.to(wordElements, {
     autoAlpha: 0,
     filter: "blur(8px)",
     y: -8,
-    duration: 0.4125,
-    stagger: 0.0825,
-    ease: "power2.inOut"
+    duration: wordDisappearDuration,
+    stagger: wordDisappearStagger,
+    ease: "power1.inOut"
   }, disappearStart);
 
-  timeline.addLabel("photo-collapse", disappearStart);
-  timeline.to(flightPhoto, {
-    scaleX: 0.06,
-    scaleY: 0.1,
-    rotationY: -9,
-    rotationX: 3,
-    filter: "blur(1.5px)",
-    duration: 0.38,
-    ease: "power4.in",
-    transformOrigin: "50% 50%",
-    force3D: true
-  }, "photo-collapse");
-  timeline.to(flightPhoto, {
-    autoAlpha: 0,
-    duration: 0.08,
-    ease: "power2.in"
-  }, "photo-collapse+=0.3");
-  timeline.set(heroPhotoImage, {
-    autoAlpha: 0,
-    scale: 0.055,
-    filter: "blur(2px)",
-    transformOrigin: "50% 50%"
-  });
-
+  const introEnd = disappearStart + wordDisappearDuration + (wordElements.length - 1) * wordDisappearStagger;
   timeline.call(() => {
-    gsap.set([heroTitle, heroInfo], { autoAlpha: 0, y: 24 });
+    document.documentElement.classList.add("hero-intro-revealing");
+    // Движется один контейнер: имя, фотография и нижний блок проходят
+    // одинаковую траекторию и финишируют строго синхронно.
+    gsap.set(heroLayout, { autoAlpha: 0, y: 8, force3D: true });
+    // Фотография проявляется вместе с контейнером — так все элементы hero
+    // стартуют и доходят до финальной позиции одним синхронным движением.
+    gsap.set(heroPhotoImage, { autoAlpha: 1 });
     document.documentElement.classList.remove("intro-pending");
-    gsap.set(heroPhoto, { autoAlpha: 1, y: 24 });
-  });
+  }, null, introEnd);
   timeline.addLabel("hero-reveal");
-  timeline.to(heroTitle, {
+  timeline.to(heroLayout, {
     autoAlpha: 1,
     y: 0,
-    duration: 0.48,
-    ease: "power3.out"
-  }, "hero-reveal");
-  timeline.to(heroInfo, {
-    autoAlpha: 1,
-    y: 0,
-    duration: 0.48,
-    ease: "power3.out"
-  }, "hero-reveal");
-  timeline.addLabel("photo-materialize");
-  timeline.to(heroPhoto, {
-    y: 0,
-    duration: 0.72,
-    ease: "power3.out"
-  }, "photo-materialize");
-  timeline.to(heroPhotoImage, {
-    autoAlpha: 1,
-    scale: 1,
-    filter: "blur(0px)",
-    duration: 0.72,
-    ease: "power3.out"
-  }, "photo-materialize");
-  timeline.add(createHeroRippleTimeline(gsap, heroPhoto), "photo-materialize+=0.04");
+    duration: 0.36,
+    ease: "power3.out",
+    force3D: true
+  }, introEnd);
 }
 
 const navigationType = performance.getEntriesByType?.("navigation")[0]?.type;
