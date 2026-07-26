@@ -426,7 +426,7 @@ async function runHeroIntro() {
     document.documentElement.classList.add("hero-intro-revealing");
     // Движется один контейнер: имя, фотография и нижний блок проходят
     // одинаковую траекторию и финишируют строго синхронно.
-    gsap.set(heroLayout, { autoAlpha: 0, y: 8, force3D: true });
+    gsap.set(heroLayout, { autoAlpha: 0, y: 2, force3D: true });
     // Фотография проявляется вместе с контейнером — так все элементы hero
     // стартуют и доходят до финальной позиции одним синхронным движением.
     gsap.set(heroPhotoImage, { autoAlpha: 1 });
@@ -436,7 +436,7 @@ async function runHeroIntro() {
   timeline.to(heroLayout, {
     autoAlpha: 1,
     y: 0,
-    duration: 0.36,
+    duration: 1.16,
     ease: "power3.out",
     force3D: true
   }, introEnd);
