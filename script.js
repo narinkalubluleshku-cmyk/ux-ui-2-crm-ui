@@ -7,6 +7,15 @@ const revealItems = Array.from(document.querySelectorAll(".reveal")).filter(
 const emailCopyLinks = document.querySelectorAll("[data-copy-email]");
 let emailToastTimer;
 
+document.querySelectorAll("[data-expand-description]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const extra = button.closest(".case-screen-copy")?.querySelector(".case-screen-extra");
+    if (!extra) return;
+    extra.hidden = false;
+    button.remove();
+  });
+});
+
 function getEmailAddress(link) {
   return decodeURIComponent(link.getAttribute("href") || "")
     .replace(/^mailto:/i, "")

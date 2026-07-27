@@ -807,6 +807,54 @@ body {
   line-height: 1.5;
 }
 
+.case-screen-copy {
+  position: relative;
+  width: min(50%, 680px);
+}
+
+.case-screen-copy > .case-screen-description {
+  width: 100%;
+  margin-top: var(--space-3);
+}
+
+.case-screen-more {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  color: #85827b;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  font: inherit;
+  opacity: 1;
+  line-height: inherit;
+  vertical-align: baseline;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.case-screen-more:hover,
+.case-screen-more:focus-visible {
+  color: var(--accent);
+}
+
+.case-screen-extra {
+  width: 100%;
+}
+
+.case-screen-extra .case-screen-description {
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+.case-screen-extra .case-screen-description + .case-screen-description {
+  margin-top: var(--space-2);
+}
+
 .case-video-wrap {
   overflow: hidden;
   width: 66.666%;
@@ -2261,14 +2309,14 @@ body.lightbox-open {
     box-shadow: 0 0 0 7px rgba(17, 17, 15, 0.12);
   }
 
-  button,
+  button:not(.case-screen-more),
   .footer-mail {
     transition:
       filter 140ms ease,
       transform 140ms ease;
   }
 
-  button:active,
+  button:not(.case-screen-more):active,
   .footer-mail:active {
     filter: brightness(0.76);
   }
@@ -2869,6 +2917,19 @@ body.lightbox-open {
 
   .case-screen-description {
     width: 100%;
+    margin-top: var(--mobile-space-2);
+  }
+
+  .case-screen-copy {
+    width: 100%;
+  }
+
+  .case-screen-copy > .case-screen-description {
+    margin-top: var(--mobile-space-2);
+  }
+
+  .case-screen-extra .case-screen-description,
+  .case-screen-extra .case-screen-description + .case-screen-description {
     margin-top: var(--mobile-space-2);
   }
 
