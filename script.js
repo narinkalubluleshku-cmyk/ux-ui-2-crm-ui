@@ -591,25 +591,6 @@ function closeLightbox() {
   document.body.classList.remove("lightbox-open");
 }
 
-document.querySelectorAll("[role='tablist']").forEach((tabList) => {
-  const tabs = Array.from(tabList.querySelectorAll("[role='tab'][data-case-tab]"));
-
-  const activateTab = (activeTab) => {
-    tabs.forEach((tab) => {
-      const isActive = tab === activeTab;
-      const panel = document.getElementById(tab.getAttribute("aria-controls"));
-
-      tab.classList.toggle("case-tab--active", isActive);
-      tab.setAttribute("aria-selected", String(isActive));
-      if (panel) panel.hidden = !isActive;
-    });
-  };
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => activateTab(tab));
-  });
-});
-
 document.querySelectorAll(".project-visual, .concept-card, .case-media").forEach((container) => {
   const image = container.querySelector("img");
   if (!image) return;

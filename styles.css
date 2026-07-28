@@ -141,13 +141,11 @@ body {
   margin-top: 40px;
 }
 
-.case-overview {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-4);
+.case-problem {
   margin-top: clamp(72px, 8vw, 120px);
 }
 
+.case-problem > h2,
 .case-overview-item h2 {
   margin: 0 0 var(--space-2);
   font-family: var(--font-caption);
@@ -155,6 +153,36 @@ body {
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.case-problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.case-problem-item h3 {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.case-problem-item p {
+  max-width: 680px;
+  margin: 0;
+  color: #4d4b46;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.case-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: clamp(72px, 8vw, 120px);
 }
 
 .case-overview-item p {
@@ -175,7 +203,40 @@ body {
   margin-top: var(--space-2);
 }
 
+.case-overview-item ul {
+  display: grid;
+  gap: 10px;
+  max-width: 520px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.case-overview-item li {
+  position: relative;
+  padding-left: 16px;
+  color: #4d4b46;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.case-overview-item li::before {
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--ink);
+  content: "";
+  transform: translateY(-50%);
+}
+
 .case-materials {
+  margin-top: clamp(72px, 8vw, 120px);
+}
+
+.case-material-section + .case-material-section {
   margin-top: clamp(72px, 8vw, 120px);
 }
 
@@ -2678,17 +2739,31 @@ body.lightbox-open {
     margin-top: var(--mobile-space-3);
   }
 
+  .case-problem {
+    margin-top: var(--mobile-space-5);
+  }
+
+  .case-problem-grid {
+    grid-template-columns: 1fr;
+    gap: var(--mobile-space-4);
+  }
+
   .case-overview {
     grid-template-columns: 1fr;
     gap: var(--mobile-space-4);
     margin-top: var(--mobile-space-5);
   }
 
+  .case-problem > h2,
   .case-overview-item h2 {
     margin-bottom: var(--mobile-space-2);
   }
 
   .case-materials {
+    margin-top: var(--mobile-space-5);
+  }
+
+  .case-material-section + .case-material-section {
     margin-top: var(--mobile-space-5);
   }
 

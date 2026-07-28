@@ -98,24 +98,45 @@
           </figure>
         </div>
 
+        <section class="case-problem" aria-labelledby="case-problem-title">
+          <h2 id="case-problem-title">Проблема</h2>
+          <div class="case-problem-grid">
+            <div class="case-problem-item">
+              <h3>Бизнес:</h3>
+              <p>
+                Люди быстро теряют интерес к&nbsp;приложению, перестают выполнять практики и&nbsp;бросают его
+              </p>
+            </div>
+            <div class="case-problem-item">
+              <h3>Пользователь:</h3>
+              <p>
+                Человеку сложно отслеживать изменения состояния и&nbsp;собственный прогресс, поэтому снижается мотивация продолжать занятия
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section class="case-overview" aria-label="Описание проекта">
           <div class="case-overview-item">
             <h2>Задача</h2>
             <p>
-              Разработать сервис медитации, в&nbsp;котором <strong>пользователь понимает ценность регулярной практики</strong>, видит личный прогресс и&nbsp;сохраняет мотивацию продолжать занятия
+              Создать мобильное приложение, которое делает эффект от&nbsp;регулярных медитаций заметным и&nbsp;поддерживает мотивацию к&nbsp;занятиям
             </p>
           </div>
           <div class="case-overview-item">
             <h2>Решение</h2>
             <p>
-              <strong>Спроектировать приложение с&nbsp;механикой фиксации самочувствия до&nbsp;и&nbsp;после медитации</strong>, визуализацией изменений и&nbsp;историей практик, чтобы пользователь мог отслеживать собственный прогресс и&nbsp;замечать влияние медитаций на&nbsp;свое состояние
+              Спроектировала мобильное приложение с&nbsp;онбордингом, каталогом медитаций и&nbsp;системой фиксации самочувствия до&nbsp;и&nbsp;после практики. Визуализация изменений и&nbsp;история занятий помогают отслеживать динамику состояния и&nbsp;замечать личный прогресс
             </p>
           </div>
           <div class="case-overview-item">
             <h2>Результат</h2>
-            <p>
-              MVP мобильного приложения для медитаций с&nbsp;онбордингом, каталогом практик, системой отслеживания прогресса через фиксацию самочувствия. <strong>Решение помогает пользователю видеть изменения своего состояния и&nbsp;поддерживает мотивацию к&nbsp;регулярной практике</strong>
-            </p>
+            <ul>
+              <li>Бенчмаркинг и&nbsp;User Flow</li>
+              <li>Концепт и&nbsp;UI-дизайн</li>
+              <li>Сценарии от&nbsp;онбординга до&nbsp;профиля</li>
+              <li>Прототип и&nbsp;UI-kit</li>
+            </ul>
           </div>
         </section>
 
@@ -177,13 +198,8 @@
           </aside>
 
           <section class="case-materials" aria-label="Материалы процесса">
-            <nav class="case-tabs" role="tablist" aria-label="Материалы процесса">
-              <button class="case-tab case-tab--active" id="wireframes-tab" type="button" role="tab" aria-selected="true" aria-controls="wireframes-panel" data-case-tab="wireframes">Wireframes</button>
-              <button class="case-tab" id="benchmarking-tab" type="button" role="tab" aria-selected="false" aria-controls="benchmarking-panel" data-case-tab="benchmarking">Benchmarking</button>
-              <button class="case-tab" id="user-flow-tab" type="button" role="tab" aria-selected="false" aria-controls="user-flow-panel" data-case-tab="user-flow">User Flow</button>
-            </nav>
-
-            <section class="case-tab-panel case-wireframes" id="wireframes-panel" role="tabpanel" aria-labelledby="wireframes-tab" data-case-panel="wireframes">
+            <section class="case-material-section case-wireframes" aria-labelledby="wireframes-title">
+              <h2 class="case-section-title" id="wireframes-title">Wireframes</h2>
               <p class="case-wireframes-intro">Наброски, которые мне передал ПМ для работы</p>
               <div class="case-wireframes-grid" aria-label="Черновые экраны приложения">
                 <div class="case-media">
@@ -201,7 +217,8 @@
               </div>
             </section>
 
-            <section class="case-tab-panel case-benchmarking" id="benchmarking-panel" role="tabpanel" aria-labelledby="benchmarking-tab" data-case-panel="benchmarking" hidden>
+            <section class="case-material-section case-benchmarking" aria-labelledby="benchmarking-title">
+              <h2 class="case-section-title" id="benchmarking-title">Benchmarking</h2>
               <p class="case-wireframes-intro">Референсы помогли определить характер интерфейса:<br class="benchmark-desktop-break" /> чистую композицию, спокойную типографику и&nbsp;понятные сценарии</p>
 
               <div class="benchmark-groups">
@@ -234,7 +251,8 @@
               </div>
             </section>
 
-            <section class="case-tab-panel case-user-flow" id="user-flow-panel" role="tabpanel" aria-labelledby="user-flow-tab" data-case-panel="user-flow" hidden>
+            <section class="case-material-section case-user-flow" aria-labelledby="user-flow-title">
+              <h2 class="case-section-title" id="user-flow-title">User Flow</h2>
               <div class="case-media case-user-flow-media">
                 <img src="./assets/case-meditation-user-flow.png" alt="Схема пользовательского пути в приложении для медитаций" width="7392" height="4708" loading="lazy" decoding="async" />
               </div>
