@@ -123,6 +123,8 @@ body {
 }
 
 .case-main {
+  display: flex;
+  flex-direction: column;
   padding: clamp(64px, 8vw, 120px) 28px 120px;
 }
 
@@ -234,6 +236,107 @@ body {
 
 .case-materials {
   margin-top: clamp(72px, 8vw, 120px);
+}
+
+.case-metrics {
+  order: 10;
+  margin-top: clamp(72px, 8vw, 120px);
+}
+
+.case-end-actions {
+  order: 11;
+}
+
+.case-metrics-intro {
+  max-width: 760px;
+  margin: 0;
+  color: #4d4b46;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.case-metrics-group {
+  margin-top: var(--space-4);
+}
+
+.case-metrics-group h3 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.case-metrics-table-wrap {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.case-metrics-table {
+  width: 100%;
+  min-width: 840px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.case-metrics-table th,
+.case-metrics-table td {
+  padding: 20px 24px;
+  vertical-align: top;
+}
+
+.case-metrics-table thead th {
+  color: #4d4b46;
+  font-family: var(--font-caption);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.case-metrics-table tbody tr:nth-child(even) {
+  background: rgba(233, 230, 224, 0.46);
+}
+
+.case-metrics-table tbody th {
+  width: 28%;
+  color: var(--ink);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.case-metrics-table tbody td {
+  width: 36%;
+  color: #4d4b46;
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.case-metrics-table strong,
+.case-metrics-table span {
+  display: block;
+}
+
+.case-metrics-table strong {
+  font-weight: 600;
+}
+
+.case-metrics-table span {
+  margin-top: 6px;
+  color: #85827b;
+  font-family: var(--font-caption);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
+.case-metrics-cards {
+  display: none;
 }
 
 .case-material-section + .case-material-section {
@@ -2765,6 +2868,95 @@ body.lightbox-open {
 
   .case-material-section + .case-material-section {
     margin-top: var(--mobile-space-5);
+  }
+
+  .case-metrics {
+    margin-top: var(--mobile-space-5);
+  }
+
+  .case-metrics-group {
+    margin-top: var(--mobile-space-4);
+  }
+
+  .case-metrics-group h3 {
+    margin-bottom: var(--mobile-space-2);
+  }
+
+  .case-metrics-table-wrap {
+    display: none;
+  }
+
+  .case-metrics-cards {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(100% - 48px);
+    gap: var(--mobile-space-2);
+    overflow-x: auto;
+    padding-bottom: var(--mobile-space-1);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+  }
+
+  .case-metrics-cards.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+
+  .case-metrics-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case-metrics-card {
+    min-height: 100%;
+    padding: var(--mobile-space-3);
+    border-radius: 20px;
+    background: rgba(233, 230, 224, 0.46);
+    scroll-snap-align: start;
+  }
+
+  .case-metrics-card-title strong {
+    display: block;
+    color: var(--ink);
+    font-size: var(--text-body);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .case-metrics-card-title span {
+    display: block;
+    margin-top: 6px;
+    color: #85827b;
+    font-family: var(--font-caption);
+    font-size: var(--text-meta);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+  }
+
+  .case-metrics-card-row {
+    margin-top: var(--mobile-space-3);
+  }
+
+  .case-metrics-card-row > span {
+    display: block;
+    color: #85827b;
+    font-family: var(--font-caption);
+    font-size: var(--text-meta);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .case-metrics-card-row p {
+    margin: var(--mobile-space-1) 0 0;
+    color: #4d4b46;
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: 1.45;
   }
 
   .case-wireframes,

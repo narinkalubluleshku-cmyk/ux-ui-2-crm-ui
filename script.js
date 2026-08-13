@@ -16,6 +16,65 @@ document.querySelectorAll("[data-expand-description]").forEach((button) => {
   });
 });
 
+document.querySelectorAll(".case-metrics-group").forEach((group) => {
+  const table = group.querySelector(".case-metrics-table");
+  if (!table) return;
+
+  const cards = document.createElement("div");
+  cards.className = "case-metrics-cards";
+  cards.setAttribute("aria-label", group.querySelector("h3")?.textContent.trim() || "Метрики");
+
+  table.querySelectorAll("tbody tr").forEach((row) => {
+    const [metric, description, target] = row.children;
+    if (!metric || !description || !target) return;
+
+    const card = document.createElement("article");
+    card.className = "case-metrics-card";
+    card.innerHTML = `
+      <div class="case-metrics-card-title">${metric.innerHTML}</div>
+      <div class="case-metrics-card-row">
+        <span>Что показывает</span>
+        <p>${description.innerHTML}</p>
+      </div>
+      <div class="case-metrics-card-row">
+        <span>Критерий успеха</span>
+        <p>${target.innerHTML}</p>
+      </div>
+    `;
+    cards.appendChild(card);
+  });
+
+  group.appendChild(cards);
+
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+  let activePointerId = null;
+
+  cards.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "mouse") return;
+    activePointerId = event.pointerId;
+    dragStartX = event.clientX;
+    dragStartScroll = cards.scrollLeft;
+    cards.setPointerCapture(activePointerId);
+    cards.classList.add("is-dragging");
+  });
+
+  cards.addEventListener("pointermove", (event) => {
+    if (event.pointerId !== activePointerId) return;
+    cards.scrollLeft = dragStartScroll - (event.clientX - dragStartX);
+  });
+
+  const stopCardsDrag = (event) => {
+    if (event.pointerId !== activePointerId) return;
+    if (cards.hasPointerCapture(activePointerId)) cards.releasePointerCapture(activePointerId);
+    activePointerId = null;
+    cards.classList.remove("is-dragging");
+  };
+
+  cards.addEventListener("pointerup", stopCardsDrag);
+  cards.addEventListener("pointercancel", stopCardsDrag);
+});
+
 function getEmailAddress(link) {
   return decodeURIComponent(link.getAttribute("href") || "")
     .replace(/^mailto:/i, "")

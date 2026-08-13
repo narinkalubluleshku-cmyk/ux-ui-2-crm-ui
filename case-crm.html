@@ -131,6 +131,98 @@
             </ul>
           </div>
         </section>
+      </section>
+
+        <section class="case-metrics" aria-labelledby="case-metrics-title">
+          <h2 class="case-section-title" id="case-metrics-title">Метрики после релиза</h2>
+          <p class="case-metrics-intro">
+            Продукт находится в&nbsp;разработке, поэтому фактических данных после релиза пока нет. После запуска я&nbsp;бы отслеживала следующие продуктовые и&nbsp;UX-метрики
+          </p>
+
+          <section class="case-metrics-group" aria-labelledby="order-metrics-title">
+            <h3 id="order-metrics-title">Эффективность обработки заказов</h3>
+            <div class="case-metrics-table-wrap" tabindex="0">
+              <table class="case-metrics-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Метрика</th>
+                    <th scope="col">Что показывает</th>
+                    <th scope="col">Критерий успеха</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><strong>Скорость принятия заказа</strong><span>TTA</span></th>
+                    <td>Медианное время от&nbsp;поступления онлайн-заказа до&nbsp;первого действия оператора</td>
+                    <td>TTA сокращается, а&nbsp;доля заказов, не&nbsp;принятых в&nbsp;установленный срок, снижается</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Время обработки заказа</strong><span>AHT</span></th>
+                    <td>Медианное время активной работы оператора с&nbsp;заказом: проверка данных, коммуникация с&nbsp;гостем и&nbsp;изменение статуса</td>
+                    <td>AHT сокращается без роста ошибок, отмен и&nbsp;повторных обращений</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Ошибки при обработке заказов</strong><span>OER</span></th>
+                    <td>Доля заказов с&nbsp;неверным статусом, составом, рестораном, временем или контактными данными</td>
+                    <td>OER и&nbsp;количество повторных ручных действий устойчиво снижаются</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Автоматизация обращений AI-ассистентом</strong><span>ACR</span></th>
+                    <td>Доля диалогов, корректно завершённых AI-ассистентом без подключения оператора</td>
+                    <td>ACR растёт, при этом не&nbsp;увеличиваются повторные обращения, исправления оператором и&nbsp;негативные оценки</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Актуальность меню</strong><span>MAR</span></th>
+                    <td>Доля позиций с&nbsp;корректными ценами, составом и&nbsp;доступностью для&nbsp;каждой точки</td>
+                    <td>MAR приближается к&nbsp;100%, а&nbsp;число заказов с&nbsp;недоступными позициями и&nbsp;ручных исправлений снижается</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Централизация обработки</strong><span>CCR</span></th>
+                    <td>Доля заказов и&nbsp;обращений, полностью обработанных внутри CRM без сторонних сервисов и&nbsp;ручного дублирования</td>
+                    <td>CCR устойчиво растёт, а&nbsp;количество операций в&nbsp;таблицах, чатах и&nbsp;других сервисах сокращается</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="case-metrics-group" aria-labelledby="usage-metrics-title">
+            <h3 id="usage-metrics-title">Использование CRM сотрудниками</h3>
+            <div class="case-metrics-table-wrap" tabindex="0">
+              <table class="case-metrics-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Метрика</th>
+                    <th scope="col">Что показывает</th>
+                    <th scope="col">Критерий успеха</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><strong>Успешность ключевых сценариев</strong><span>TSR</span></th>
+                    <td>Доля задач, выполненных оператором без ошибок и&nbsp;посторонней помощи: найти заказ, изменить статус, ответить гостю или уточнить данные</td>
+                    <td>TSR растёт, а&nbsp;доля прерванных сценариев и&nbsp;обращений за&nbsp;помощью снижается</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Эффективность поиска и&nbsp;фильтров</strong><span>FUR</span></th>
+                    <td>Использование фильтров по&nbsp;статусу, типу заявки, каналу, ресторану и&nbsp;периоду, а&nbsp;также результативность поиска</td>
+                    <td>Операторы быстрее находят нужные заказы, используют меньше лишних действий, а&nbsp;доля поисков без результата снижается</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Использование дашборда</strong><span>Dashboard Usage</span></th>
+                    <td>Доля операторов и&nbsp;управляющих, которые используют дашборд для контроля показателей и&nbsp;перехода к&nbsp;заказам, требующим внимания</td>
+                    <td>Пользователи регулярно переходят из&nbsp;дашборда к&nbsp;целевым действиям, а&nbsp;не&nbsp;ограничиваются просмотром показателей</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Освоение CRM</strong><span>TTC</span></th>
+                    <td>Время, необходимое новому сотруднику для самостоятельного выполнения основных рабочих сценариев</td>
+                    <td>TTC, количество ошибок в&nbsp;первых заказах и&nbsp;число обращений к&nbsp;наставнику сокращаются</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
 
         <section class="case-process" aria-labelledby="case-process-title">
           <h2 class="case-section-title" id="case-process-title">Процесс</h2>
@@ -286,7 +378,6 @@
             <span>На главную</span>
           </a>
         </div>
-      </section>
     </main>
     <script src="./script.js?v=20260727-1"></script>
   </body>
