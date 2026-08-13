@@ -261,11 +261,18 @@ body {
 }
 
 .case-metrics-group h3 {
+  display: inline-block;
   margin: 0 0 var(--space-2);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgb(228 194 124 / 30%);
+  color: #b0832a;
+  font-family: var(--font-caption);
+  font-size: 10px;
   font-weight: 600;
-  line-height: 1.5;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .case-metrics-table-wrap {
