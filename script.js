@@ -20,6 +20,15 @@ document.querySelectorAll(".case-metrics-group").forEach((group) => {
   const table = group.querySelector(".case-metrics-table");
   if (!table) return;
 
+  const isHypothesesTable = Boolean(group.closest(".case-metrics--inline"));
+  const headings = Array.from(table.querySelectorAll("thead th"));
+  const descriptionHeading = isHypothesesTable
+    ? ""
+    : headings[1]?.textContent.trim() || "Что показывает";
+  const targetHeading = isHypothesesTable
+    ? "Метрики"
+    : headings[2]?.textContent.trim() || "Критерий успеха";
+
   const cards = document.createElement("div");
   cards.className = "case-metrics-cards";
   cards.setAttribute("aria-label", group.querySelector("h3")?.textContent.trim() || "Метрики");
@@ -33,11 +42,11 @@ document.querySelectorAll(".case-metrics-group").forEach((group) => {
     card.innerHTML = `
       <div class="case-metrics-card-title">${metric.innerHTML}</div>
       <div class="case-metrics-card-row">
-        <span>Что показывает</span>
+        ${descriptionHeading ? `<span>${descriptionHeading}</span>` : ""}
         <p>${description.innerHTML}</p>
       </div>
       <div class="case-metrics-card-row">
-        <span>Критерий успеха</span>
+        <span>${targetHeading}</span>
         <p>${target.innerHTML}</p>
       </div>
     `;
