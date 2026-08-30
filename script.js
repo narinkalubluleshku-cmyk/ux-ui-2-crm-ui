@@ -698,3 +698,14 @@ if (cursor && window.matchMedia("(pointer: fine)").matches) {
     item.addEventListener("pointerleave", () => cursor.classList.remove("is-active"));
   });
 }
+
+const favoritesComparisonScroller = document.querySelector(".favorites-reference-comparison-wrap");
+
+if (favoritesComparisonScroller) {
+  const updateFavoritesServiceColumn = () => {
+    favoritesComparisonScroller.classList.toggle("is-scrolled", favoritesComparisonScroller.scrollLeft > 16);
+  };
+
+  favoritesComparisonScroller.addEventListener("scroll", updateFavoritesServiceColumn, { passive: true });
+  updateFavoritesServiceColumn();
+}

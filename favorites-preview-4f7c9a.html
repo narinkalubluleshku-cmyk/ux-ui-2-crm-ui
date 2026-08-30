@@ -77,47 +77,53 @@
           </figure>
         </div>
 
-        <section class="case-problem" aria-labelledby="case-problem-title">
-          <h2 id="case-problem-title">Проблема</h2>
-          <div class="case-problem-grid">
-            <div class="case-problem-item">
-              <h3>Бизнес:</h3>
-              <p>
-                Пользователи приходят в&nbsp;Screen Gallery за&nbsp;референсами под конкретную задачу, собирают подборки локально в&nbsp;Figma и&nbsp;после этого не&nbsp;видят причины продлевать подписку
-              </p>
-            </div>
-            <div class="case-problem-item">
-              <h3>Пользователь:</h3>
-              <p>
-                Найденные экраны, флоу и&nbsp;приложения приходится сохранять вне галереи и&nbsp;собирать вручную. К&nbsp;референсам сложно вернуться, дополнить или передать их&nbsp;коллеге
-              </p>
-            </div>
+        <section class="favorites-summary" aria-label="Саммари проекта">
+          <div class="case-overview-item favorites-summary-item">
+            <h2>Проблема бизнеса</h2>
+            <p>
+              Дизайнеры приходят в&nbsp;галерею под конкретную задачу и&nbsp;уносят найденное во&nbsp;внешние доски. Собранное оставалось за&nbsp;пределами сервиса: с&nbsp;каждой новой задачей поиск начинался заново
+            </p>
           </div>
-        </section>
-
-        <section class="case-overview" aria-label="Описание проекта">
-          <div class="case-overview-item">
+          <div class="case-overview-item favorites-summary-item">
+            <h2>Проблема пользователя</h2>
+            <p>
+              Найденные экраны, флоу и&nbsp;приложения приходится сохранять вне галереи и&nbsp;собирать вручную. К&nbsp;референсам сложно вернуться, дополнить или передать их&nbsp;коллеге
+            </p>
+          </div>
+          <div class="case-overview-item favorites-summary-item">
             <h2>Задача</h2>
             <p>
               Создать в&nbsp;Screen Gallery инструмент для&nbsp;сохранения и&nbsp;сортировки референсов
             </p>
           </div>
-          <div class="case-overview-item">
+          <div class="case-overview-item favorites-summary-item favorites-summary-solution">
             <h2>Решение</h2>
             <p>
               Спроектировала избранное и&nbsp;коллекции: пользователь может сохранять экраны, флоу и&nbsp;приложения, а&nbsp;затем группировать нужные материалы в&nbsp;подборки
             </p>
           </div>
-          <div class="case-overview-item">
+          <div class="case-overview-item favorites-summary-item favorites-summary-result">
             <h2>Результат</h2>
-            <p>
-              Что мы&nbsp;узнали о&nbsp;поведении пользователей через месяц после релиза:
-            </p>
-            <ul>
-              <li>Фича заметна и&nbsp;понятна тем, кто приходит в&nbsp;галерею впервые</li>
-              <li>Пользователи сразу понимают, куда хотят положить референс, и&nbsp;не&nbsp;разбирают сохранённое позже</li>
-              <li>В&nbsp;75% случаев следующее сохранение отправляется в&nbsp;ту&nbsp;же коллекцию</li>
-            </ul>
+            <table class="favorites-summary-result-table" aria-label="Результаты первого месяца после релиза">
+              <tbody>
+                <tr>
+                  <th scope="row">Фича заметна и&nbsp;понятна тем, кто приходит в&nbsp;галерею впервые</th>
+                  <td>12 минут</td>
+                </tr>
+                <tr>
+                  <th scope="row">Пользователи сразу понимают, куда хотят положить референс, и&nbsp;не&nbsp;разбирают сохранённое позже</th>
+                  <td>93%</td>
+                </tr>
+                <tr>
+                  <th scope="row">В&nbsp;большинстве случаев следующее сохранение отправляется в&nbsp;ту&nbsp;же коллекцию</th>
+                  <td>75%</td>
+                </tr>
+                <tr>
+                  <th scope="row">Feature Adoption Rate</th>
+                  <td>Фича живёт месяц, охват пока небольшой, и&nbsp;отдельная задача сейчас — рассказать о&nbsp;ней тем, кто зарегистрировался до&nbsp;релиза</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
@@ -264,6 +270,184 @@
         <section class="case-references" aria-labelledby="case-references-title">
           <h2 class="case-section-title" id="case-references-title">Референсы</h2>
 
+          <div class="favorites-reference-comparison-wrap">
+            <table class="favorites-reference-comparison favorites-reference-comparison--desktop" aria-label="Сравнение функции избранного в Mobbin, Refero и Appshots">
+              <thead>
+                <tr>
+                  <th scope="col">Mobbin</th>
+                  <th scope="col">Refero</th>
+                  <th scope="col">Appshots</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Что можно сохранять</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">Приложения, отдельные экраны и&nbsp;флоу. На&nbsp;странице Saved сохранённые материалы также группируются по&nbsp;приложениям</td>
+                  <td data-service="Refero">Сохранение скринов</td>
+                  <td data-service="Appshots">Коллекции поддерживают приложения, экраны, UI-элементы и&nbsp;флоу</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Сохранение скрина из&nbsp;ленты</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">В&nbsp;ленте экранов приложения кнопка Save появляется на&nbsp;карточке скрина при наведении</td>
+                  <td data-service="Refero">Нет данных</td>
+                  <td data-service="Appshots">В&nbsp;ленте экранов открытого приложения пользователь отмечает скрин чекбоксом. После выбора появляется нижняя панель, где можно указать коллекцию и&nbsp;нажать Save</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Сохранение открытого скрина</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">Кнопка Save расположена под экраном в&nbsp;просмотрщике</td>
+                  <td data-service="Refero">Кнопка Save to… расположена внизу боковой панели просмотрщика</td>
+                  <td data-service="Appshots">Нет данных</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Сохранение сценария</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">Сценарий можно сохранить при его открытии</td>
+                  <td data-service="Refero">Нет такой функции</td>
+                  <td data-service="Appshots">Нет данных</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Сохранение приложения</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">Приложение можно сохранить из&nbsp;ленты приложений или со&nbsp;страницы открытого приложения</td>
+                  <td data-service="Refero">Нет такой функции</td>
+                  <td data-service="Appshots">В&nbsp;ленте приложений пользователь отмечает карточку приложения, выбирает одну или несколько коллекций и&nbsp;нажимает Save</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Что происходит после нажатия</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">Открывается меню: экран можно сохранить в&nbsp;All saved, добавить в&nbsp;существующую коллекцию или перейти к&nbsp;созданию новой</td>
+                  <td data-service="Refero">Открывается панель Bookmarks со&nbsp;списком бордов. Один скрин можно одновременно отметить в&nbsp;нескольких бордах</td>
+                  <td data-service="Appshots">Внизу экрана появляется панель с&nbsp;выбором коллекции. Список можно раскрыть, отметить одну или несколько коллекций либо создать новую</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Подтверждение сохранения</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">После сохранения появляется тост с&nbsp;подтверждением и&nbsp;действием Add comment. Переход в&nbsp;целевую коллекцию не&nbsp;предлагается</td>
+                  <td data-service="Refero">Счётчик элементов в&nbsp;выбранном борде обновляется прямо в&nbsp;панели, подтверждая успешное сохранение. О&nbsp;переходе в&nbsp;борд из&nbsp;этого состояния нет данных</td>
+                  <td data-service="Appshots">После сохранения появляется сообщение Saved to collection с&nbsp;кнопкой View для перехода в&nbsp;коллекцию</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Создание коллекции</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">В&nbsp;меню сохранения пользователь выбирает Create collection. В&nbsp;модальном окне задаёт название, при необходимости добавляет описание и&nbsp;включает приватность, затем нажимает Create. После создания экран сохраняется в&nbsp;новую коллекцию</td>
+                  <td data-service="Refero">Из&nbsp;панели Bookmarks можно открыть Create Board, задать название и&nbsp;сразу создать новый борд</td>
+                  <td data-service="Appshots">Новую коллекцию можно создать прямо во&nbsp;время сохранения: в&nbsp;панели Add to Collection выбрать Add to new collection, указать название и&nbsp;нажать Save</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Просмотр и&nbsp;организация сохранённого</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">На&nbsp;странице Saved коллекции показаны карточками с&nbsp;обложкой, названием и&nbsp;количеством элементов. Есть поиск по&nbsp;коллекциям, переключатели Mobile / Web / Sites, группировка по&nbsp;приложениям и&nbsp;общий раздел All saved со&nbsp;вкладками Screens и&nbsp;Flows</td>
+                  <td data-service="Refero">Внутри борда отображается сохранённый скрин. О&nbsp;дополнительных способах организации материалов нет данных</td>
+                  <td data-service="Appshots">Коллекции представлены карточками с&nbsp;названием, обложкой и&nbsp;счётчиками материалов. Внутри есть вкладки Apps, Screens, UI Elements и&nbsp;Flows</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Командная работа</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">В&nbsp;Team-плане коллекции можно создавать и&nbsp;пополнять совместно, а&nbsp;также делиться ими внутри команды</td>
+                  <td data-service="Refero">Нет данных</td>
+                  <td data-service="Appshots">Нет данных</td>
+                </tr>
+
+                <tr class="favorites-reference-criterion">
+                  <th colspan="3" scope="rowgroup">Переход в&nbsp;избранное с&nbsp;главной</th>
+                </tr>
+                <tr class="favorites-reference-analysis">
+                  <td data-service="Mobbin">Через иконку закладки Saved в&nbsp;верхней навигации</td>
+                  <td data-service="Refero">Через пункт Bookmarks в&nbsp;левой навигационной панели</td>
+                  <td data-service="Appshots">Через пункт Collections в&nbsp;бургер-меню</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="favorites-reference-comparison-mobile" aria-label="Сравнение функции избранного в Mobbin, Refero и Appshots">
+              <colgroup>
+                <col class="favorites-reference-service-column" />
+                <col span="11" class="favorites-reference-criterion-column" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" aria-label="Название сервиса"></th>
+                  <th scope="col">Что можно сохранять</th>
+                  <th scope="col">Сохранение из&nbsp;ленты</th>
+                  <th scope="col">Сохранение открытого скрина</th>
+                  <th scope="col">Сохранение сценария</th>
+                  <th scope="col">Сохранение приложения</th>
+                  <th scope="col">После нажатия</th>
+                  <th scope="col">Подтверждение сохранения</th>
+                  <th scope="col">Создание коллекции</th>
+                  <th scope="col">Просмотр сохранённого</th>
+                  <th scope="col">Командная работа</th>
+                  <th scope="col">Переход в&nbsp;избранное с&nbsp;главной</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><span class="favorites-service-full">Mobbin</span><span class="favorites-service-short" aria-hidden="true">M</span></th>
+                  <td>Приложения, отдельные экраны и&nbsp;флоу. На&nbsp;странице Saved сохранённые материалы также группируются по&nbsp;приложениям</td>
+                  <td>Кнопка Save появляется на&nbsp;карточке скрина при наведении</td>
+                  <td>Кнопка Save расположена под экраном в&nbsp;просмотрщике</td>
+                  <td>Сценарий можно сохранить при его открытии</td>
+                  <td>Приложение можно сохранить из&nbsp;ленты приложений или со&nbsp;страницы открытого приложения</td>
+                  <td>Открывается меню: All saved, существующая коллекция или создание новой</td>
+                  <td>Тост подтверждает сохранение и&nbsp;предлагает Add comment. Перехода в&nbsp;целевую коллекцию нет</td>
+                  <td>В&nbsp;меню сохранения пользователь выбирает Create collection, задаёт название, при необходимости добавляет описание и&nbsp;включает приватность. После Create экран сохраняется в&nbsp;новую коллекцию</td>
+                  <td>Карточки коллекций с&nbsp;обложкой, названием и&nbsp;счётчиком. Есть поиск, Mobile / Web / Sites, группировка по&nbsp;приложениям и&nbsp;All saved со&nbsp;вкладками Screens / Flows</td>
+                  <td>В&nbsp;Team-плане коллекции можно совместно создавать, пополнять и&nbsp;передавать команде</td>
+                  <td>Иконка закладки Saved в&nbsp;верхней навигации</td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="favorites-service-full">Refero</span><span class="favorites-service-short" aria-hidden="true">R</span></th>
+                  <td>Сохранение скринов</td>
+                  <td>Нет данных</td>
+                  <td>Кнопка Save to… внизу боковой панели просмотрщика</td>
+                  <td>Нет такой функции</td>
+                  <td>Нет такой функции</td>
+                  <td>Открывается панель Bookmarks. Один скрин можно одновременно отметить в&nbsp;нескольких бордах</td>
+                  <td>Счётчик элементов в&nbsp;борде обновляется, подтверждая сохранение. О&nbsp;переходе в&nbsp;борд из&nbsp;этого состояния нет данных</td>
+                  <td>Из&nbsp;панели Bookmarks можно открыть Create Board, задать название и&nbsp;создать новый борд</td>
+                  <td>Внутри борда отображается сохранённый скрин. О&nbsp;дополнительных способах организации материалов нет данных</td>
+                  <td>Нет данных</td>
+                  <td>Пункт Bookmarks в&nbsp;левой навигационной панели</td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="favorites-service-full">Appshots</span><span class="favorites-service-short" aria-hidden="true">A</span></th>
+                  <td>Приложения, экраны, UI-элементы и&nbsp;флоу</td>
+                  <td>В&nbsp;ленте экранов открытого приложения пользователь отмечает скрин чекбоксом, выбирает коллекцию в&nbsp;нижней панели и&nbsp;нажимает Save</td>
+                  <td>Нет данных</td>
+                  <td>Нет данных</td>
+                  <td>В&nbsp;ленте приложений пользователь отмечает карточку приложения, выбирает одну или несколько коллекций и&nbsp;нажимает Save</td>
+                  <td>Внизу экрана появляется панель с&nbsp;выбором коллекции. Можно отметить одну или несколько коллекций либо создать новую</td>
+                  <td>Сообщение Saved to collection подтверждает сохранение; кнопка View ведёт в&nbsp;коллекцию</td>
+                  <td>В&nbsp;панели Add to Collection можно выбрать Add to new collection, указать название и&nbsp;нажать Save</td>
+                  <td>Карточки со&nbsp;счётчиками; внутри вкладки Apps, Screens, UI Elements и&nbsp;Flows</td>
+                  <td>Нет данных</td>
+                  <td>Через пункт Collections в&nbsp;бургер-меню</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <section class="favorites-reference-group" aria-label="Галереи референсов">
             <section class="favorites-reference-service" aria-labelledby="refero-title">
               <div class="favorites-reference-grid">
@@ -439,7 +623,7 @@
                   62% пользователей, попробовавших избранное, сохранили больше одного объекта. Почти треть из&nbsp;них перешла к&nbsp;коллекциям — пользователи не&nbsp;только сохраняют отдельные референсы, но&nbsp;и&nbsp;начинают собирать подборки под задачу
                 </p>
               </div>
-              <div class="favorites-adoption-chart" role="img" aria-label="Все пользователи новой функции — 100 процентов; сохранили больше одного объекта — 62 процента; перешли к коллекциям — около 21 процента">
+              <div class="favorites-adoption-chart" role="img" aria-label="Все пользователи новой функции — 100 процентов; сохранили больше одного объекта — 62 процента; перешли к коллекциям — 32 процента">
                 <div class="favorites-adoption-chart-plot" aria-hidden="true">
                   <div class="favorites-adoption-chart-column" style="--chart-value: 100%; --chart-color: rgb(201 26 141 / 18%);">
                     <span>100%</span>
@@ -449,8 +633,8 @@
                     <span>62%</span>
                     <i></i>
                   </div>
-                  <div class="favorites-adoption-chart-column" style="--chart-value: 21%; --chart-color: var(--accent);">
-                    <span>≈21%</span>
+                  <div class="favorites-adoption-chart-column" style="--chart-value: 32%; --chart-color: var(--accent);">
+                    <span>32%</span>
                     <i></i>
                   </div>
                 </div>
@@ -467,16 +651,16 @@
               <h3>Поведенческие находки</h3>
               <div class="case-release-finding-copy">
                 <p>
-                  Между сохранением и&nbsp;добавлением в&nbsp;коллекцию проходит в&nbsp;среднем 3 секунды. Это означает, что пользователи сразу понимают, куда хотят положить референс, и&nbsp;не&nbsp;разбирают сохранённое позже
+                  Между сохранением и&nbsp;добавлением в&nbsp;коллекцию обычно проходит 3 секунды. Это означает, что пользователи сразу понимают, куда хотят положить референс, и&nbsp;не&nbsp;разбирают сохранённое позже
                 </p>
                 <p>
-                  В&nbsp;75% случаев следующее сохранение отправляется в&nbsp;ту&nbsp;же коллекцию. Это даёт основание внедрить автосохранение в&nbsp;последнюю использованную коллекцию
+                  В&nbsp;75% случаев следующее сохранение отправляется в&nbsp;ту&nbsp;же коллекцию
                 </p>
                 <p>
                   96% сохранений происходят в&nbsp;будни: Screen Gallery используют как рабочий инструмент для&nbsp;конкретной задачи
                 </p>
                 <p>
-                  В&nbsp;банковских приложениях чаще сохраняют флоу, чтобы изучить логику сценариев; в&nbsp;фудтехе — отдельные экраны как визуальные референсы
+                  Сценарии сохраняют почти исключительно из&nbsp;банковских приложений, а&nbsp;фудтех сохраняют экранами
                 </p>
               </div>
             </article>
@@ -484,10 +668,10 @@
             <article class="case-release-finding-card case-release-finding-card--wide">
               <span class="case-release-finding-number" aria-hidden="true">03</span>
               <div class="case-release-finding-wide-content">
-                <h3>Возможные пути развития избранного</h3>
+                <h3>Что делаем дальше</h3>
                 <div class="case-release-finding-copy">
                   <p>
-                    Упрощаем путь в&nbsp;коллекцию: после сохранения предлагаем последнюю использованную подборку
+                    Упрощаем путь в&nbsp;коллекцию: при сохранении предлагаем список коллекций с&nbsp;предвыбранной последней использованной коллекцией (3 из&nbsp;4 сохранений идут в&nbsp;ту&nbsp;же коллекцию)
                   </p>
                   <p>
                     Если пользователь ещё ничего не&nbsp;сохранил, объясняем, как работает функция, и&nbsp;предлагаем перейти к&nbsp;поиску референсов
