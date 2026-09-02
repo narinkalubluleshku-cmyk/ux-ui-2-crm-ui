@@ -3778,7 +3778,7 @@ body.lightbox-open {
   }
 
   .case-metrics {
-    margin-top: var(--mobile-space-5);
+    margin-top: calc(var(--mobile-space-5) * 2);
   }
 
   .case-metrics--inline + .case-references {
@@ -3944,21 +3944,8 @@ body.lightbox-open {
     line-height: 1.45;
   }
 
-  .case-metrics--inline .case-metrics-card-row:nth-child(2) > span {
-    display: none;
-  }
-
-  .case-metrics--inline .case-metrics-card-row:nth-child(2) > p {
+  .case-metrics--inline .case-metrics-card-content .case-metrics-card-row:first-child > p {
     margin-top: 0;
-  }
-
-  .case-metrics--inline .case-metrics-card-row:nth-child(3) > span {
-    font-size: 0;
-  }
-
-  .case-metrics--inline .case-metrics-card-row:nth-child(3) > span::after {
-    font-size: var(--text-meta);
-    content: "Метрики";
   }
 
   .case-wireframes,
@@ -4089,7 +4076,7 @@ body.lightbox-open {
 
 
   .case-process {
-    margin-block: var(--mobile-space-5);
+    margin-block: calc(var(--mobile-space-5) * 2);
   }
 
   .favorites-add-to-collection-grid {
@@ -4217,7 +4204,7 @@ body.lightbox-open {
   }
 
   .favorites-user-flow + .case-references {
-    margin-top: var(--mobile-space-5);
+    margin-top: calc(var(--mobile-space-5) * 2);
   }
 
   .favorites-add-to-collection-note {
@@ -4328,7 +4315,7 @@ body.lightbox-open {
   }
 
   .case-references {
-    margin-bottom: var(--mobile-space-5);
+    margin-bottom: calc(var(--mobile-space-5) * 2);
   }
 
   .favorites-references-intro {
@@ -4336,11 +4323,11 @@ body.lightbox-open {
   }
 
   .favorites-add-to-collection + .case-release-findings {
-    margin-top: var(--mobile-space-5);
+    margin-top: calc(var(--mobile-space-5) * 2);
   }
 
   .case-release-findings {
-    margin-bottom: var(--mobile-space-5);
+    margin-bottom: calc(var(--mobile-space-5) * 2);
   }
 
   .case-release-findings-grid {
