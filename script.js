@@ -16,6 +16,8 @@ document.querySelectorAll("[data-expand-description]").forEach((button) => {
   });
 });
 
+let metricsAccordionId = 0;
+
 document.querySelectorAll(".case-metrics-group").forEach((group) => {
   const table = group.querySelector(".case-metrics-table");
   if (!table) return;
@@ -31,7 +33,7 @@ document.querySelectorAll(".case-metrics-group").forEach((group) => {
 
   const cards = document.createElement("div");
   cards.className = "case-metrics-cards";
-  cards.setAttribute("aria-label", group.querySelector("h3")?.textContent.trim() || "Метрики");
+  cards.setAttribute("aria-label", group.getAttribute("aria-label") || group.querySelector("h3")?.textContent.trim() || "Метрики");
 
   table.querySelectorAll("tbody tr").forEach((row) => {
     const [metric, description, target] = row.children;
@@ -39,8 +41,7 @@ document.querySelectorAll(".case-metrics-group").forEach((group) => {
 
     const card = document.createElement("article");
     card.className = "case-metrics-card";
-    card.innerHTML = `
-      <div class="case-metrics-card-title">${metric.innerHTML}</div>
+    const cardRows = `
       <div class="case-metrics-card-row">
         ${descriptionHeading ? `<span>${descriptionHeading}</span>` : ""}
         <p>${description.innerHTML}</p>
@@ -50,10 +51,71 @@ document.querySelectorAll(".case-metrics-group").forEach((group) => {
         <p>${target.innerHTML}</p>
       </div>
     `;
+
+    if (isHypothesesTable) {
+      metricsAccordionId += 1;
+      const contentId = `hypothesis-card-content-${metricsAccordionId}`;
+      card.classList.add("case-metrics-card--accordion");
+      card.innerHTML = `
+        <div class="case-metrics-card-header">
+          <div class="case-metrics-card-title">${metric.innerHTML}</div>
+          <button class="case-metrics-card-toggle" type="button" aria-expanded="false" aria-controls="${contentId}" aria-label="Раскрыть гипотезу">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="case-metrics-card-content" id="${contentId}" hidden>
+          ${cardRows}
+        </div>
+      `;
+
+      const toggle = card.querySelector(".case-metrics-card-toggle");
+      const content = card.querySelector(".case-metrics-card-content");
+      toggle?.addEventListener("click", () => {
+        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!isExpanded));
+        toggle.setAttribute("aria-label", isExpanded ? "Раскрыть гипотезу" : "Свернуть гипотезу");
+        card.classList.toggle("is-expanded", !isExpanded);
+        if (content) content.hidden = isExpanded;
+      });
+    } else {
+      card.innerHTML = `
+        <div class="case-metrics-card-title">${metric.innerHTML}</div>
+        ${cardRows}
+      `;
+    }
     cards.appendChild(card);
   });
 
   group.appendChild(cards);
+
+  if (isHypothesesTable) {
+    const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+    const openRow = (activeRow) => {
+      rows.forEach((row) => {
+        const isExpanded = row === activeRow;
+        row.classList.toggle("is-expanded", isExpanded);
+        const button = row.querySelector(".case-metrics-table-toggle");
+        button?.setAttribute("aria-expanded", String(isExpanded));
+      });
+    };
+
+    rows.forEach((row, index) => {
+      const titleCell = row.querySelector("th");
+      if (!titleCell) return;
+
+      const button = document.createElement("button");
+      button.className = "case-metrics-table-toggle";
+      button.type = "button";
+      button.setAttribute("aria-expanded", String(index === 0));
+      button.innerHTML = titleCell.innerHTML;
+      titleCell.replaceChildren(button);
+
+      row.classList.add("case-metrics-table-accordion-row");
+      row.classList.toggle("is-expanded", index === 0);
+      row.addEventListener("click", () => openRow(row));
+    });
+  }
 
   let dragStartX = 0;
   let dragStartScroll = 0;
@@ -61,6 +123,7 @@ document.querySelectorAll(".case-metrics-group").forEach((group) => {
 
   cards.addEventListener("pointerdown", (event) => {
     if (event.pointerType !== "mouse") return;
+    if (event.target.closest("button, a, input, select, textarea")) return;
     activePointerId = event.pointerId;
     dragStartX = event.clientX;
     dragStartScroll = cards.scrollLeft;

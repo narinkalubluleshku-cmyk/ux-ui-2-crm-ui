@@ -876,6 +876,33 @@ body {
   gap: var(--space-2);
 }
 
+@media (min-width: 801px) {
+  .case-metrics--inline .case-metrics-table-accordion-row {
+    cursor: pointer;
+  }
+
+  .case-metrics--inline .case-metrics-table-accordion-row:not(.is-expanded) td {
+    display: none;
+  }
+
+  .case-metrics-table-toggle {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .case-metrics-table-toggle:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 6px;
+  }
+}
+
 .favorites-main-layout-group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3825,6 +3852,56 @@ body.lightbox-open {
     border-bottom: 0;
   }
 
+  .case-metrics-card-header {
+    display: flex;
+    gap: var(--mobile-space-2);
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .case-metrics-card-header .case-metrics-card-title {
+    min-width: 0;
+  }
+
+  .case-metrics-card-toggle {
+    position: relative;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    margin: -6px -6px 0 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #b2b0ab;
+    cursor: pointer;
+  }
+
+  .case-metrics-card-toggle span::before,
+  .case-metrics-card-toggle span::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 1.5px;
+    border-radius: 999px;
+    background: currentColor;
+    content: "";
+    transform: translate(-50%, -50%);
+    transition: transform 180ms ease;
+  }
+
+  .case-metrics-card-toggle span::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .case-metrics-card-toggle[aria-expanded="true"] span::after {
+    transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
+  }
+
+  .case-metrics-card-content[hidden] {
+    display: none;
+  }
+
   .case-metrics-card-title strong {
     display: block;
     color: var(--ink);
@@ -4145,7 +4222,11 @@ body.lightbox-open {
 
   .favorites-add-to-collection-note {
     max-width: calc(100% - 48px);
-    margin-top: var(--mobile-space-3);
+    margin-top: var(--mobile-space-1);
+  }
+
+  .favorites-main-layout-annotated {
+    margin-bottom: var(--mobile-space-3);
   }
 
   .favorites-add-to-collection-note svg {
