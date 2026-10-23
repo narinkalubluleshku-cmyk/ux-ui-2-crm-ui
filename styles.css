@@ -2019,13 +2019,17 @@ html.intro-pending .hero-layout {
   visibility: hidden;
 }
 
-html.intro-pending .projects .project:first-of-type,
-html.hero-intro-active:not(.first-case-revealing) .projects .project:first-of-type {
+html.intro-pending main > :not(.hero),
+html.hero-intro-active main > :not(.hero):not(.projects),
+html.hero-intro-active .projects .project:not(.intro-project-revealing) {
   visibility: hidden;
   opacity: 0;
 }
 
-html.hero-intro-active .projects .project:first-of-type {
+html.intro-pending .site-header,
+html.hero-intro-active .site-header { visibility: hidden; }
+
+html.hero-intro-active .projects .project {
   transition: none;
 }
 

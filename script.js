@@ -331,7 +331,7 @@ function updateRepeatedHeadingAnimations() {
   const triggerLine = window.innerHeight * 0.78;
 
   repeatedHeadings.forEach((heading) => {
-    if (heading === firstProjectHeading && document.documentElement.matches(".intro-pending, .hero-intro-active")) return;
+    if (document.documentElement.matches(".intro-pending, .hero-intro-active")) return;
     const rect = heading.getBoundingClientRect();
     const state = headingReplayState.get(heading);
 
@@ -453,12 +453,16 @@ const heroIntroText = document.querySelector(".hero-intro-text");
 const heroTitle = document.querySelector(".hero-title");
 const heroInfo = document.querySelector(".hero-info");
 const firstProject = document.querySelector(".projects .project");
+const secondProject = document.querySelectorAll(".projects .project")[1];
 const heroPhotoImage = heroPhoto?.querySelector("img");
 
 function showHeroFinalState() {
   document.documentElement.classList.remove("intro-pending");
   document.documentElement.classList.remove("hero-intro-active", "hero-intro-revealing", "first-case-revealing");
-  ["opacity", "visibility", "transform"].forEach((property) => firstProject?.style.removeProperty(property));
+  [firstProject, secondProject].filter(Boolean).forEach((project) => {
+    project.classList.remove("intro-project-revealing");
+    ["opacity", "visibility", "transform"].forEach((property) => project.style.removeProperty(property));
+  });
   heroIntro?.remove();
   heroTitle?.querySelectorAll(".generated-word").forEach((word) => {
     word.style.opacity = "1";
@@ -550,8 +554,9 @@ async function runHeroIntro() {
     defaults: { overwrite: "auto" },
     onComplete: () => {
       heroIntro.remove();
+      [firstProject, secondProject].filter(Boolean).forEach((project) => project.classList.remove("intro-project-revealing"));
       document.documentElement.classList.remove("hero-intro-active", "hero-intro-revealing", "first-case-revealing");
-      gsap.set([heroLayout, heroTitle, heroInfo, heroPhoto, heroPhotoImage, firstProject].filter(Boolean), { clearProps: "opacity,visibility,transform" });
+      gsap.set([heroLayout, heroTitle, heroInfo, heroPhoto, heroPhotoImage, firstProject, secondProject].filter(Boolean), { clearProps: "opacity,visibility,transform" });
     }
   });
 
@@ -601,7 +606,7 @@ async function runHeroIntro() {
 
   if (firstProject) {
     timeline.call(() => {
-      firstProject.classList.add("is-visible");
+      firstProject.classList.add("is-visible", "intro-project-revealing");
       document.documentElement.classList.add("first-case-revealing");
     }, null, introEnd + 0.5);
     timeline.fromTo(firstProject, { autoAlpha: 0, y: 80 }, {
@@ -618,6 +623,29 @@ async function runHeroIntro() {
       void firstProjectHeading.offsetWidth;
       firstProjectHeading.classList.add("text-animate-in");
     }, null, introEnd + 0.5 + 1.2);
+
+    const secondRect = secondProject?.getBoundingClientRect();
+    if (window.matchMedia("(min-width: 801px)").matches && secondRect && secondRect.top < window.innerHeight && secondRect.bottom > 0) {
+      const secondStart = introEnd + 0.5 + 1.2 + 0.5;
+      timeline.call(() => {
+        secondProject.classList.add("is-visible", "intro-project-revealing");
+      }, null, secondStart);
+      timeline.fromTo(secondProject, { autoAlpha: 0, y: 80 }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1.2,
+        ease: "power3.out"
+      }, secondStart);
+      timeline.call(() => {
+        const heading = secondProject.querySelector("h3");
+        if (!heading) return;
+        const state = headingReplayState.get(heading);
+        if (state) state.armed = false;
+        heading.classList.remove("text-instant", "text-animate-in");
+        void heading.offsetWidth;
+        heading.classList.add("text-animate-in");
+      }, null, secondStart + 1.2);
+    }
   }
 }
 
