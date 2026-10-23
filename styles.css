@@ -3438,6 +3438,7 @@ body.lightbox-open {
     --mobile-space-4: 32px;
     --mobile-space-5: 48px;
     --mobile-space-6: 64px;
+    --mobile-section-space: var(--mobile-space-6);
     --mobile-case-gap: calc(var(--mobile-space-6) * 1.4);
     --hero-projects-offset: 64px;
   }
@@ -3584,8 +3585,7 @@ body.lightbox-open {
   }
 
   .projects {
-    padding-top: calc(var(--mobile-space-6) + var(--hero-projects-offset));
-    padding-bottom: var(--mobile-space-5);
+    padding-block: var(--mobile-section-space);
   }
 
   .section-heading {
@@ -3687,7 +3687,7 @@ body.lightbox-open {
   }
 
   .concepts {
-    padding: var(--mobile-space-5) var(--mobile-gutter);
+    padding: var(--mobile-section-space) var(--mobile-gutter);
   }
 
   .concept-layout {
@@ -3702,7 +3702,7 @@ body.lightbox-open {
   .concept-list {
     display: grid;
     overflow: visible;
-    gap: var(--mobile-space-6);
+    gap: var(--mobile-section-space);
     padding: 0;
     margin: 0;
   }
@@ -3716,7 +3716,6 @@ body.lightbox-open {
 
   .concept-card::after {
     display: block;
-    min-height: 2.5em;
     margin-top: var(--mobile-space-2);
     font-family: var(--font-body);
     font-size: calc(var(--text-body) - 2px);
@@ -3738,8 +3737,7 @@ body.lightbox-open {
   }
 
   .about {
-    padding-top: var(--mobile-space-5);
-    padding-bottom: var(--mobile-space-5);
+    padding-block: var(--mobile-section-space);
   }
 
   .about-list {
@@ -3810,8 +3808,7 @@ body.lightbox-open {
 
   .footer {
     min-height: 0;
-    padding-top: var(--mobile-space-3);
-    padding-bottom: var(--mobile-space-3);
+    padding-block: var(--mobile-section-space);
   }
 
   .footer-row {
