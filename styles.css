@@ -3428,6 +3428,7 @@ body.lightbox-open {
     --mobile-space-4: 32px;
     --mobile-space-5: 48px;
     --mobile-space-6: 64px;
+    --mobile-case-gap: calc(var(--mobile-space-6) * 1.4);
     --hero-projects-offset: 64px;
   }
 
@@ -3588,7 +3589,7 @@ body.lightbox-open {
     flex-direction: column;
     gap: 0;
     padding-top: 0;
-    margin-bottom: var(--mobile-space-6);
+    margin-bottom: var(--mobile-case-gap);
   }
 
   .projects .section-heading + .project {
@@ -3605,7 +3606,7 @@ body.lightbox-open {
 
   .project h3 {
     order: 1;
-    font-size: var(--text-title);
+    font-size: calc(var(--text-title) * 0.8);
     margin-bottom: var(--mobile-space-2);
   }
 
@@ -3706,9 +3707,10 @@ body.lightbox-open {
     display: block;
     min-height: 2.5em;
     margin-top: var(--mobile-space-2);
-    font-family: var(--font-display);
-    font-size: var(--text-body);
-    line-height: 1.25;
+    font-family: var(--font-body);
+    font-size: calc(var(--text-body) - 2px);
+    font-weight: 400;
+    line-height: 1.45;
     opacity: 0.4;
     content: attr(data-caption);
   }
@@ -3770,25 +3772,25 @@ body.lightbox-open {
   .collage-image--one {
     top: -12px;
     left: 36%;
-    width: 28% !important;
+    width: 33.6% !important;
   }
 
   .collage-image--three {
     top: 34px;
     right: 0;
-    width: 32% !important;
+    width: 38.4% !important;
   }
 
   .collage-image--four {
     bottom: 40px;
     left: 6%;
-    width: 48% !important;
+    width: 57.6% !important;
   }
 
   .about-collage .collage-cat {
     right: 16%;
     bottom: -24px;
-    width: 40%;
+    width: 48%;
   }
 
   .footer-bottom {
