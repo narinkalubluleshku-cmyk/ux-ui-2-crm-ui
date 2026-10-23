@@ -308,6 +308,7 @@ window.addEventListener("scroll", () => {
 
 const heroHeadings = Array.from(animatedHeadings).filter((heading) => heading.closest(".hero-title"));
 const repeatedHeadings = Array.from(animatedHeadings).filter((heading) => !heading.closest(".hero-title"));
+const firstProjectHeading = document.querySelector(".projects .project h3");
 const headingReplayState = new WeakMap(repeatedHeadings.map((heading) => [heading, { armed: true }]));
 
 const heroHeadingObserver = new IntersectionObserver(
@@ -327,6 +328,7 @@ function updateRepeatedHeadingAnimations() {
   const triggerLine = window.innerHeight * 0.78;
 
   repeatedHeadings.forEach((heading) => {
+    if (heading === firstProjectHeading && document.documentElement.matches(".intro-pending, .hero-intro-active")) return;
     const rect = heading.getBoundingClientRect();
     const state = headingReplayState.get(heading);
 
@@ -605,6 +607,14 @@ async function runHeroIntro() {
       duration: 1.2,
       ease: "power3.out"
     }, introEnd + 0.5);
+    timeline.call(() => {
+      if (!firstProjectHeading) return;
+      const state = headingReplayState.get(firstProjectHeading);
+      if (state) state.armed = false;
+      firstProjectHeading.classList.remove("text-instant", "text-animate-in");
+      void firstProjectHeading.offsetWidth;
+      firstProjectHeading.classList.add("text-animate-in");
+    }, null, introEnd + 0.5 + 1.2);
   }
 }
 
