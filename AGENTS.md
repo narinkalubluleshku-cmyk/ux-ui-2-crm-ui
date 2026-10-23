@@ -27,5 +27,7 @@
 
 ## Local preview links
 
+- При изменении общих CSS или JavaScript перед публикацией обновляй версии ссылок на эти ресурсы во всех HTML-страницах (предпочтительно хеш содержимого файла). Проверяй совпадение версий, чтобы новая разметка не загружалась со старыми стилями или скриптами из кеша браузера.
+
 - When the user asks for a local preview link, provide a clean URL without cache-busting query parameters.
 - Verify that the local server responds before sharing the link. If it is unavailable, restart it and only then send the working URL.
