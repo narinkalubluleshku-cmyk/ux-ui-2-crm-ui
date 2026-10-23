@@ -3564,6 +3564,7 @@ body.lightbox-open {
 
   .project h3 {
     order: 1;
+    font-size: var(--text-title);
     margin-bottom: var(--mobile-space-2);
   }
 
