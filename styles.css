@@ -3501,7 +3501,8 @@ body.lightbox-open {
   }
 
   .header-context {
-    display: none;
+    display: block;
+    max-width: calc(100% - 140px);
   }
 
   .mobile-header-actions {

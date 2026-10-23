@@ -241,8 +241,11 @@ function updateHeaderContext() {
     return;
   }
 
-  if (headerContext.textContent !== activeSection.title) {
-    headerContext.textContent = activeSection.title;
+  const mobileTitles = { projects: "Кейсы", concepts: "Концепты", about: "Обо\u00a0мне" };
+  const mobileTitle = Object.entries(mobileTitles).find(([className]) => activeSection.section.classList.contains(className))?.[1];
+  const title = window.matchMedia("(max-width: 800px)").matches ? mobileTitle || activeSection.title : activeSection.title;
+  if (headerContext.textContent !== title) {
+    headerContext.textContent = title;
   }
   headerContext.classList.add("is-visible");
 }
