@@ -15,7 +15,7 @@
   --text-title: clamp(34px, 4.8vw, 72px);
   --header-height: 58px;
   --site-max-width: 1400px;
-  --hero-projects-offset: 96px;
+  --hero-projects-gap: 256px;
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
@@ -3249,7 +3249,7 @@ body.lightbox-open {
   }
 
   .hero {
-    min-height: calc(66.667svh - var(--space-6));
+    min-height: 0;
     padding-top: var(--space-4);
     padding-bottom: var(--space-3);
   }
@@ -3276,7 +3276,7 @@ body.lightbox-open {
   }
 
   .projects {
-    padding-top: calc(var(--space-6) + var(--hero-projects-offset));
+    padding-top: calc(var(--hero-projects-gap) - var(--space-3));
     padding-bottom: var(--space-6);
   }
 
@@ -3440,7 +3440,6 @@ body.lightbox-open {
     --mobile-space-6: 64px;
     --mobile-section-space: var(--mobile-space-6);
     --mobile-case-gap: calc(var(--mobile-space-6) * 1.4);
-    --hero-projects-offset: 64px;
   }
 
   .site-header,
