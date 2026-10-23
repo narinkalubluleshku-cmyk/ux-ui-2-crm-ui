@@ -509,7 +509,9 @@ async function runHeroIntro() {
 
   phraseWords.forEach((text) => {
     if (text === "что") {
-      heroIntroText.appendChild(document.createElement("br"));
+      const lineBreak = document.createElement("br");
+      lineBreak.className = "hero-intro-break";
+      heroIntroText.appendChild(lineBreak);
     }
     const word = document.createElement("span");
     word.className = "generated-word";
