@@ -2889,8 +2889,18 @@ body.lightbox-open {
 }
 
 .about-detail--facts span {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: start;
+  column-gap: var(--space-1);
   position: relative;
   padding-left: 0;
+}
+
+.about-fact-cat {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .about-detail--facts span::before {
@@ -3799,47 +3809,48 @@ body.lightbox-open {
   }
 
   .footer {
-    min-height: 46svh;
+    min-height: 0;
     padding-top: var(--mobile-space-3);
     padding-bottom: var(--mobile-space-3);
   }
 
   .footer-row {
     position: relative;
-    display: block;
-    min-height: calc(46svh - 48px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mobile-space-3);
+    min-height: 0;
     margin-top: 0;
   }
 
   .footer-links {
     font-family: var(--font-caption);
-    position: absolute;
-    top: 50%;
-    left: 0;
+    position: static;
+    order: 2;
     display: flex;
     width: 100%;
+    flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    gap: 22px;
+    gap: var(--mobile-space-2);
     font-size: var(--text-meta);
     letter-spacing: 0.04em;
     white-space: nowrap;
     text-transform: uppercase;
-    transform: translateY(-50%);
+    transform: none;
   }
 
   .footer-actions {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: static;
+    order: 1;
     flex-direction: column;
     align-items: flex-start;
   }
 
   .footer-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: static;
+    order: 3;
     display: block;
     white-space: nowrap;
     text-align: left;
