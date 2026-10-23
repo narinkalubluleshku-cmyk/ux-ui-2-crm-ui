@@ -222,8 +222,8 @@ const contextSections = Array.from(
   document.querySelectorAll(".projects, .concepts, .about")
 ).map((section) => ({
   section,
-  heading: section.querySelector(".section-heading"),
-  title: section.querySelector(".section-heading h2")?.textContent.trim() || ""
+  heading: section.querySelector(".section-heading") || section,
+  title: section.dataset.headerTitle || section.querySelector(".section-heading h2")?.textContent.trim() || ""
 }));
 
 function updateHeaderContext() {
@@ -250,7 +250,7 @@ function updateHeaderContext() {
 function updateHeaderVisibility() {
   if (!siteHeader || !heroContacts) return;
   const contactsTop = heroContacts.getBoundingClientRect().top;
-  siteHeader.classList.toggle("is-shown", contactsTop <= window.innerHeight * 0.5);
+  siteHeader.classList.toggle("is-shown", window.scrollY > 1 && contactsTop <= window.innerHeight * 0.5);
 }
 
 const animatedHeadings = document.querySelectorAll(
@@ -264,7 +264,7 @@ function splitHeadingIntoWords(element) {
     if (node.nodeType === Node.TEXT_NODE) {
       const fragment = document.createDocumentFragment();
 
-      node.textContent.split(/(\s+)/).forEach((part) => {
+      node.textContent.split(/([ \t\r\n\f]+)/).forEach((part) => {
         if (!part) return;
         if (/^\s+$/.test(part)) {
           return;
@@ -447,11 +447,13 @@ const heroIntro = document.querySelector(".hero-intro");
 const heroIntroText = document.querySelector(".hero-intro-text");
 const heroTitle = document.querySelector(".hero-title");
 const heroInfo = document.querySelector(".hero-info");
+const firstProject = document.querySelector(".projects .project");
 const heroPhotoImage = heroPhoto?.querySelector("img");
 
 function showHeroFinalState() {
   document.documentElement.classList.remove("intro-pending");
-  document.documentElement.classList.remove("hero-intro-active", "hero-intro-revealing");
+  document.documentElement.classList.remove("hero-intro-active", "hero-intro-revealing", "first-case-revealing");
+  ["opacity", "visibility", "transform"].forEach((property) => firstProject?.style.removeProperty(property));
   heroIntro?.remove();
   heroTitle?.querySelectorAll(".generated-word").forEach((word) => {
     word.style.opacity = "1";
@@ -474,6 +476,7 @@ function showHeroFinalState() {
 
 async function runHeroIntro() {
   if (
+    window.scrollY > 1 ||
     window.__heroIntroPlayed ||
     !heroIntro ||
     !heroIntroText ||
@@ -505,6 +508,9 @@ async function runHeroIntro() {
   const wordElements = [];
 
   phraseWords.forEach((text) => {
+    if (text === "что") {
+      heroIntroText.appendChild(document.createElement("br"));
+    }
     const word = document.createElement("span");
     word.className = "generated-word";
     word.textContent = text;
@@ -525,6 +531,11 @@ async function runHeroIntro() {
   await Promise.allSettled(resources);
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
+  if (window.scrollY > 1) {
+    showHeroFinalState();
+    return;
+  }
+
   gsap.set(wordElements, { autoAlpha: 0, filter: "blur(14px)", y: 18 });
   gsap.set(heroPhotoImage, { autoAlpha: 0 });
 
@@ -532,8 +543,8 @@ async function runHeroIntro() {
     defaults: { overwrite: "auto" },
     onComplete: () => {
       heroIntro.remove();
-      document.documentElement.classList.remove("hero-intro-active", "hero-intro-revealing");
-      gsap.set([heroLayout, heroTitle, heroInfo, heroPhoto, heroPhotoImage], { clearProps: "opacity,visibility,transform" });
+      document.documentElement.classList.remove("hero-intro-active", "hero-intro-revealing", "first-case-revealing");
+      gsap.set([heroLayout, heroTitle, heroInfo, heroPhoto, heroPhotoImage, firstProject].filter(Boolean), { clearProps: "opacity,visibility,transform" });
     }
   });
 
@@ -580,18 +591,46 @@ async function runHeroIntro() {
     ease: "power3.out",
     force3D: true
   }, introEnd);
+
+  if (firstProject) {
+    timeline.call(() => {
+      firstProject.classList.add("is-visible");
+      document.documentElement.classList.add("first-case-revealing");
+    }, null, introEnd + 0.5);
+    timeline.fromTo(firstProject, { autoAlpha: 0, y: 80 }, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.2,
+      ease: "power3.out"
+    }, introEnd + 0.5);
+  }
 }
 
 const navigationType = performance.getEntriesByType?.("navigation")[0]?.type;
 
-if (navigationType === "back_forward") {
-  showHeroFinalState();
-} else {
-  runHeroIntro().catch(showHeroFinalState);
+let heroIntroInitialized = false;
+
+function initializeHeroIntro() {
+  if (heroIntroInitialized) return;
+  heroIntroInitialized = true;
+  // Wait for the browser to restore scrolling before deciding to play the intro.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (navigationType === "back_forward" || window.scrollY > 1) {
+      showHeroFinalState();
+    } else {
+      runHeroIntro().catch(showHeroFinalState);
+    }
+  }));
 }
 
+if (document.readyState === "complete") initializeHeroIntro();
+
 window.addEventListener("pageshow", (event) => {
-  if (event.persisted) showHeroFinalState();
+  if (event.persisted) {
+    showHeroFinalState();
+  } else {
+    initializeHeroIntro();
+  }
 });
 
 const catPhotos = [
