@@ -30,6 +30,7 @@
   --case-grid-gap: 32px;
   --case-section-gap: clamp(72px, 8vw, 120px);
   --case-table-block-gap: var(--space-5);
+  --case-table-button-padding-y: 10px;
   --case-table-button-gap: var(--space-1);
   --case-section-title-size: calc(var(--text-meta) * 2);
   --text-title: clamp(34px, 4.8vw, 72px);
@@ -617,7 +618,7 @@ body {
     align-items: center;
     gap: var(--space-1);
     margin-top: var(--case-table-button-gap);
-    padding: 10px var(--space-2);
+    padding: var(--case-table-button-padding-y) var(--space-2);
     border: 0;
     border-radius: 999px;
     color: var(--ink);
@@ -5628,4 +5629,39 @@ body.lightbox-open {
   .benchmark-pager-answers { display: grid; gap: var(--mobile-space-3); }
   .benchmark-pager-answers p { margin: 0; }
   .benchmark-pager-answers .hypothesis-pager-label { margin-bottom: var(--mobile-space-1); }
+}
+
+@media (min-width: 801px) {
+  .benchmark-pager + .favorites-reference-group {
+    margin-top: var(--case-table-block-gap);
+  }
+}
+
+@media (min-width: 801px) {
+  /* Measure the gap from the button label, excluding its invisible hit padding. */
+  .case-table-expand + section,
+  .benchmark-pager + .favorites-reference-group,
+  .case-metrics-group:has(> .case-table-expand) + .case-metrics-group {
+    margin-top: calc(var(--case-table-block-gap) - var(--case-table-button-padding-y));
+  }
+  .case-metrics:has(.case-table-expand) + section,
+  .case-hero > section:has(.case-table-expand) + section {
+    margin-top: calc(var(--case-section-gap) - var(--case-table-button-padding-y));
+  }
+}
+
+@media (max-width: 800px) {
+  .favorites-user-flow,
+  .favorites-add-to-collection {
+    --case-mobile-copy-media-gap: var(--mobile-space-3);
+    --case-mobile-screen-gap: var(--mobile-space-4);
+    --case-mobile-layout-group-gap: var(--mobile-space-5);
+  }
+  .favorites-user-flow-intro { margin-bottom: var(--case-mobile-screen-gap); }
+  .favorites-user-flow-grid { row-gap: var(--case-mobile-layout-group-gap); }
+  .favorites-user-flow-item figcaption { margin-bottom: var(--case-mobile-copy-media-gap); }
+  .favorites-main-layout-group { row-gap: var(--case-mobile-copy-media-gap); }
+  .favorites-main-layout-content .favorites-add-to-collection-grid { row-gap: var(--case-mobile-screen-gap); }
+  .favorites-main-layout-group + .favorites-main-layout-group { margin-top: var(--case-mobile-layout-group-gap); }
+  .favorites-add-to-collection-note { margin-top: var(--mobile-space-2); }
 }
