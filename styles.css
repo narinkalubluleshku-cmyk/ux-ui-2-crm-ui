@@ -4687,7 +4687,7 @@ body.lightbox-open {
 
 
   .case-process {
-    margin-block: calc(var(--mobile-space-5) * 2);
+    margin-block: var(--case-section-gap);
   }
 
   .favorites-add-to-collection-grid {
