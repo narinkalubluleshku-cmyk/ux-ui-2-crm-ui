@@ -5709,3 +5709,25 @@ body.lightbox-open {
   .benchmark-groups { row-gap: var(--case-mobile-media-gap); }
   .case-video-wrap { margin-top: var(--case-mobile-copy-gap); }
 }
+
+.case-process--crm {
+  --process-number-size: clamp(32px, 3vw, 48px);
+  --process-number-gap: var(--space-3);
+}
+.case-process--crm .case-process-step { min-height: 0; }
+.case-process--crm .case-process-number {
+  font-size: var(--process-number-size);
+  margin-bottom: var(--process-number-gap);
+}
+@media (max-width: 800px) {
+  .case-process--crm { --process-number-size: 32px; }
+}
+
+@media (min-width: 801px) {
+  .case-screens--crm .case-gallery > figure > .case-media {
+    width: calc((100% - 2 * var(--case-grid-gap)) / 3 * 2 + var(--case-grid-gap));
+    margin-inline: 0;
+  }
+}
+
+.case-metrics--crm .case-metrics-table tbody tr:nth-child(even) { background: transparent; }
