@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=f367a31ba5f5" />
+    <link rel="stylesheet" href="./styles.css?v=f1b2461f6b51" />
     <!-- Yandex.Metrika counter -->
     <script>
       (function (m, e, t, r, i, k, a) {
@@ -79,10 +79,23 @@
 
     <main class="case-main" id="case-top">
       <section class="case-hero">
-        <h1>CRM для&nbsp;онлайн-заказов</h1>
-        <div class="tags case-tags" aria-label="Категории проекта">
-          <span>Desktop</span><span>CRM</span><span>MVP</span>
-        </div>
+        <h1>CRM онлайн-заказов</h1>
+
+        <section class="case-summary" aria-label="Саммари проекта">
+          <div class="case-summary-copy">
+            <p class="case-summary-intro">Спроектировала MVP CRM с&nbsp;AI-ассистентом: отвечает на&nbsp;вопросы и&nbsp;оформляет заказы из&nbsp;всех каналов</p>
+            <div class="case-summary-problem">
+              <p class="case-summary-problem-label">Какую проблему решала</p>
+              <p>Заказы из&nbsp;разных каналов приходилось обрабатывать вручную в&nbsp;нескольких сервисах — это замедляло работу и&nbsp;увеличивало число ошибок</p>
+            </div>
+            <p class="case-summary-meta">UX/UI-дизайнер / Desktop / 2026</p>
+          </div>
+          <div class="case-summary-results" aria-label="Результаты">
+            <div class="case-summary-card"><p class="case-summary-value">0 → 1</p><p class="case-summary-caption">MVP CRM с&nbsp;AI-ассистентом</p></div>
+            <div class="case-summary-card"><p class="case-summary-value">10</p><p class="case-summary-caption">Ключевых сценариев и&nbsp;дашборд</p></div>
+            <div class="case-summary-card"><p class="case-summary-value">50+</p><p class="case-summary-caption">Компонентов UI-кита — ускорила разработку в&nbsp;1,5–2,5&nbsp;раза</p></div>
+          </div>
+        </section>
 
         <div class="case-video-wrap">
           <video autoplay muted loop playsinline preload="metadata" aria-label="Демонстрация интерфейса CRM">
@@ -90,46 +103,71 @@
           </video>
         </div>
 
-        <section class="case-problem" aria-labelledby="case-problem-title">
-          <h2 id="case-problem-title">Проблема</h2>
-          <div class="case-problem-grid">
-            <div class="case-problem-item">
-              <h3>Бизнес:</h3>
-              <p>
-                Рестораны получают заказы из&nbsp;разных цифровых каналов, но&nbsp;создание собственной CRM для&nbsp;их объединения требует значительных инвестиций. Использование нескольких несвязанных сервисов усложняет обработку заказов, увеличивает операционные издержки и&nbsp;мешает масштабированию
-              </p>
-            </div>
-            <div class="case-problem-item">
-              <h3>Пользователь:</h3>
-              <p>
-                Сотрудники ресторана вынуждены работать сразу в&nbsp;нескольких интерфейсах, вручную обрабатывать обращения и&nbsp;отвечать на&nbsp;повторяющиеся вопросы. Это замедляет обслуживание, повышает количество ошибок и&nbsp;ухудшает клиентский опыт
-              </p>
-            </div>
-          </div>
-        </section>
 
-        <section class="case-overview" aria-label="Описание проекта">
-          <div class="case-overview-item">
-            <h2>Задача</h2>
-            <p>
-              Создать универсальный продукт для&nbsp;централизованной обработки онлайн-заказов ресторанов
-            </p>
-          </div>
-          <div class="case-overview-item">
-            <h2>Решение</h2>
-            <p>
-              Спроектировала универсальную CRM, которая объединяет все каналы заказов, позволяет централизованно управлять меню и&nbsp;базой данных ресторанов, а&nbsp;также адаптировать AI-ассистента под особенности каждого бизнеса
-            </p>
-          </div>
-          <div class="case-overview-item">
-            <h2>Результат</h2>
-            <ul>
-              <li>Концепт и&nbsp;UI-дизайн</li>
-              <li>10 оригинальных экранов и&nbsp;состояния</li>
-              <li>Desktop 1920/1280 + Лендинг 1280/360</li>
-              <li>UI-kit</li>
-            </ul>
-          </div>
+
+        <section class="case-process" aria-labelledby="case-process-title">
+          <h2 class="case-section-title" id="case-process-title">Процесс</h2>
+          <ol class="case-process-list">
+            <li class="case-process-step">
+              <span class="case-process-number" aria-hidden="true">01</span>
+              <h3>Исходные материалы</h3>
+              <p>
+                На&nbsp;старте проекта заказчик пришёл с&nbsp;уже сформированной идеей продукта,
+                результатами собственного исследования, описанием ключевых требований
+                и&nbsp;low-fidelity-прототипом. В&nbsp;нём были определены основные разделы CRM,
+                однако не&nbsp;хватало целостной UI-системы, проработки состояний интерфейса
+                и&nbsp;пользовательских сценариев
+              </p>
+            </li>
+            <li class="case-process-step">
+              <span class="case-process-number" aria-hidden="true">02</span>
+              <h3>Ключевой экран</h3>
+              <p>
+                Работу начали с&nbsp;совместной проработки страницы заказа — ключевого экрана
+                системы. На&nbsp;нём сформировали визуальную концепцию продукта, определили основные
+                UI-паттерны и&nbsp;принципы оформления. После утверждения направления остальные
+                экраны проектировались на&nbsp;основе выбранной дизайн-концепции
+              </p>
+            </li>
+            <li class="case-process-step">
+              <span class="case-process-number" aria-hidden="true">03</span>
+              <h3>UI Kit</h3>
+              <p>
+                Параллельно с&nbsp;проектированием интерфейсов собирался UI Kit. Сначала была
+                сформирована цветовая система и&nbsp;семантика цветов, затем на&nbsp;её основе
+                последовательно создавались компоненты по&nbsp;атомарному подходу
+              </p>
+            </li>
+            <li class="case-process-step">
+              <span class="case-process-number" aria-hidden="true">04</span>
+              <h3>Итерации</h3>
+              <p>
+                Из-за минимального объёма исходного ТЗ проект развивался итерационно. После каждого
+                этапа заказчик просматривал готовые решения, уточнял требования и&nbsp;вносил
+                корректировки
+              </p>
+            </li>
+            <li class="case-process-step">
+              <span class="case-process-number" aria-hidden="true">05</span>
+              <h3>Интерфейсы CRM</h3>
+              <p>
+                Были спроектированы 10 основных экранов CRM со&nbsp;всеми необходимыми и&nbsp;пустыми
+                состояниями, а&nbsp;также адаптации для&nbsp;ширины 1920 и&nbsp;1280 px. Дополнительно
+                разработаны модальные окна, выпадающие списки и&nbsp;элементы управления для
+                фильтрации, выбора, редактирования и&nbsp;удаления данных
+              </p>
+            </li>
+            <li class="case-process-step">
+              <span class="case-process-number" aria-hidden="true">06</span>
+              <h3>Лендинг и&nbsp;разработка</h3>
+              <p>
+                Финальным этапом стал дизайн промо-лендинга CRM в&nbsp;десктопной и&nbsp;мобильной
+                версиях. После завершения дизайна проект передали в&nbsp;разработку. Сейчас он
+                находится на&nbsp;этапе реализации с&nbsp;последующей поддержкой и&nbsp;уточнениями
+                по&nbsp;запросам команды разработки
+              </p>
+            </li>
+          </ol>
         </section>
       </section>
 
@@ -224,70 +262,7 @@
           </section>
         </section>
 
-        <section class="case-process" aria-labelledby="case-process-title">
-          <h2 class="case-section-title" id="case-process-title">Процесс</h2>
-          <ol class="case-process-list">
-            <li class="case-process-step">
-              <span class="case-process-number" aria-hidden="true">01</span>
-              <h3>Исходные материалы</h3>
-              <p>
-                На&nbsp;старте проекта заказчик пришёл с&nbsp;уже сформированной идеей продукта,
-                результатами собственного исследования, описанием ключевых требований
-                и&nbsp;low-fidelity-прототипом. В&nbsp;нём были определены основные разделы CRM,
-                однако не&nbsp;хватало целостной UI-системы, проработки состояний интерфейса
-                и&nbsp;пользовательских сценариев
-              </p>
-            </li>
-            <li class="case-process-step">
-              <span class="case-process-number" aria-hidden="true">02</span>
-              <h3>Ключевой экран</h3>
-              <p>
-                Работу начали с&nbsp;совместной проработки страницы заказа — ключевого экрана
-                системы. На&nbsp;нём сформировали визуальную концепцию продукта, определили основные
-                UI-паттерны и&nbsp;принципы оформления. После утверждения направления остальные
-                экраны проектировались на&nbsp;основе выбранной дизайн-концепции
-              </p>
-            </li>
-            <li class="case-process-step">
-              <span class="case-process-number" aria-hidden="true">03</span>
-              <h3>UI Kit</h3>
-              <p>
-                Параллельно с&nbsp;проектированием интерфейсов собирался UI Kit. Сначала была
-                сформирована цветовая система и&nbsp;семантика цветов, затем на&nbsp;её основе
-                последовательно создавались компоненты по&nbsp;атомарному подходу
-              </p>
-            </li>
-            <li class="case-process-step">
-              <span class="case-process-number" aria-hidden="true">04</span>
-              <h3>Итерации</h3>
-              <p>
-                Из-за минимального объёма исходного ТЗ проект развивался итерационно. После каждого
-                этапа заказчик просматривал готовые решения, уточнял требования и&nbsp;вносил
-                корректировки
-              </p>
-            </li>
-            <li class="case-process-step">
-              <span class="case-process-number" aria-hidden="true">05</span>
-              <h3>Интерфейсы CRM</h3>
-              <p>
-                Были спроектированы 10 основных экранов CRM со&nbsp;всеми необходимыми и&nbsp;пустыми
-                состояниями, а&nbsp;также адаптации для&nbsp;ширины 1920 и&nbsp;1280 px. Дополнительно
-                разработаны модальные окна, выпадающие списки и&nbsp;элементы управления для
-                фильтрации, выбора, редактирования и&nbsp;удаления данных
-              </p>
-            </li>
-            <li class="case-process-step">
-              <span class="case-process-number" aria-hidden="true">06</span>
-              <h3>Лендинг и&nbsp;разработка</h3>
-              <p>
-                Финальным этапом стал дизайн промо-лендинга CRM в&nbsp;десктопной и&nbsp;мобильной
-                версиях. После завершения дизайна проект передали в&nbsp;разработку. Сейчас он
-                находится на&nbsp;этапе реализации с&nbsp;последующей поддержкой и&nbsp;уточнениями
-                по&nbsp;запросам команды разработки
-              </p>
-            </li>
-          </ol>
-        </section>
+
 
         <section class="case-screens" aria-labelledby="case-screens-title">
           <h2 class="case-section-title" id="case-screens-title">Макеты основных экранов</h2>
@@ -379,6 +354,6 @@
           </a>
         </div>
     </main>
-    <script src="./script.js?v=ffa16249f164"></script>
+    <script src="./script.js?v=4f0a421ca85d"></script>
   </body>
 </html>

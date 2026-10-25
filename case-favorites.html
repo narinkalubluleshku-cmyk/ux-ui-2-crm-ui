@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=f367a31ba5f5" />
+    <link rel="stylesheet" href="./styles.css?v=f1b2461f6b51" />
   </head>
   <body class="case-page">
     <header class="case-header">
@@ -52,9 +52,22 @@
     <main class="case-main" id="case-top">
       <section class="case-hero">
         <h1>Избранное Screen Gallery</h1>
-        <div class="tags case-tags" aria-label="Категории проекта">
-          <span>Desktop</span><span>Mobile adaptive</span><span>Flow</span>
-        </div>
+
+        <section class="case-summary" aria-label="Саммари проекта">
+          <div class="case-summary-copy">
+            <p class="case-summary-intro">Спроектировала флоу добавления в&nbsp;Избранное и&nbsp;Персональные коллекции для&nbsp;организации рабочих подборок референсов прямо&nbsp;в&nbsp;Screen&nbsp;Gallery</p>
+            <div class="case-summary-problem">
+              <p class="case-summary-problem-label">Какую проблему решала</p>
+              <p>Пользователи уносили референсы во&nbsp;внешние доски и&nbsp;теряли связь с&nbsp;галереей. С&nbsp;каждой новой задачей подборку приходилось собирать заново</p>
+            </div>
+            <p class="case-summary-meta">UX/UI-дизайнер / Desktop, Mobile adaptive / 2026</p>
+          </div>
+          <div class="case-summary-results" aria-label="Результаты">
+            <div class="case-summary-card"><p class="case-summary-value">5%</p><p class="case-summary-caption">Adoption Rate</p></div>
+            <div class="case-summary-card"><p class="case-summary-value">56%</p><p class="case-summary-caption">Repeat Usage</p></div>
+            <div class="case-summary-card"><p class="case-summary-value">23%</p><p class="case-summary-caption">Collection Creation Rate</p></div>
+          </div>
+        </section>
 
         <div class="case-gallery case-gallery--lead case-gallery--narrow-lead" aria-label="Коллекция референсов в Screen Gallery">
           <figure>
@@ -77,102 +90,9 @@
           </figure>
         </div>
 
-        <section class="favorites-summary" aria-label="Саммари проекта">
-          <div class="case-overview-item favorites-summary-item">
-            <h2>Проблема бизнеса</h2>
-            <p>
-              Дизайнеры приходят в&nbsp;галерею под конкретную задачу и&nbsp;уносят найденное во&nbsp;внешние доски. Собранное оставалось за&nbsp;пределами сервиса: с&nbsp;каждой новой задачей поиск начинался заново
-            </p>
-          </div>
-          <div class="case-overview-item favorites-summary-item">
-            <h2>Проблема пользователя</h2>
-            <p>
-              Найденные экраны, флоу и&nbsp;приложения приходится сохранять вне галереи и&nbsp;собирать вручную. К&nbsp;референсам сложно вернуться, дополнить или передать их&nbsp;коллеге
-            </p>
-          </div>
-          <div class="case-overview-item favorites-summary-item">
-            <h2>Задача</h2>
-            <p>
-              Создать в&nbsp;Screen Gallery инструмент для&nbsp;сохранения и&nbsp;сортировки референсов
-            </p>
-          </div>
-          <div class="case-overview-item favorites-summary-item favorites-summary-solution">
-            <h2>Решение</h2>
-            <p>
-              Спроектировала избранное и&nbsp;коллекции: пользователь может сохранять экраны, флоу и&nbsp;приложения, а&nbsp;затем группировать нужные материалы в&nbsp;подборки
-            </p>
-          </div>
-          <div class="case-overview-item favorites-summary-item favorites-summary-result">
-            <h2>Результат</h2>
-            <table class="favorites-summary-result-table" aria-label="Результаты первого месяца после релиза">
-              <tbody>
-                <tr>
-                  <th scope="row">Фича заметна и&nbsp;понятна тем, кто приходит в&nbsp;галерею впервые</th>
-                  <td>12 минут</td>
-                </tr>
-                <tr>
-                  <th scope="row">Пользователи сразу понимают, куда хотят положить референс, и&nbsp;не&nbsp;разбирают сохранённое позже</th>
-                  <td>93%</td>
-                </tr>
-                <tr>
-                  <th scope="row">В&nbsp;большинстве случаев следующее сохранение отправляется в&nbsp;ту&nbsp;же коллекцию</th>
-                  <td>75%</td>
-                </tr>
-                <tr>
-                  <th scope="row">Feature Adoption Rate</th>
-                  <td>Фича живёт месяц, охват пока небольшой, и&nbsp;отдельная задача сейчас — рассказать о&nbsp;ней тем, кто зарегистрировался до&nbsp;релиза</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
 
-        <section class="case-metrics case-metrics--inline" aria-labelledby="favorites-hypotheses-title">
-          <h2 class="case-section-title" id="favorites-hypotheses-title">Гипотезы</h2>
 
-          <section class="case-metrics-group" aria-label="Гипотезы по добавлению избранного">
-            <div class="case-metrics-table-wrap" tabindex="0">
-              <table class="case-metrics-table">
-                <thead>
-                  <tr>
-                    <th scope="col">Название</th>
-                    <th scope="col">Гипотеза</th>
-                    <th scope="col">Метрики</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><strong>Сохранение референсов</strong></th>
-                    <td>Если пользователь сможет сохранять экраны, флоу и&nbsp;приложения в&nbsp;избранное внутри Screen Gallery, он&nbsp;будет собирать нужные референсы в&nbsp;сервисе, а&nbsp;не&nbsp;переносить их&nbsp;в&nbsp;Figma</td>
-                    <td>Ключевая: Feature Adoption Rate — доля активных пользователей, которые сохранили хотя&nbsp;бы один объект.<span class="case-metric-secondary">Дополнительная: Repeat Usage Rate избранного — возвращаются&nbsp;ли пользователи к&nbsp;сохранению референсов в&nbsp;следующие рабочие сессии</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><strong>Сортировка по&nbsp;коллекциям</strong></th>
-                    <td>Если пользователь сможет группировать сохранённые референсы в&nbsp;коллекции, он&nbsp;будет собирать подборки под конкретные рабочие задачи и&nbsp;быстрее возвращаться к&nbsp;ним</td>
-                    <td>Ключевая: Collection Creation Rate — доля пользователей избранного, создавших хотя&nbsp;бы одну коллекцию.<span class="case-metric-secondary">Дополнительная: Repeat Usage Rate коллекций — возвращаются&nbsp;ли пользователи к&nbsp;созданным подборкам</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><strong>Шаринг коллекций</strong></th>
-                    <td>Если коллекцией можно поделиться по&nbsp;ссылке, пользователи будут передавать готовые подборки коллегам через Screen Gallery</td>
-                    <td>Ключевая: Share Rate — доля пользователей, поделившихся хотя&nbsp;бы одной коллекцией.<span class="case-metric-secondary">Дополнительная: доля ссылок, по&nbsp;которым открыли коллекцию</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><strong>Совместное редактирование в&nbsp;Team</strong></th>
-                    <td>Если участники Team-подписки смогут редактировать общие коллекции, команда будет работать с&nbsp;одной актуальной подборкой референсов вместо личных копий</td>
-                    <td>Ключевая: доля общих коллекций, в&nbsp;которых действия совершили два и&nbsp;более участника команды.<span class="case-metric-secondary">Дополнительная: Repeat Usage Rate общих коллекций</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><strong>Удержание подписчиков</strong></th>
-                    <td>Если избранное, коллекции и&nbsp;совместная работа станут частью рабочего процесса, пользователи будут чаще продлевать подписку</td>
-                    <td>Ключевая: Renewal Rate.<span class="case-metric-secondary">Дополнительная: Repeat Usage Rate избранного и&nbsp;коллекций среди пользователей перед продлением</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </section>
-
-        <section class="case-process favorites-process" aria-labelledby="case-process-title">
+        <section class="case-process favorites-process" aria-labelledby="case-process-title" hidden>
           <h2 class="case-section-title" id="case-process-title">Процесс</h2>
           <ol class="case-process-list">
             <li class="case-process-step">
@@ -228,31 +148,10 @@
           </ol>
         </section>
 
-        <section class="favorites-user-flow" aria-labelledby="favorites-user-flow-title">
-          <h2 class="case-section-title" id="favorites-user-flow-title">User Flow добавления в&nbsp;Избранное</h2>
-          <p class="favorites-user-flow-intro">
-            Мы&nbsp;хотели сделать добавление референсов в&nbsp;Избранное в&nbsp;одно действие, полагая, что важнее быстро накидать в&nbsp;одну кучу. Но первая аналитика показала, что мы&nbsp;тут ошиблись и&nbsp;важно дать пользователю возможность сразу распределять рефы по&nbsp;коллекциям
-          </p>
-          <div class="favorites-user-flow-grid">
-            <figure class="favorites-user-flow-item">
-              <figcaption>Screen Gallery</figcaption>
-              <div class="case-media">
-                <img src="./assets/case-favorites-user-flow-01.png" alt="User Flow добавления в Избранное в Screen Gallery" width="2748" height="3956" loading="lazy" decoding="async" />
-              </div>
-            </figure>
-            <figure class="favorites-user-flow-item">
-              <figcaption>Mobbin и&nbsp;Refero</figcaption>
-              <div class="case-media">
-                <img src="./assets/case-favorites-user-flow-02-v2.png" alt="User Flow добавления в Избранное в Mobbin и Refero" width="2740" height="3720" loading="lazy" decoding="async" />
-              </div>
-            </figure>
-          </div>
-        </section>
-
         <section class="case-references" aria-labelledby="case-references-title">
-          <h2 class="case-section-title" id="case-references-title">Референсы и&nbsp;бенчмаркинг</h2>
+          <h2 class="case-section-title" id="case-references-title">Бенчмаркинг</h2>
           <p class="favorites-references-intro">
-            А&nbsp;здесь — детальный разбор решений конкурентов: точек входа, сценариев сохранения и&nbsp;работы с&nbsp;коллекциями. На&nbsp;его основе я&nbsp;сформулировала первоначальные гипотезы для собственного флоу
+            Детальный разбор решений конкурентов: точек входа, сценариев сохранения и&nbsp;работы с&nbsp;коллекциями
           </p>
 
           <div class="favorites-reference-comparison-wrap">
@@ -436,7 +335,7 @@
           <section class="favorites-reference-group" aria-label="Галереи референсов">
             <section class="favorites-reference-service" aria-labelledby="refero-title">
               <h3 class="favorites-reference-service-title" id="refero-title">Refero</h3>
-              <div class="favorites-reference-grid">
+              <div class="favorites-reference-grid" role="region" aria-label="Скриншоты Refero" tabindex="0">
                 <article class="favorites-reference-item">
                   <p class="benchmark-bubble favorites-reference-screen-caption">Открытый скрин и&nbsp;кнопка «Сохранить»</p>
                   <div class="case-media">
@@ -460,7 +359,7 @@
 
             <section class="favorites-reference-service" aria-labelledby="mobbin-title">
               <h3 class="favorites-reference-service-title" id="mobbin-title">Mobbin</h3>
-              <div class="favorites-reference-grid">
+              <div class="favorites-reference-grid" role="region" aria-label="Скриншоты Mobbin" tabindex="0">
                 <article class="favorites-reference-item">
                   <p class="benchmark-bubble favorites-reference-screen-caption">Открытый скрин и&nbsp;поле комментария</p>
                   <div class="case-media">
@@ -502,7 +401,7 @@
 
             <section class="favorites-reference-service" aria-labelledby="appshots-title">
               <h3 class="favorites-reference-service-title" id="appshots-title">Appshots</h3>
-              <div class="favorites-reference-grid">
+              <div class="favorites-reference-grid" role="region" aria-label="Скриншоты Appshots" tabindex="0">
                 <article class="favorites-reference-item">
                   <p class="benchmark-bubble favorites-reference-screen-caption">Переход в&nbsp;Collections через бургер-меню</p>
                   <div class="case-media">
@@ -551,187 +450,151 @@
 
         </section>
 
-        <section class="favorites-add-to-collection" aria-labelledby="favorites-main-layouts-title">
-          <h2 class="case-section-title" id="favorites-main-layouts-title">Основные макеты</h2>
-          <div class="favorites-main-layout-group favorites-main-layout-group--screen">
-            <div class="favorites-main-layout-aside favorites-main-layout-aside--screen">
-              <div class="favorites-add-to-collection-caption">
-                <h3>Добавление экрана</h3>
-                <p>Открытый экран можно добавить в&nbsp;избранное через кнопку «Сохранить» в&nbsp;нижней панели действий</p>
-              </div>
+        <section class="case-metrics case-metrics--inline" aria-labelledby="favorites-hypotheses-title">
+          <h2 class="case-section-title" id="favorites-hypotheses-title">Гипотезы</h2>
+
+          <section class="case-metrics-group" aria-label="Гипотезы по добавлению избранного">
+            <div class="case-metrics-table-wrap" tabindex="0">
+              <table class="case-metrics-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Гипотеза</th>
+                    <th scope="col">Метрики</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><strong>Сохранение референсов</strong></th>
+                    <td>Если пользователь сможет сохранять экраны, флоу и&nbsp;приложения в&nbsp;избранное внутри Screen Gallery, он&nbsp;будет собирать нужные референсы в&nbsp;сервисе, а&nbsp;не&nbsp;переносить их&nbsp;в&nbsp;Figma</td>
+                    <td>Ключевая: Feature Adoption Rate — доля активных пользователей, которые сохранили хотя&nbsp;бы один объект.<span class="case-metric-secondary">Дополнительная: Repeat Usage Rate избранного — возвращаются&nbsp;ли пользователи к&nbsp;сохранению референсов в&nbsp;следующие рабочие сессии</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Сортировка по&nbsp;коллекциям</strong></th>
+                    <td>Если пользователь сможет группировать сохранённые референсы в&nbsp;коллекции, он&nbsp;будет собирать подборки под конкретные рабочие задачи и&nbsp;быстрее возвращаться к&nbsp;ним</td>
+                    <td>Ключевая: Collection Creation Rate — доля пользователей избранного, создавших хотя&nbsp;бы одну коллекцию.<span class="case-metric-secondary">Дополнительная: Repeat Usage Rate коллекций — возвращаются&nbsp;ли пользователи к&nbsp;созданным подборкам</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Шаринг коллекций</strong></th>
+                    <td>Если коллекцией можно поделиться по&nbsp;ссылке, пользователи будут передавать готовые подборки коллегам через Screen Gallery</td>
+                    <td>Ключевая: Share Rate — доля пользователей, поделившихся хотя&nbsp;бы одной коллекцией.<span class="case-metric-secondary">Дополнительная: доля ссылок, по&nbsp;которым открыли коллекцию</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Совместное редактирование в&nbsp;Team</strong></th>
+                    <td>Если участники Team-подписки смогут редактировать общие коллекции, команда будет работать с&nbsp;одной актуальной подборкой референсов вместо личных копий</td>
+                    <td>Ключевая: доля общих коллекций, в&nbsp;которых действия совершили два и&nbsp;более участника команды.<span class="case-metric-secondary">Дополнительная: Repeat Usage Rate общих коллекций</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><strong>Удержание подписчиков</strong></th>
+                    <td>Если избранное, коллекции и&nbsp;совместная работа станут частью рабочего процесса, пользователи будут чаще продлевать подписку</td>
+                    <td>Ключевая: Renewal Rate.<span class="case-metric-secondary">Дополнительная: Repeat Usage Rate избранного и&nbsp;коллекций среди пользователей перед продлением</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+
+
+        <section class="favorites-user-flow" aria-labelledby="favorites-user-flow-title">
+          <h2 class="case-section-title" id="favorites-user-flow-title">User Flow</h2>
+          <p class="favorites-user-flow-intro">
+            Мы&nbsp;хотели сделать добавление референсов в&nbsp;Избранное в&nbsp;одно действие, уже после сортировать по&nbsp;Коллекциям
+          </p>
+          <div class="favorites-user-flow-grid">
+            <figure class="favorites-user-flow-item">
+              <figcaption>Screen Gallery</figcaption>
               <div class="case-media">
-                <img src="./assets/case-favorites-add-screen-02.png" alt="Добавление мобильного экрана в избранное" width="750" height="2660" loading="lazy" decoding="async" />
+                <img src="./assets/case-favorites-user-flow-01.png" alt="User Flow добавления в Избранное в Screen Gallery" width="2748" height="3956" loading="lazy" decoding="async" />
               </div>
-            </div>
-            <div class="case-media favorites-main-layout-primary">
-              <img src="./assets/case-favorites-add-screen-01.png" alt="Добавление экрана приложения в избранное" width="3840" height="2403" loading="lazy" decoding="async" />
-            </div>
-            <div class="case-media favorites-main-layout-primary favorites-main-layout-primary--continued">
-              <img src="./assets/case-favorites-add-screen-03.png" alt="Добавление экрана в избранное: дополнительный макет" width="3840" height="2403" loading="lazy" decoding="async" />
-            </div>
-            <div class="case-media favorites-main-layout-primary favorites-main-layout-primary--continued">
-              <img src="./assets/case-favorites-add-screen-04.png" alt="Добавление экрана в избранное: дополнительное состояние" width="3840" height="2403" loading="lazy" decoding="async" />
-            </div>
-          </div>
-          <div class="favorites-main-layout-group">
-            <div class="favorites-add-to-collection-caption">
-              <h3>Добавление сценария</h3>
-              <p>На&nbsp;примере сценария показан общий способ добавления в&nbsp;новую коллекцию после нажатия кнопки «Сохранить» или кнопки с&nbsp;сердечком</p>
-            </div>
-            <div class="favorites-main-layout-content">
-              <div class="favorites-add-to-collection-grid">
-                <div class="favorites-main-layout-annotated">
-                  <div class="case-media">
-                    <img src="./assets/case-favorites-add-to-collection-01.png" alt="Состояния добавления сохранённого референса в коллекцию" width="3840" height="2404" loading="lazy" decoding="async" />
-                  </div>
-                  <div class="favorites-add-to-collection-note">
-                    <p>При сохранении в&nbsp;избранное можно сразу закинуть реф/флоу в&nbsp;коллекцию</p>
-                  </div>
-                </div>
-                <div class="favorites-main-layout-annotated">
-                  <div class="case-media">
-                    <img src="./assets/case-favorites-add-to-collection-02.png" alt="Модальное окно выбора коллекции для сохранённого референса" width="3840" height="2404" loading="lazy" decoding="async" />
-                  </div>
-                  <div class="favorites-add-to-collection-note">
-                    <p>В&nbsp;окне выбора коллекции можно создать новую, если подходящей ещё нет</p>
-                  </div>
-                </div>
-                <div class="case-media">
-                  <img src="./assets/case-favorites-add-to-collection-04.png" alt="Добавление сценария в избранное: выбор коллекции" width="3840" height="2403" loading="lazy" decoding="async" />
-                </div>
-                <div class="case-media">
-                  <img src="./assets/case-favorites-add-to-collection-05.png" alt="Добавление сценария в избранное: состояние сохранения" width="3840" height="2403" loading="lazy" decoding="async" />
-                </div>
-                <div class="favorites-main-layout-annotated">
-                  <div class="case-media">
-                    <img src="./assets/case-favorites-add-to-collection-06.png" alt="Добавление сценария в избранное: новая коллекция выбрана, сохранение подтверждено" width="3840" height="2403" loading="lazy" decoding="async" />
-                  </div>
-                  <div class="favorites-add-to-collection-note">
-                    <p>Новая коллекция появляется в&nbsp;списке с&nbsp;отметкой о&nbsp;добавлении сценария. Из&nbsp;сообщения об&nbsp;успехе можно сразу перейти в&nbsp;неё</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="favorites-main-layout-group favorites-main-layout-group--app">
-            <div class="favorites-main-layout-aside favorites-main-layout-aside--app">
-              <div class="favorites-add-to-collection-caption favorites-add-app-caption">
-                <h3>Добавление приложения</h3>
-                <p>Добавить приложение в&nbsp;избранное или коллекцию можно так&nbsp;же, как экран или флоу: из&nbsp;ленты приложений или на&nbsp;странице приложения — через кнопку с&nbsp;сердечком</p>
-              </div>
+            </figure>
+            <figure class="favorites-user-flow-item">
+              <figcaption>Mobbin и&nbsp;Refero</figcaption>
               <div class="case-media">
-                <img src="./assets/case-favorites-add-app-02.png" alt="Добавление приложения в избранное на мобильном устройстве" width="750" height="2660" loading="lazy" decoding="async" />
+                <img src="./assets/case-favorites-user-flow-02-v2.png" alt="User Flow добавления в Избранное в Mobbin и Refero" width="2740" height="3720" loading="lazy" decoding="async" />
               </div>
-            </div>
-            <div class="case-media favorites-main-layout-primary">
-              <img src="./assets/case-favorites-add-app-01.png" alt="Добавление приложения в избранное" width="1920" height="1202" loading="lazy" decoding="async" />
-            </div>
-          </div>
-          <div class="favorites-main-layout-group favorites-main-layout-group--screen">
-            <div class="favorites-main-layout-aside favorites-main-layout-aside--screen">
-              <div class="favorites-add-to-collection-caption favorites-add-app-caption">
-                <h3>Переход в&nbsp;избранное</h3>
-                <p>Перейти к&nbsp;сохранённым материалам можно из&nbsp;основной навигации</p>
-              </div>
-              <div class="case-media">
-                <img src="./assets/case-favorites-navigation-02.png" alt="Переход в избранное из основной навигации на мобильном устройстве" width="750" height="2660" loading="lazy" decoding="async" />
-              </div>
-            </div>
-            <div class="case-media favorites-main-layout-primary">
-              <img src="./assets/case-favorites-navigation-01.png" alt="Переход в избранное из основной навигации" width="3840" height="2404" loading="lazy" decoding="async" />
-            </div>
+            </figure>
           </div>
         </section>
 
+
+
+<section class="favorites-add-to-collection" aria-labelledby="favorites-main-layouts-title">
+<h2 class="case-section-title" id="favorites-main-layouts-title">Основные макеты</h2>
+<div class="favorites-main-layout-group favorites-main-layout-group--screen favorites-main-layout-group--add-screen"><div class="favorites-main-layout-aside favorites-main-layout-aside--screen"><div class="favorites-add-to-collection-caption"><h3>Добавление экрана</h3><p>Открытый экран можно добавить в&nbsp;избранное через кнопку «Сохранить» в&nbsp;нижней панели действий</p></div><div class="case-media"><img src="./assets/case-favorites-add-screen-02.png" alt="Добавление мобильного экрана в избранное" width="750" height="2660" loading="lazy" decoding="async" /></div></div><div class="case-media favorites-main-layout-primary"><img src="./assets/case-favorites-add-screen-01.png" alt="Добавление экрана приложения в избранное" width="3840" height="2403" loading="lazy" decoding="async" /></div><div class="case-media favorites-main-layout-primary favorites-main-layout-primary--continued"><img src="./assets/case-favorites-add-screen-03.png" alt="Добавление экрана в избранное: дополнительный макет" width="3840" height="2403" loading="lazy" decoding="async" /></div><div class="case-media favorites-main-layout-primary favorites-main-layout-primary--continued"><img src="./assets/case-favorites-add-screen-04.png" alt="Добавление экрана в избранное: дополнительное состояние" width="3840" height="2403" loading="lazy" decoding="async" /></div></div>
+<div class="favorites-main-layout-group favorites-main-layout-group--scenario"><div class="favorites-add-to-collection-caption"><h3>Добавление сценария</h3><p>На&nbsp;примере сценария показан общий способ добавления в&nbsp;новую коллекцию после нажатия кнопки «Сохранить» или кнопки с&nbsp;сердечком</p></div><div class="favorites-main-layout-content"><div class="favorites-add-to-collection-grid">
+<div class="favorites-main-layout-annotated"><div class="case-media"><img src="./assets/case-favorites-add-to-collection-01.png" alt="Состояния добавления сохранённого референса в коллекцию" width="3840" height="2404" loading="lazy" decoding="async" /></div><div class="favorites-add-to-collection-note">
+                    <p>При сохранении в&nbsp;избранное можно сразу закинуть реф/флоу в&nbsp;коллекцию</p>
+                  </div></div>
+<div class="favorites-main-layout-annotated"><div class="case-media"><img src="./assets/case-favorites-add-to-collection-02.png" alt="Модальное окно выбора коллекции для сохранённого референса" width="3840" height="2404" loading="lazy" decoding="async" /></div><div class="favorites-add-to-collection-note">
+                    <p>Создавай новую коллекцию</p>
+                  </div></div>
+<div class="case-media"><img src="./assets/case-favorites-add-to-collection-04.png" alt="Добавление сценария в избранное: выбор коллекции" width="3840" height="2403" loading="lazy" decoding="async" /></div>
+<div class="case-media"><img src="./assets/case-favorites-add-to-collection-05.png" alt="Добавление сценария в избранное: состояние сохранения" width="3840" height="2403" loading="lazy" decoding="async" /></div>
+<div class="favorites-main-layout-annotated"><div class="case-media"><img src="./assets/case-favorites-add-to-collection-06.png" alt="Добавление сценария в избранное: новая коллекция выбрана, сохранение подтверждено" width="3840" height="2403" loading="lazy" decoding="async" /></div><div class="favorites-add-to-collection-note">
+                    <p>Сразу переходи в&nbsp;сохраненки</p>
+                  </div></div>
+</div></div></div>
+<div class="favorites-main-layout-group favorites-main-layout-group--app favorites-main-layout-group--pair-below"><div class="favorites-main-layout-aside favorites-main-layout-aside--app"><div class="favorites-add-to-collection-caption"><h3>Добавление приложения</h3><p>Добавить приложение в&nbsp;избранное или коллекцию можно так&nbsp;же, как экран или флоу: из&nbsp;ленты приложений или на&nbsp;странице приложения — через кнопку с&nbsp;сердечком</p></div><div class="case-media"><img src="./assets/case-favorites-add-app-02.png" alt="Добавление приложения в избранное на мобильном устройстве" width="750" height="2660" loading="lazy" decoding="async" /></div></div><div class="case-media favorites-main-layout-primary"><img src="./assets/case-favorites-add-app-01.png" alt="Добавление приложения в избранное" width="1920" height="1202" loading="lazy" decoding="async" /></div></div>
+<div class="favorites-main-layout-group favorites-main-layout-group--screen favorites-main-layout-group--pair-below"><div class="favorites-main-layout-aside favorites-main-layout-aside--screen"><div class="favorites-add-to-collection-caption"><h3>Переход в&nbsp;избранное</h3><p>Перейти к&nbsp;сохранённым материалам можно из&nbsp;основной навигации</p></div><div class="case-media"><img src="./assets/case-favorites-navigation-02.png" alt="Переход в избранное из основной навигации на мобильном устройстве" width="750" height="2660" loading="lazy" decoding="async" /></div></div><div class="case-media favorites-main-layout-primary"><img src="./assets/case-favorites-navigation-01.png" alt="Переход в избранное из основной навигации" width="3840" height="2404" loading="lazy" decoding="async" /></div></div>
+</section>
+
         <section class="case-release-findings" aria-labelledby="release-findings-title">
-          <h2 class="case-section-title" id="release-findings-title">Месяц после релиза</h2>
-          <div class="case-release-findings-grid">
-            <article class="case-release-finding-card">
-              <h3>Что мы&nbsp;узнали о&nbsp;том, как дизайнеры сохраняют референсы</h3>
-              <div class="case-release-finding-copy favorites-release-metrics">
-                <div class="favorites-release-metric">
-                  <strong class="favorites-release-metric-value"><span>12</span><small>минут</small></strong>
-                  <p>
-                    минут проходит от&nbsp;регистрации до&nbsp;первого сохранения у&nbsp;новых пользователей — значит, фича заметна и&nbsp;понятна тем, кто приходит в&nbsp;галерею впервые
-                  </p>
-                </div>
-                <div class="favorites-release-metric">
-                  <strong class="favorites-release-metric-value"><span>62</span><small>%</small></strong>
-                  <p>
-                    пользователей, попробовавших избранное, сохранили больше одного объекта. Почти треть из&nbsp;них перешла к&nbsp;коллекциям — пользователи не&nbsp;только сохраняют отдельные референсы, но&nbsp;и&nbsp;начинают собирать подборки под задачу
-                  </p>
-                </div>
+          <h2 class="case-section-title" id="release-findings-title">Результаты</h2>
+          <div class="case-result-grid">
+            <article class="case-result-card">
+              <div class="case-result-heading">
+                <p class="case-result-value">≈5%</p>
+                <h3>Adoption Rate</h3>
               </div>
-              <div class="favorites-adoption-chart" role="img" aria-label="Все пользователи новой функции — 100 процентов; сохранили больше одного объекта — 62 процента; перешли к коллекциям — 32 процента">
-                <div class="favorites-adoption-chart-plot" aria-hidden="true">
-                  <div class="favorites-adoption-chart-column" style="--chart-value: 100%; --chart-color: rgb(201 26 141 / 18%);">
-                    <span>100%</span>
-                    <i></i>
-                  </div>
-                  <div class="favorites-adoption-chart-column" style="--chart-value: 62%; --chart-color: rgb(201 26 141 / 55%);">
-                    <span>62%</span>
-                    <i></i>
-                  </div>
-                  <div class="favorites-adoption-chart-column" style="--chart-value: 32%; --chart-color: var(--accent);">
-                    <span>32%</span>
-                    <i></i>
-                  </div>
-                </div>
-                <div class="favorites-adoption-chart-labels">
-                  <p>Воспользовались<span class="favorites-chart-mobile-break"></span> новой функцией</p>
-                  <p>Сохранили больше одного объекта</p>
-                  <p>Перешли<span class="favorites-chart-mobile-break"></span> к&nbsp;коллекциям</p>
-                </div>
-              </div>
+              <p class="case-result-conclusion">Стабильный органический охват, пока без&nbsp;массового использования</p>
             </article>
-
-            <article class="case-release-finding-card">
-              <h3>Поведенческие находки</h3>
-              <div class="case-release-finding-copy favorites-release-metrics">
-                <div class="favorites-release-metric">
-                  <strong class="favorites-release-metric-value"><span>3</span><small>секунды</small></strong>
-                  <p>
-                    обычно проходит между сохранением и&nbsp;добавлением в&nbsp;коллекцию. Пользователи сразу понимают, куда хотят положить референс, и&nbsp;не&nbsp;разбирают сохранённое позже
-                  </p>
-                </div>
-                <div class="favorites-release-metric">
-                  <strong class="favorites-release-metric-value"><span>75</span><small>%</small></strong>
-                  <p>случаев следующее сохранение отправляется в&nbsp;ту&nbsp;же коллекцию</p>
-                </div>
-                <div class="favorites-release-metric">
-                  <strong class="favorites-release-metric-value"><span>96</span><small>%</small></strong>
-                  <p>сохранений происходят в&nbsp;будни: Screen Gallery используют как рабочий инструмент для&nbsp;конкретной задачи</p>
-                </div>
-                <p>
-                  Сценарии сохраняют почти исключительно из&nbsp;банковских приложений, а&nbsp;фудтех сохраняют экранами
-                </p>
+            <article class="case-result-card">
+              <div class="case-result-heading">
+                <p class="case-result-value">56%</p>
+                <h3>Repeat Usage</h3>
               </div>
+              <p class="case-result-conclusion">Более половины сохраняют второй объект. Это не&nbsp;означает возвращение к&nbsp;самим референсам</p>
             </article>
-
-            <article class="case-release-finding-card case-release-finding-card--wide">
-              <div class="case-release-finding-wide-content">
-                <h3>Что делаем дальше</h3>
-                <div class="case-release-finding-copy favorites-release-metrics">
-                  <p>
-                    Если пользователь ещё ничего не&nbsp;сохранил, объясняем, как работает функция, и&nbsp;предлагаем перейти к&nbsp;поиску референсов
-                  </p>
-                  <p>
-                    Если сохранения уже есть, показываем похожие экраны и&nbsp;другие материалы из&nbsp;тех&nbsp;же приложений, чтобы пользователь мог продолжить поиск и&nbsp;дополнить подборку
-                  </p>
-                  <div class="favorites-release-metric">
-                    <strong class="favorites-release-metric-value"><span>3</span><small>из</small><span>4</span></strong>
-                    <p>
-                      сохранений идут в&nbsp;ту&nbsp;же коллекцию — поэтому при сохранении предлагаем список коллекций с&nbsp;предвыбранной последней использованной коллекцией
-                    </p>
-                  </div>
-                  <div class="favorites-release-metric">
-                    <strong class="favorites-release-metric-value"><span>1</span><small>месяц</small></strong>
-                    <p>
-                      <em>слишком короткий срок, чтобы оценивать возвращаемость и&nbsp;влияние на&nbsp;подписку. Эти эффекты продолжаем измерять в&nbsp;следующем цикле</em>
-                    </p>
-                  </div>
-                </div>
+            <article class="case-result-card">
+              <div class="case-result-heading">
+                <p class="case-result-value">23%</p>
+                <h3>Collection Creation Rate</h3>
               </div>
+              <p class="case-result-conclusion">Коллекции нужны части аудитории: среди пользователей с&nbsp;двумя и&nbsp;более сохранениями их&nbsp;создают 41%</p>
+            </article>
+            <article class="case-result-card">
+              <div class="case-result-heading">
+                <p class="case-result-value">3&nbsp;с</p>
+                <h3>Скорость работы с&nbsp;коллекциями</h3>
+              </div>
+              <p class="case-result-conclusion">Медианное время переноса. 93% переносов — в&nbsp;первые 30&nbsp;секунд: сценарий быстрый и&nbsp;понятный</p>
+            </article>
+            <article class="case-result-card">
+              <div class="case-result-heading">
+                <p class="case-result-value">90%</p>
+                <h3>Рабочий контекст</h3>
+              </div>
+              <p class="case-result-conclusion">Сохранения происходят в&nbsp;будни — это поддерживает гипотезу рабочего сценария</p>
+            </article>
+          </div>
+          <div class="case-result-grid case-result-grid--insights" aria-label="Полезные инсайты">
+            <article class="case-result-card">
+              <span class="case-insight-badge">Полезный инсайт</span>
+              <div class="case-result-heading">
+                <p class="case-result-value">39%</p>
+                <h3>Заходов в&nbsp;избранное — до&nbsp;первого сохранения</h3>
+              </div>
+              <p class="case-result-conclusion">Проблема пустого состояния. Это конкретная точка для&nbsp;улучшения первого опыта</p>
+            </article>
+            <article class="case-result-card">
+              <span class="case-insight-badge">Полезный инсайт</span>
+              <div class="case-result-heading">
+                <p class="case-result-value">≈1/4</p>
+                <h3>Заходов заканчивается открытием сохранённого</h3>
+              </div>
+              <p class="case-result-conclusion">Больше половины визитов обрывается — проблема продолжения сценария. Стоит исследовать, почему пользователь не&nbsp;продолжает работу</p>
             </article>
           </div>
         </section>
@@ -749,6 +612,6 @@
         </div>
       </section>
     </main>
-    <script src="./script.js?v=ffa16249f164"></script>
+    <script src="./script.js?v=4f0a421ca85d"></script>
   </body>
 </html>

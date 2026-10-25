@@ -16,20 +16,163 @@ document.querySelectorAll("[data-expand-description]").forEach((button) => {
   });
 });
 
-let metricsAccordionId = 0;
+// Compact mobile hypothesis reader for the Screen Gallery case.
+const hypothesesSection = document.querySelector("#favorites-hypotheses-title")?.closest("section");
+const hypothesesTable = hypothesesSection?.querySelector(".case-metrics-table");
+if (hypothesesSection && hypothesesTable) {
+  const rows = Array.from(hypothesesTable.querySelectorAll("tbody > tr"));
+  const group = hypothesesTable.closest(".case-metrics-group");
+  if (group && rows.length) {
+    const pager = document.createElement("div");
+    pager.className = "hypothesis-pager";
+    pager.innerHTML = `
+      <nav class="hypothesis-pager-nav" aria-label="Переключение гипотез">
+        <button type="button" data-hypothesis-prev aria-label="Предыдущая гипотеза" aria-controls="hypothesis-reader"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5" /></svg></button>
+        <span class="hypothesis-pager-count" aria-live="polite" aria-atomic="true"></span>
+        <button type="button" data-hypothesis-next aria-label="Следующая гипотеза" aria-controls="hypothesis-reader"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5" /></svg></button>
+      </nav>
+      <div class="hypothesis-pager-panel" id="hypothesis-reader" role="group" aria-labelledby="hypothesis-reader-title" tabindex="0">
+        <h3 id="hypothesis-reader-title"></h3>
+        <div class="hypothesis-pager-description"></div>
+        <div class="hypothesis-pager-metrics"><p class="hypothesis-pager-label">Метрики</p><div></div></div>
+      </div>`;
+    let current = 0;
+    const prev = pager.querySelector("[data-hypothesis-prev]");
+    const next = pager.querySelector("[data-hypothesis-next]");
+    const panel = pager.querySelector(".hypothesis-pager-panel");
+    const render = () => {
+      const [title, description, metrics] = rows[current].children;
+      pager.querySelector(".hypothesis-pager-count").textContent = `${current + 1} из ${rows.length}`;
+      pager.querySelector("h3").textContent = title.textContent.trim();
+      pager.querySelector(".hypothesis-pager-description").innerHTML = description.innerHTML;
+      pager.querySelector(".hypothesis-pager-metrics > div").innerHTML = metrics.innerHTML;
+      prev.disabled = current === 0;
+      next.disabled = current === rows.length - 1;
+    };
+    prev.addEventListener("click", () => { if (current > 0) { current -= 1; render(); } });
+    next.addEventListener("click", () => { if (current < rows.length - 1) { current += 1; render(); } });
+    let swipeStart = null;
+    panel.addEventListener("touchstart", (event) => {
+      const touch = event.touches[0];
+      swipeStart = event.touches.length === 1 ? { x: touch.clientX, y: touch.clientY } : null;
+    }, { passive: true });
+    panel.addEventListener("touchmove", (event) => {
+      if (event.touches.length !== 1) swipeStart = null;
+    }, { passive: true });
+    panel.addEventListener("touchend", (event) => {
+      const start = swipeStart;
+      swipeStart = null;
+      const touch = event.changedTouches[0];
+      if (!start || !touch || event.touches.length) return;
+      const dx = touch.clientX - start.x;
+      const dy = touch.clientY - start.y;
+      if (Math.abs(dx) < 48 || Math.abs(dx) <= Math.abs(dy) * 1.4) return;
+      if (dx < 0) next.click();
+      else prev.click();
+    }, { passive: true });
+    panel.addEventListener("touchcancel", () => { swipeStart = null; }, { passive: true });
+    render();
+    group.appendChild(pager);
+    hypothesesSection.classList.add("case-metrics--pager");
+  }
+}
+
+// Mobile benchmarking: one criterion and three concise service answers.
+(() => {
+  const table = document.querySelector('.favorites-reference-comparison--desktop');
+  const wrap = table?.closest('.favorites-reference-comparison-wrap');
+  if (!wrap) return;
+  const criteria = [...table.querySelectorAll('.favorites-reference-criterion')];
+  const answers = [
+    ['Приложения, экраны и флоу; группировка по приложениям', 'Скриншоты', 'Приложения, экраны, UI-элементы и флоу'],
+    ['Save при наведении на скрин', 'Нет данных', 'Чекбокс → выбор коллекции → Save'],
+    ['Save под экраном', 'Save to… внизу боковой панели', 'Нет данных'],
+    ['Сохранение открытого сценария', 'Нет такой функции', 'Нет данных'],
+    ['Из ленты или со страницы приложения', 'Нет такой функции', 'Выбор приложения и коллекций → Save'],
+    ['All saved, существующая или новая коллекция', 'Панель Bookmarks; можно выбрать несколько бордов', 'Нижняя панель; выбор или создание коллекции'],
+    ['Тост с Add comment, без перехода в коллекцию', 'Обновляется счётчик борда', 'Сообщение Saved to collection и кнопка View'],
+    ['Create collection → название, описание, приватность → Create', 'Create Board → название → создание', 'Add to new collection → название → Save'],
+    ['Карточки, поиск, фильтры, Screens и Flows', 'Сохранённый скрин внутри борда', 'Карточки; вкладки Apps, Screens, UI Elements и Flows'],
+    ['Совместные коллекции в Team-плане', 'Нет данных', 'Нет данных'],
+    ['Saved в верхней навигации', 'Bookmarks в левой панели', 'Collections в бургер-меню']
+  ];
+  if (criteria.length !== answers.length) return;
+  const nbsp = (text) => text.replace(/(^|\s)(в|во|на|по|из|со|с|под|без|при|для|и|или|до|после|к|от) /gi, '$1$2\u00a0');
+  const pager = document.createElement('div');
+  pager.className = 'hypothesis-pager benchmark-pager';
+  pager.innerHTML = `<nav class="hypothesis-pager-nav" aria-label="Переключение критериев">
+    <button type="button" aria-label="Предыдущий критерий" aria-controls="benchmark-reader"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 5-5 5 5 5" /></svg></button>
+    <span class="hypothesis-pager-count" aria-live="polite" aria-atomic="true"></span>
+    <button type="button" aria-label="Следующий критерий" aria-controls="benchmark-reader"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m8 5 5 5-5 5" /></svg></button>
+    </nav><div class="hypothesis-pager-panel" id="benchmark-reader" role="group" aria-labelledby="benchmark-reader-title" tabindex="0"><h3 id="benchmark-reader-title"></h3><div class="benchmark-pager-answers"></div></div>`;
+  const [prev, next] = pager.querySelectorAll('button');
+  const panel = pager.querySelector('.hypothesis-pager-panel');
+  let current = 0;
+  const render = () => {
+    pager.querySelector('.hypothesis-pager-count').textContent = `${current + 1} из ${criteria.length}`;
+    pager.querySelector('h3').textContent = criteria[current].textContent.trim();
+    const list = pager.querySelector('.benchmark-pager-answers');
+    list.replaceChildren();
+    ['Mobbin', 'Refero', 'Appshots'].forEach((name, i) => {
+      const item = document.createElement('div');
+      const label = document.createElement('p');
+      label.className = 'hypothesis-pager-label'; label.textContent = name;
+      const text = document.createElement('p'); text.textContent = nbsp(answers[current][i]);
+      item.append(label, text); list.append(item);
+    });
+    prev.disabled = current === 0; next.disabled = current === criteria.length - 1;
+  };
+  prev.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+  next.addEventListener('click', () => { if (current < criteria.length - 1) { current++; render(); } });
+  panel.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); prev.click(); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); next.click(); }
+  });
+  let start = null;
+  panel.addEventListener('touchstart', (event) => { const t = event.touches[0]; start = event.touches.length === 1 ? {x:t.clientX,y:t.clientY} : null; }, {passive:true});
+  panel.addEventListener('touchmove', (event) => { if (event.touches.length !== 1) start = null; }, {passive:true});
+  panel.addEventListener('touchend', (event) => {
+    const t = event.changedTouches[0], origin = start; start = null;
+    if (!origin || !t || event.touches.length) return;
+    const dx = t.clientX-origin.x, dy = t.clientY-origin.y;
+    if (Math.abs(dx) >= 48 && Math.abs(dx) > Math.abs(dy)*1.4) (dx < 0 ? next : prev).click();
+  }, {passive:true});
+  panel.addEventListener('touchcancel', () => { start = null; }, {passive:true});
+  render(); wrap.after(pager); wrap.classList.add('has-benchmark-pager');
+})();
+
+// Desktop table previews preserve the complete table on mobile and without JavaScript.
+document.querySelectorAll(".case-metrics-table, .favorites-reference-comparison--desktop").forEach((table, index) => {
+  const rows = table.querySelectorAll("tbody > tr");
+  const wrap = table.closest(".case-metrics-table-wrap, .favorites-reference-comparison-wrap");
+  if (!wrap || rows.length < 2) return;
+
+  if (!table.id) table.id = `case-table-${index + 1}`;
+  table.classList.add("case-table-preview");
+  if (table.matches(".favorites-reference-comparison--desktop")) table.classList.add("case-table-preview--comparison");
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "case-table-expand";
+  button.setAttribute("aria-expanded", "false");
+  button.setAttribute("aria-controls", table.id);
+  button.innerHTML = '<span>Развернуть</span><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m5 7.5 5 5 5-5" /></svg>';
+  button.addEventListener("click", () => {
+    const expanded = button.getAttribute("aria-expanded") !== "true";
+    table.classList.toggle("is-expanded", expanded);
+    button.setAttribute("aria-expanded", String(expanded));
+    button.querySelector("span").textContent = expanded ? "Свернуть" : "Развернуть";
+  });
+  wrap.after(button);
+});
 
 document.querySelectorAll(".case-metrics-group").forEach((group) => {
   const table = group.querySelector(".case-metrics-table");
   if (!table) return;
 
-  const isHypothesesTable = Boolean(group.closest(".case-metrics--inline"));
+  if (group.closest(".case-metrics--inline")) return;
   const headings = Array.from(table.querySelectorAll("thead th"));
-  const descriptionHeading = isHypothesesTable
-    ? ""
-    : headings[1]?.textContent.trim() || "Что показывает";
-  const targetHeading = isHypothesesTable
-    ? "Метрики"
-    : headings[2]?.textContent.trim() || "Критерий успеха";
+  const descriptionHeading = headings[1]?.textContent.trim() || "Что показывает";
+  const targetHeading = headings[2]?.textContent.trim() || "Критерий успеха";
 
   const cards = document.createElement("div");
   cards.className = "case-metrics-cards";
@@ -52,70 +195,14 @@ document.querySelectorAll(".case-metrics-group").forEach((group) => {
       </div>
     `;
 
-    if (isHypothesesTable) {
-      metricsAccordionId += 1;
-      const contentId = `hypothesis-card-content-${metricsAccordionId}`;
-      card.classList.add("case-metrics-card--accordion");
-      card.innerHTML = `
-        <div class="case-metrics-card-header">
-          <div class="case-metrics-card-title">${metric.innerHTML}</div>
-          <button class="case-metrics-card-toggle" type="button" aria-expanded="false" aria-controls="${contentId}" aria-label="Раскрыть гипотезу">
-            <span aria-hidden="true"></span>
-          </button>
-        </div>
-        <div class="case-metrics-card-content" id="${contentId}" hidden>
-          ${cardRows}
-        </div>
-      `;
-
-      const toggle = card.querySelector(".case-metrics-card-toggle");
-      const content = card.querySelector(".case-metrics-card-content");
-      toggle?.addEventListener("click", () => {
-        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
-        toggle.setAttribute("aria-expanded", String(!isExpanded));
-        toggle.setAttribute("aria-label", isExpanded ? "Раскрыть гипотезу" : "Свернуть гипотезу");
-        card.classList.toggle("is-expanded", !isExpanded);
-        if (content) content.hidden = isExpanded;
-      });
-    } else {
-      card.innerHTML = `
-        <div class="case-metrics-card-title">${metric.innerHTML}</div>
-        ${cardRows}
-      `;
-    }
+    card.innerHTML = `
+      <div class="case-metrics-card-title">${metric.innerHTML}</div>
+      ${cardRows}
+    `;
     cards.appendChild(card);
   });
 
   group.appendChild(cards);
-
-  if (isHypothesesTable) {
-    const rows = Array.from(table.querySelectorAll("tbody tr"));
-
-    const openRow = (activeRow) => {
-      rows.forEach((row) => {
-        const isExpanded = row === activeRow;
-        row.classList.toggle("is-expanded", isExpanded);
-        const button = row.querySelector(".case-metrics-table-toggle");
-        button?.setAttribute("aria-expanded", String(isExpanded));
-      });
-    };
-
-    rows.forEach((row, index) => {
-      const titleCell = row.querySelector("th");
-      if (!titleCell) return;
-
-      const button = document.createElement("button");
-      button.className = "case-metrics-table-toggle";
-      button.type = "button";
-      button.setAttribute("aria-expanded", String(index === 0));
-      button.innerHTML = titleCell.innerHTML;
-      titleCell.replaceChildren(button);
-
-      row.classList.add("case-metrics-table-accordion-row");
-      row.classList.toggle("is-expanded", index === 0);
-      row.addEventListener("click", () => openRow(row));
-    });
-  }
 
   let dragStartX = 0;
   let dragStartScroll = 0;
