@@ -5653,9 +5653,9 @@ body.lightbox-open {
 @media (max-width: 800px) {
   .favorites-user-flow,
   .favorites-add-to-collection {
-    --case-mobile-copy-media-gap: var(--mobile-space-3);
-    --case-mobile-screen-gap: var(--mobile-space-4);
-    --case-mobile-layout-group-gap: var(--mobile-space-5);
+    --case-mobile-copy-media-gap: var(--case-mobile-copy-gap);
+    --case-mobile-screen-gap: var(--case-mobile-media-gap);
+    --case-mobile-layout-group-gap: var(--case-mobile-section-gap);
   }
   .favorites-user-flow-intro { margin-bottom: var(--case-mobile-screen-gap); }
   .favorites-user-flow-grid { row-gap: var(--case-mobile-layout-group-gap); }
@@ -5664,4 +5664,48 @@ body.lightbox-open {
   .favorites-main-layout-content .favorites-add-to-collection-grid { row-gap: var(--case-mobile-screen-gap); }
   .favorites-main-layout-group + .favorites-main-layout-group { margin-top: var(--case-mobile-layout-group-gap); }
   .favorites-add-to-collection-note { margin-top: var(--mobile-space-2); }
+}
+
+/* Shared mobile rhythm across all portfolio cases. */
+@media (max-width: 800px) {
+  .case-page {
+    --case-mobile-section-gap: var(--mobile-space-6);
+    --case-mobile-media-gap: var(--mobile-space-5);
+    --case-mobile-copy-gap: var(--mobile-space-3);
+    --case-mobile-caption-gap: var(--mobile-space-2);
+    --case-section-gap: var(--case-mobile-section-gap);
+    --case-table-block-gap: var(--case-mobile-section-gap);
+    --case-mobile-copy-media-gap: var(--case-mobile-copy-gap);
+    --case-mobile-screen-gap: var(--case-mobile-media-gap);
+    --case-mobile-layout-group-gap: var(--case-mobile-section-gap);
+  }
+  .case-materials,
+  .case-screens,
+  .case-metrics,
+  .case-material-section + .case-material-section,
+  .favorites-user-flow + .favorites-add-to-collection,
+  .favorites-add-to-collection + .case-release-findings {
+    margin-top: var(--case-mobile-section-gap);
+  }
+  .case-references,
+  .case-release-findings { margin-bottom: var(--case-mobile-section-gap); }
+  .case-section-title { margin-bottom: var(--case-mobile-copy-gap); }
+  .case-gallery,
+  .case-screens .case-gallery { row-gap: var(--case-mobile-media-gap); }
+  .case-screens .case-gallery { margin-top: 0; }
+  .case-gallery figcaption { margin-bottom: var(--case-mobile-caption-gap); }
+  .case-screen-description,
+  .case-screen-copy > .case-screen-description { margin-top: var(--case-mobile-caption-gap); }
+  .favorites-user-flow-intro { margin-bottom: var(--case-mobile-copy-gap); }
+  .favorites-user-flow-grid { row-gap: var(--case-mobile-media-gap); }
+  .favorites-user-flow-item figcaption { margin-bottom: var(--case-mobile-caption-gap); }
+  .favorites-main-layout-group { row-gap: var(--case-mobile-copy-gap); }
+  .favorites-main-layout-content .favorites-add-to-collection-grid { row-gap: var(--case-mobile-media-gap); }
+  .favorites-main-layout-group + .favorites-main-layout-group,
+  .favorites-reference-group + .favorites-reference-group { margin-top: var(--case-mobile-section-gap); }
+  .favorites-add-to-collection-note { margin-top: var(--case-mobile-caption-gap); }
+  .favorites-reference-group { gap: var(--case-mobile-copy-gap); }
+  .favorites-reference-item { row-gap: var(--case-mobile-caption-gap); }
+  .benchmark-groups { row-gap: var(--case-mobile-media-gap); }
+  .case-video-wrap { margin-top: var(--case-mobile-copy-gap); }
 }
