@@ -5731,3 +5731,6 @@ body.lightbox-open {
 }
 
 .case-metrics--crm .case-metrics-table tbody tr:nth-child(even) { background: transparent; }
+
+/* The following section owns spacing after the hero's final process block. */
+.case-hero > .case-process:last-child { margin-bottom: 0; }
