@@ -2689,7 +2689,7 @@ html.hero-intro-revealing .hero-photo-wrap img {
   max-width: 470px;
   margin: 0;
   color: #4d4b46;
-  font-size: var(--text-body-small);
+  font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.45;
 }
@@ -2709,7 +2709,7 @@ html.hero-intro-revealing .hero-photo-wrap img {
   font-family: var(--font-body);
   color: #4d4b46;
   margin-bottom: 4px;
-  font-size: var(--text-body-small);
+  font-size: var(--text-body);
   font-weight: 600;
   letter-spacing: normal;
   text-transform: none;
@@ -2721,14 +2721,14 @@ html.hero-intro-revealing .hero-photo-wrap img {
   gap: 4px;
   margin: 0;
   color: #4d4b46;
-  font-size: var(--text-body-small);
+  font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.45;
 }
 
 .project-preview-metrics strong {
   color: inherit;
-  font-size: var(--text-body-small);
+  font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.45;
 }
@@ -2746,7 +2746,7 @@ html.hero-intro-revealing .hero-photo-wrap img {
   position: relative;
   padding-left: 16px;
   color: #4d4b46;
-  font-size: var(--text-body-small);
+  font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.45;
 }
@@ -2802,7 +2802,7 @@ html.hero-intro-revealing .hero-photo-wrap img {
   gap: var(--space-1);
   color: var(--text-body-color);
   font-family: var(--font-body);
-  font-size: var(--text-body-small);
+  font-size: var(--text-body);
   font-weight: var(--text-body-weight);
   line-height: var(--text-body-leading);
   transition: color 180ms ease;
@@ -2813,13 +2813,19 @@ html.hero-intro-revealing .hero-photo-wrap img {
   color: var(--accent);
 }
 
-.case-summary-meta--with-prototype {
-  display: grid;
+.case-summary-problem-details {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-leading);
 }
 
-.case-summary-meta--with-prototype p {
-  margin: 0;
+.case-summary-problem-details .project-prototype-link {
+  font-size: inherit;
 }
 
 .project-case-arrow {
@@ -3762,6 +3768,10 @@ body.lightbox-open {
     align-self: stretch;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--case-grid-gap);
+  }
+
+  .case-summary--with-prototype .case-summary-results {
+    grid-row: 2;
   }
 
   .case-summary .case-summary-card:first-child {
