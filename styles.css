@@ -229,7 +229,7 @@ body {
 
 .case-summary-meta .project-prototype-link {
   display: block;
-  margin-top: var(--space-1);
+  margin-top: var(--case-summary-copy-gap);
 }
 
 .case-summary-results {
@@ -2813,6 +2813,9 @@ html.hero-intro-revealing .hero-photo-wrap img {
 .project-prototype-link {
   justify-self: start;
   width: fit-content;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: normal;
 }
 
 .project-case-arrow {
