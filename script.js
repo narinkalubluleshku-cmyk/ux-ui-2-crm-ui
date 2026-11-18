@@ -822,6 +822,76 @@ function findFreeCatPosition() {
   return { left: slot[0], top: slot[1], index };
 }
 
+let activeCatBurst;
+
+async function burstCuteCat(cat) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  activeCatBurst?.remove();
+  const field = document.createElement("div");
+  field.className = "cat-burst";
+  field.setAttribute("aria-hidden", "true");
+  document.body.append(field);
+  activeCatBurst = field;
+
+  const source = cat.getBoundingClientRect();
+  const style = getComputedStyle(cat);
+  const copyWidth = parseFloat(style.width) / 2;
+  const copyHeight = parseFloat(style.height) / 2;
+  const startX = source.left + source.width / 2;
+  const startY = source.top + source.height / 2;
+  const { width, height } = field.getBoundingClientRect();
+  const columns = Math.max(3, Math.min(18, Math.round(Math.sqrt(84 * width / height))));
+  const rows = Math.max(3, Math.round(84 / columns));
+  const copies = document.createDocumentFragment();
+  const flights = [];
+
+  for (let row = 0; row < rows; row++) {
+    for (let column = 0; column < columns; column++) {
+      const endX = (column + 0.3 + Math.random() * 0.4) * width / columns;
+      const endY = (row + 0.3 + Math.random() * 0.4) * height / rows;
+      const dx = endX - startX;
+      const dy = endY - startY;
+      const lift = Math.abs(dy) / 4 + Math.min(130, height * 0.18);
+      const tilt = (Math.random() - 0.5) * 40;
+      const copy = document.createElement("img");
+      copy.className = "cat-burst-copy";
+      copy.src = cat.currentSrc || cat.src;
+      copy.alt = "";
+      copy.style.width = `${copyWidth}px`;
+      copy.style.height = `${copyHeight}px`;
+      copies.append(copy);
+
+      const frames = Array.from({ length: 21 }, (_, step) => {
+        const t = step / 20;
+        const x = startX + dx * t;
+        const y = startY + dy * t - 4 * lift * t * (1 - t);
+        return {
+          transform: `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${tilt * t}deg)`
+        };
+      });
+      flights.push({ copy, frames });
+    }
+  }
+
+  field.append(copies);
+  await Promise.allSettled(flights.map(({ copy, frames }) =>
+    copy.animate(frames, {
+      duration: 1250,
+      easing: "cubic-bezier(0.15, 0.65, 0.4, 1)",
+      fill: "forwards"
+    }).finished
+  ));
+  if (activeCatBurst !== field) return;
+
+  await field.animate([{ opacity: 1 }, { opacity: 0 }], {
+    duration: 420,
+    fill: "forwards"
+  }).finished;
+  field.remove();
+  if (activeCatBurst === field) activeCatBurst = undefined;
+}
+
 function addCuteCat() {
   if (!heroLayout) return;
   const existingCats = heroLayout.querySelectorAll(".cat-pop");
@@ -835,6 +905,16 @@ function addCuteCat() {
   cat.style.left = `${position.left}%`;
   cat.style.top = `${position.top}%`;
   cat.dataset.slot = position.index;
+  cat.setAttribute("role", "button");
+  cat.setAttribute("aria-label", "Запустить фейерверк из котиков");
+  cat.tabIndex = 0;
+  cat.addEventListener("click", () => burstCuteCat(cat));
+  cat.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      cat.click();
+    }
+  });
   heroLayout.appendChild(cat);
   catIndex += 1;
 }
