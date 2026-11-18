@@ -841,51 +841,59 @@ async function burstCuteCat(cat) {
   const startX = source.left + source.width / 2;
   const startY = source.top + source.height / 2;
   const { width, height } = field.getBoundingClientRect();
-  const columns = Math.max(3, Math.min(18, Math.round(Math.sqrt(84 * width / height))));
-  const rows = Math.max(3, Math.round(84 / columns));
   const copies = document.createDocumentFragment();
   const flights = [];
+  const count = 84;
 
-  for (let row = 0; row < rows; row++) {
-    for (let column = 0; column < columns; column++) {
-      const endX = (column + 0.3 + Math.random() * 0.4) * width / columns;
-      const endY = (row + 0.3 + Math.random() * 0.4) * height / rows;
-      const dx = endX - startX;
-      const dy = endY - startY;
-      const lift = Math.abs(dy) / 4 + Math.min(130, height * 0.18);
-      const tilt = (Math.random() - 0.5) * 40;
-      const copy = document.createElement("img");
-      copy.className = "cat-burst-copy";
-      copy.src = cat.currentSrc || cat.src;
-      copy.alt = "";
-      copy.style.width = `${copyWidth}px`;
-      copy.style.height = `${copyHeight}px`;
-      copies.append(copy);
+  for (let index = 0; index < count; index++) {
+    // Scatter across the floor; a taller centre makes a loose mound.
+    const spread = (index + Math.random()) / count;
+    const endX = copyWidth / 2 + spread * Math.max(0, width - copyWidth);
+    const mound = Math.sin(Math.PI * spread) ** 1.6;
+    const pileHeight = Math.min(height * 0.25, copyHeight * 3.5);
+    const endY = height - copyHeight / 2 - mound * pileHeight * Math.random();
+    const lift = Math.min(startY * 0.85, 70 + Math.random() * height * 0.32);
+    const spin = (Math.random() - 0.5) * 460;
+    const restingTilt = (Math.random() - 0.5) * 80;
+    const duration = 1500 + Math.random() * 850;
+    const copy = document.createElement("img");
+    copy.className = "cat-burst-copy";
+    copy.src = cat.currentSrc || cat.src;
+    copy.alt = "";
+    copy.style.width = `${copyWidth}px`;
+    copy.style.height = `${copyHeight}px`;
+    copies.append(copy);
 
-      const frames = Array.from({ length: 21 }, (_, step) => {
-        const t = step / 20;
-        const x = startX + dx * t;
-        const y = startY + dy * t - 4 * lift * t * (1 - t);
-        return {
-          transform: `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${tilt * t}deg)`
-        };
-      });
-      flights.push({ copy, frames });
-    }
+    const transform = (x, y, angle) =>
+      `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${angle}deg)`;
+    const frames = Array.from({ length: 37 }, (_, step) => {
+      const t = step / 36;
+      // Constant gravity: rise first, then accelerate down to the mound.
+      const x = startX + (endX - startX) * t;
+      const y = startY - 4 * lift * t + (endY - startY + 4 * lift) * t * t;
+      return { offset: t * 0.86, transform: transform(x, y, spin * t) };
+    });
+    frames.push(
+      { offset: 0.93, transform: transform(endX, endY - 8 - Math.random() * 14, restingTilt) },
+      { offset: 1, transform: transform(endX, endY, restingTilt) }
+    );
+    flights.push({ copy, frames, duration, delay: Math.random() * 240 });
   }
 
   field.append(copies);
-  await Promise.allSettled(flights.map(({ copy, frames }) =>
+  await Promise.allSettled(flights.map(({ copy, frames, duration, delay }) =>
     copy.animate(frames, {
-      duration: 1250,
-      easing: "cubic-bezier(0.15, 0.65, 0.4, 1)",
-      fill: "forwards"
+      duration,
+      delay,
+      easing: "linear",
+      fill: "both"
     }).finished
   ));
   if (activeCatBurst !== field) return;
 
   await field.animate([{ opacity: 1 }, { opacity: 0 }], {
-    duration: 420,
+    delay: 650,
+    duration: 900,
     fill: "forwards"
   }).finished;
   field.remove();
