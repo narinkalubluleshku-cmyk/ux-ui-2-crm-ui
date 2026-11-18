@@ -178,6 +178,11 @@ body {
   margin-top: var(--space-6);
 }
 
+.case-summary--with-prototype {
+  --case-summary-space: var(--space-2);
+  --case-summary-copy-gap: var(--case-summary-space);
+}
+
 .case-summary-copy {
   grid-column: 1;
   grid-row: 2;
@@ -2545,19 +2550,25 @@ html.hero-intro-revealing .hero-photo-wrap img {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 22px;
+}
+
+.hero-contacts,
+.project-prototype-link {
   font-family: var(--font-caption);
   font-size: var(--text-meta);
   text-transform: uppercase;
 }
 
-.hero-contacts a {
+.hero-contacts a,
+.project-prototype-link {
   position: relative;
   padding-bottom: 3px;
   border-bottom: 0;
   transition: color 180ms ease;
 }
 
-.hero-contacts a::after {
+.hero-contacts a::after,
+.project-prototype-link::after {
   content: "";
   position: absolute;
   right: 0;
@@ -2571,12 +2582,16 @@ html.hero-intro-revealing .hero-photo-wrap img {
 }
 
 .hero-contacts a:hover,
-.hero-contacts a:focus-visible {
+.hero-contacts a:focus-visible,
+.project-prototype-link:hover,
+.project-prototype-link:focus-visible {
   color: var(--accent);
 }
 
 .hero-contacts a:hover::after,
-.hero-contacts a:focus-visible::after {
+.hero-contacts a:focus-visible::after,
+.project-prototype-link:hover::after,
+.project-prototype-link:focus-visible::after {
   animation: contact-line-sweep 600ms ease-in-out both;
 }
 
@@ -2796,36 +2811,8 @@ html.hero-intro-revealing .hero-photo-wrap img {
 }
 
 .project-prototype-link {
-  display: inline-flex;
   justify-self: start;
-  align-items: baseline;
-  gap: var(--space-1);
-  color: var(--text-body-color);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  font-weight: var(--text-body-weight);
-  line-height: var(--text-body-leading);
-  transition: color 180ms ease;
-}
-
-.project-prototype-link:hover,
-.project-prototype-link:focus-visible {
-  color: var(--accent);
-}
-
-.case-summary-problem-details {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: var(--space-2);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  font-weight: var(--text-body-weight);
-  line-height: var(--text-body-leading);
-}
-
-.case-summary-problem-details .project-prototype-link {
-  font-size: inherit;
+  width: fit-content;
 }
 
 .project-case-arrow {
@@ -3770,6 +3757,15 @@ body.lightbox-open {
     gap: var(--case-grid-gap);
   }
 
+  .case-summary--with-prototype .case-summary-copy {
+    display: grid;
+  }
+
+  .case-summary--with-prototype .case-summary-copy > .case-summary-problem,
+  .case-summary--with-prototype .case-summary-copy > .case-summary-meta {
+    grid-row: auto;
+  }
+
   .case-summary--with-prototype .case-summary-results {
     grid-row: 2;
   }
@@ -3877,6 +3873,10 @@ body.lightbox-open {
     --case-summary-columns: minmax(0, 1fr);
     --case-summary-space: var(--mobile-space-4);
     margin-top: var(--mobile-space-5);
+  }
+
+  .case-summary--with-prototype {
+    --case-summary-space: var(--space-2);
   }
 
   .case-summary-intro,
