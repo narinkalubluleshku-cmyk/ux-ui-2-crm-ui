@@ -2795,6 +2795,33 @@ html.hero-intro-revealing .hero-photo-wrap img {
     transform 180ms ease;
 }
 
+.project-prototype-link {
+  display: inline-flex;
+  justify-self: start;
+  align-items: baseline;
+  gap: var(--space-1);
+  color: var(--text-body-color);
+  font-family: var(--font-body);
+  font-size: var(--text-body-small);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-leading);
+  transition: color 180ms ease;
+}
+
+.project-prototype-link:hover,
+.project-prototype-link:focus-visible {
+  color: var(--accent);
+}
+
+.case-summary-meta--with-prototype {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.case-summary-meta--with-prototype p {
+  margin: 0;
+}
+
 .project-case-arrow {
   display: inline-block;
   font-size: 15px;
@@ -2806,7 +2833,9 @@ html.hero-intro-revealing .hero-photo-wrap img {
   transform: translateY(-3px);
 }
 
-.project-case-link:hover .project-case-arrow {
+.project-case-link:hover .project-case-arrow,
+.project-prototype-link:hover .project-case-arrow,
+.project-prototype-link:focus-visible .project-case-arrow {
   transform: translate(2px, -2px);
 }
 
