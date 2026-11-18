@@ -178,11 +178,6 @@ body {
   margin-top: var(--space-6);
 }
 
-.case-summary--with-prototype {
-  --case-summary-space: var(--space-2);
-  --case-summary-copy-gap: var(--case-summary-space);
-}
-
 .case-summary-copy {
   grid-column: 1;
   grid-row: 2;
@@ -230,6 +225,11 @@ body {
   font-size: var(--text-body);
   font-weight: var(--text-body-weight);
   line-height: var(--text-body-leading);
+}
+
+.case-summary-meta .project-prototype-link {
+  display: block;
+  margin-top: var(--space-1);
 }
 
 .case-summary-results {
@@ -3757,19 +3757,6 @@ body.lightbox-open {
     gap: var(--case-grid-gap);
   }
 
-  .case-summary--with-prototype .case-summary-copy {
-    display: grid;
-  }
-
-  .case-summary--with-prototype .case-summary-copy > .case-summary-problem,
-  .case-summary--with-prototype .case-summary-copy > .case-summary-meta {
-    grid-row: auto;
-  }
-
-  .case-summary--with-prototype .case-summary-results {
-    grid-row: 2;
-  }
-
   .case-summary .case-summary-card:first-child {
     grid-column: 2;
   }
@@ -3873,10 +3860,6 @@ body.lightbox-open {
     --case-summary-columns: minmax(0, 1fr);
     --case-summary-space: var(--mobile-space-4);
     margin-top: var(--mobile-space-5);
-  }
-
-  .case-summary--with-prototype {
-    --case-summary-space: var(--space-2);
   }
 
   .case-summary-intro,
